@@ -1,0 +1,25 @@
+/* html {
+    background-image: url(../images/rain1.jpg); 
+    background-position: center; 
+    background-size: cover; 
+    height: 100%; 
+    width: 100%;
+} */
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.custom-bg-image {
+    background-image: url(../images/rain2.jpg); 
+    background-position: center; 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    filter: blur(0px);
+    -webkit-filter: blur(0px);
+    opacity: 40%; 
+    height: 100%;
+}
