@@ -1,25 +1,27 @@
-/* html {
-    background-image: url(../images/rain1.jpg); 
-    background-position: center; 
-    background-size: cover; 
-    height: 100%; 
-    width: 100%;
-} */
 body, html {
     height: 100%;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.custom-bg-image {
-    background-image: url(../images/rain2.jpg); 
-    background-position: center; 
-    background-size: cover; 
+  }
+  
+  .bg { 
+    /* The image used */
+    background-image: url("../images/rain2.jpg");
+  
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
     background-repeat: no-repeat;
-    filter: blur(0px);
-    -webkit-filter: blur(0px);
-    opacity: 40%; 
-    height: 100%;
-}
+    background-size: cover;
+  }
+
+  #outer-question-box {
+      background-color: white;
+      border-radius: 70px;
+  }
+
+  #inner-question-box {
+      background-color: #3991b4af;
+      border-radius: 85px;
+      box-shadow: 0px 1.5px 10px black;
+  }
