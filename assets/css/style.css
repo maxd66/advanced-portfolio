@@ -2,26 +2,53 @@ body, html {
     height: 100%;
   }
   
-  .bg { 
+.bg { 
     /* The image used */
     background-image: url("../images/rain2.jpg");
-  
-    /* Full height */
+
     height: 100%; 
-  
-    /* Center and scale the image nicely */
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
 
-  #outer-question-box {
-      background-color: white;
-      border-radius: 70px;
-  }
+nav {
+    font-family: 'Montserrat', monospace;
+}
 
-  #inner-question-box {
-      background-color: #3991b4af;
-      border-radius: 85px;
-      box-shadow: 0px 1.5px 10px black;
-  }
+#outer-question-box {
+    background-color: white;
+    border-radius: 70px;
+}
+
+#inner-question-box {
+    background-color: #3991b4af;
+    border-radius: 85px;
+    box-shadow: 0px 1.5px 10px black;
+}
+
+.question {
+    font-family: 'Montserrat', monospace;
+}
+
+#button-box {
+    background-color: white;
+    border-radius: 45px;
+}
+
+#start-button {
+    background-color: #3991b4af;
+    border-radius: 30px;
+    box-shadow: 0px 1.5px 10px black;
+    font-size: x-large;
+    font-family: 'Source Code Pro', monospace;
+}
+
+#start-button:hover {
+    background-color: #3991b4ce;
+}
+
+#start-button:focus {
+    outline: none;
+}
