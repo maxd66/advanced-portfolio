@@ -32,10 +32,20 @@ nav {
     font-family: 'Montserrat', monospace;
 }
 
+#button-element-container {
+    position: relative;
+}
+
 #button-box {
     background-color: white;
     border-radius: 45px;
+    position: relative;
+    /* animation: 3s infinite alternate bounce; */
 }
+
+/* @keyframes bounce {
+
+} */
 
 #start-button {
     background-color: #3991b4af;
@@ -51,4 +61,15 @@ nav {
 
 #start-button:focus {
     outline: none;
+}
+
+/* Media Queries that bootstrap won't cover */
+@media screen and (min-width: 1200px){
+    #question-answer-container {
+        margin-top: 15%;
+    }
+
+    #outer-question-box {
+        max-width: 75%;
+    }
 }
