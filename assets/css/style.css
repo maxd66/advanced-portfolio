@@ -17,6 +17,10 @@ nav {
     font-family: 'Montserrat', monospace;
 }
 
+#question-answer-container {
+    justify-content: space-evenly;
+}
+
 #outer-question-box {
     background-color: white;
     border-radius: 70px;
@@ -40,12 +44,32 @@ nav {
     background-color: white;
     border-radius: 45px;
     position: relative;
-    /* animation: 3s infinite alternate bounce; */
+    animation: 4s infinite alternate bounce;
+    animation-timing-function: linear;
 }
 
-/* @keyframes bounce {
-
-} */
+@keyframes bounce {
+    from {
+        right: 0px;
+        top: 0px;
+    }
+    25% {
+        right: 10px;
+        top: 5px;
+    }
+    50% {
+        right: 0px;
+        top: -5px;
+    }
+    75% {
+        right: -10px;
+        top: 5px;
+    }
+    to {
+        right: 0px;
+        top: 0px;
+    }
+}
 
 #start-button {
     background-color: #3991b4af;
