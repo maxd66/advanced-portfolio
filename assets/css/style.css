@@ -1,26 +1,35 @@
 body, html {
     height: 100%;
   }
-  
+
+:root {
+    --regFont: 'Montserrat', monospace;
+    --specFont: 'Source Code Pro', monospace;
+}
+
+/* ========Background Image =========== */
 .bg { 
     /* The image used */
     background-image: url("../images/rain2.jpg");
 
-    height: 100%; 
+    min-height: 100%; 
 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+/* ============Nav============= */
 nav {
-    font-family: 'Montserrat', monospace;
+    font-family: var(--regFont);
 }
 
+/* =============Question and Button section================== */
 #question-answer-container {
     justify-content: space-evenly;
 }
 
+/* =============Question section================== */
 #outer-question-box {
     background-color: white;
     border-radius: 70px;
@@ -33,9 +42,10 @@ nav {
 }
 
 .question {
-    font-family: 'Montserrat', monospace;
+    font-family: var(--regFont);
 }
 
+/* ========Start Button style and animation========= */
 #button-element-container {
     position: relative;
 }
@@ -76,7 +86,7 @@ nav {
     border-radius: 30px;
     box-shadow: 0px 1.5px 10px black;
     font-size: x-large;
-    font-family: 'Source Code Pro', monospace;
+    font-family: var(--specFont);
 }
 
 #start-button:hover {

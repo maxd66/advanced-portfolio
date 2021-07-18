@@ -2,30 +2,52 @@ body, html {
     height: 100%;
   }
 
+:root {
+    --regFont: 'Montserrat', monospace;
+    --specFont: 'Source Code Pro', monospace;
+}
+
+/* ========Background Image =========== */
 .bg { 
     /* The image used */
     background-image: url("../images/rain2.jpg");
 
-    height: 100%; 
+    min-height: 100%; 
 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+/* ============Nav============= */
 nav {
     font-family: 'Montserrat', monospace;
 }
 
+/* =============About Me section================== */
 #outer-about-box {
     background-color: white;
     border-radius: 70px;
+    font-family: var(--regFont);
 }
 
 #inner-about-box {
     background-color: #3991b4af;
     border-radius: 85px;
     box-shadow: 0px 1.5px 10px black;
+}
+
+.about-me-head {
+    font-family: var(--specFont);
+    font-weight: 550;
+}
+
+#about-me-underline {
+    height: 10px;
+    background-color: white;
+    box-shadow: inset 0px 0px 5px black;
+    border-radius: 3px;
+    margin-bottom: 5px;
 }
 
 #myPicture {
@@ -38,6 +60,90 @@ nav {
 @media screen and (min-width: 700px) and (max-width: 1200px){
     #myPicture {
         position: relative;
-        bottom: 50px;
+        bottom: 20px;
     }
+}
+
+/* ============Work Section============ */
+
+#flex-work-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#flex-work-container a {
+    height: 100%;
+}
+
+#flex-work-container section img {
+    width: 100%;
+    position: inherit;
+    height: 300px;
+    object-position: center;
+    object-fit: cover;
+    opacity: .5;
+    transition: all .5s ease-in-out;
+}
+
+.img1, .img2, .img3, .img4, .img5 {
+    flex: 0 0 90%;
+    margin: 8px;
+}
+
+#main-img, #question, #cat, #weather, #calendar {
+    border-radius: 50px;
+}
+
+/* ==========image hover reactions=============== */
+.img1:hover #main-img {
+    opacity: 1;
+    border-radius: 85px;
+}
+
+.img2:hover #weather {
+    opacity: 1;
+    border-radius: 85px;
+}
+
+.img3:hover #question {
+    opacity: 1;
+    border-radius: 85px;
+}
+
+.img4:hover #cat {
+    opacity: 1;
+    border-radius: 85px;
+}
+
+.img5:hover #calendar {
+    opacity: 1;
+    border-radius: 85px;
+}
+
+section {
+    position: relative;
+}
+
+figcaption {
+    position: absolute;
+    bottom: -16%;
+    left: 2%;
+    margin-bottom: 10%;
+    font-size: 150%;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    padding: 8px;
+}
+
+@media screen and (min-width: 1200px){
+    .img2, .img3, .img4, .img5 {
+        flex: 0 0 45%;
+        margin: 8px;
+    }
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
 }
