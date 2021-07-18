@@ -16,3 +16,28 @@ body, html {
 nav {
     font-family: 'Montserrat', monospace;
 }
+
+#outer-about-box {
+    background-color: white;
+    border-radius: 70px;
+}
+
+#inner-about-box {
+    background-color: #3991b4af;
+    border-radius: 85px;
+    box-shadow: 0px 1.5px 10px black;
+}
+
+#myPicture {
+    height: 200px;
+    width: auto;
+    float: left;
+    margin: 5px;
+}
+
+@media screen and (min-width: 700px) and (max-width: 1200px){
+    #myPicture {
+        position: relative;
+        bottom: 50px;
+    }
+}
