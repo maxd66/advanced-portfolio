@@ -50,11 +50,35 @@ nav {
     position: relative;
 }
 
-#button-box {
+#button-box1 {
     background-color: white;
     border-radius: 45px;
     position: relative;
     animation: 4s infinite alternate bounce;
+    animation-timing-function: linear;
+}
+
+#button-box2 {
+    background-color: white;
+    border-radius: 45px;
+    position: relative;
+    animation: 4s infinite alternate bounce2;
+    animation-timing-function: linear;
+}
+
+#button-box3 {
+    background-color: white;
+    border-radius: 45px;
+    position: relative;
+    animation: 4s infinite alternate bounce3;
+    animation-timing-function: linear;
+}
+
+#button-box4 {
+    background-color: white;
+    border-radius: 45px;
+    position: relative;
+    animation: 4s infinite alternate bounce4;
     animation-timing-function: linear;
 }
 
@@ -81,7 +105,77 @@ nav {
     }
 }
 
-#start-button {
+@keyframes bounce2 {
+    from {
+        left: 0px;
+        top: 0px;
+    }
+    25% {
+        left: 8px;
+        top: 5px;
+    }
+    50% {
+        left: -2px;
+        top: -5px;
+    }
+    75% {
+        left: 2px;
+        top: 5px;
+    }
+    to {
+        left: 0px;
+        top: 0px;
+    }
+}
+
+@keyframes bounce3 {
+    from {
+        right: 0px;
+        bottom: 0px;
+    }
+    25% {
+        right: 10px;
+        bottom: 5px;
+    }
+    50% {
+        right: 0px;
+        bottom: -5px;
+    }
+    75% {
+        right: -10px;
+        bottom: 5px;
+    }
+    to {
+        right: 0px;
+        bottom: 0px;
+    }
+}
+
+@keyframes bounce4 {
+    from {
+        left: 0px;
+        bottom: 0px;
+    }
+    25% {
+        left: 10px;
+        bottom: 5px;
+    }
+    50% {
+        left: 0px;
+        bottom: -5px;
+    }
+    75% {
+        left: -10px;
+        bottom: 5px;
+    }
+    to {
+        left: 0px;
+        bottom: 0px;
+    }
+}
+
+#start-button, #button0, #button1, #button2, #button3 {
+    min-width: 100%;
     background-color: #3991b4af;
     border-radius: 30px;
     box-shadow: 0px 1.5px 10px black;
