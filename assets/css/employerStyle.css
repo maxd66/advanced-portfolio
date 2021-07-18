@@ -141,6 +141,11 @@ figcaption {
         flex: 0 0 45%;
         margin: 8px;
     }
+
+    .custom-fixed {
+        position: fixed;
+        right: -4px;
+    }
 }
 
 ul {
