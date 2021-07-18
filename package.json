@@ -1,0 +1,22 @@
+{
+  "name": "advanced-portfolio",
+  "version": "1.0.0",
+  "description": "This is an enhancement on my previous portfolio. It is more interactive and a better demonstration of my skills.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxd66/advanced-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxd66/advanced-portfolio/issues"
+  },
+  "homepage": "https://github.com/maxd66/advanced-portfolio#readme",
+  "dependencies": {
+    "jest": "^27.0.6"
+  }
+}
