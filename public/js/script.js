@@ -1,3 +1,4 @@
+// ========================== GenHtml class ===================================
 class GenHtml {
     genButtonsHtml(ansArr) {
         const buttonsHTML = `<div id="button-element-container">
@@ -29,10 +30,9 @@ class GenHtml {
     }
 }
 
-
 const genHtml = new GenHtml;
 
-// =========================== Next Class ===================================
+// =========================== Q and A Class ===================================
 class QandA {
     constructor(question, buttons) {
       this.questionHtml = genHtml.genQuestionHtml(question);
@@ -52,7 +52,7 @@ class QandA {
 // ============================ Script specific for this index.html ===================================
 let questionNumber = 0;
 const mainQuestion = `My name is L.I.L.I and I was designed to help you find whatever you are looking for! Please select the option that best describes you! P.S. you can always switch to different pages with the buttons in the Nav Bar!`
-const mainButtons = ['I am a possible future employer.', 'I am a curious family member or friend.', 'I am a fellow developer looking for inspiration.', 'Where am I? How did I get here?']
+const mainButtons = ['I am a possible future employer.', 'I am a curious family member or friend.', 'I am a fellow developer looking for inspiration.', 'Where am I? How did I get here? Is this a game?']
 
 const qAndA = new QandA(mainQuestion, mainButtons);
 
@@ -69,7 +69,7 @@ document.getElementById('start-button').addEventListener('click', () => {
 // if has started equals false, set question number equal to 0. Would need to save each time they progress
 // by updating the questionNumber in local storage
 
-
+// ======= The event listener and switch case below is going to be running most of the game =========
 document.getElementById('all-buttons-container').addEventListener('click', (e) => {
   switch(questionNumber) {
     case 1:
