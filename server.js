@@ -32,11 +32,11 @@ app.get('/index', (req, res) => {
 app.get('/employer', (req, res) => {
     res.sendFile(path.join(__dirname, './public/employer.html'))
 })
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './index.html'))
+app.get('/family', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/family.html'))
 })
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './index.html'))
+app.get('/fellowdev', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/fellowdev.html'))
 })
 
 
