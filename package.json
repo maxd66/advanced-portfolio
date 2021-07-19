@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/maxd66/advanced-portfolio#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "jest": "^27.0.6"
   }
 }

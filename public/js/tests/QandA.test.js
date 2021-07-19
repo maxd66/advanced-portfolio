@@ -19,4 +19,4 @@ describe('QandA', () => {
             expect(qAndA.buttonsHtml).toBeDefined()
         })
     })
-})
+}) 
