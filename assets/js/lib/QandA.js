@@ -1,15 +1,18 @@
-const GenHtml = requires('GenHtml')
+const GenHtml = require('../lib/GenHtml')
+const genHtml = new GenHtml;
 
 class QandA {
-    constructor() {
-      this.questionHTML = ``;
-      this.buttonsHTML = ``;
+    constructor(question, buttons) {
+      this.questionHtml = genHtml.genQuestionHtml(question);
+      this.buttonsHtml = genHtml.genButtonsHtml(buttons);
     }
 
-    nextQuestion(question) {
+    appendQuestion() {
+      $('#inner-question-box').innerHTML = this.questionHtml;
     }
 
-    nextButtons(ansArr) {
+    appendButtons() {
+      $('#button-element-container').innerHTML = this.buttonsHtml;
     }
 }
 

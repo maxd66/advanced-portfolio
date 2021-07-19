@@ -43,6 +43,7 @@ nav {
 
 .question {
     font-family: var(--regFont);
+    font-size: 40px;
 }
 
 /* ========Start Button style and animation========= */
@@ -188,6 +189,18 @@ nav {
 }
 
 #start-button:focus {
+    outline: none;
+}
+#button0:focus {
+    outline: none;
+}
+#button1:focus {
+    outline: none;
+}
+#button2:focus {
+    outline: none;
+}
+#button3:focus {
     outline: none;
 }
 
