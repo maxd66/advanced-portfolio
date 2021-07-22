@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-
+const sequelize = require('./config/connection');
 const express = require('express');
 
 const app = express();
@@ -22,13 +22,8 @@ app.use(express.static('public'))
 app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
 })
-// app.get('/assets/css/style.css', (req, res) => {
-//     res.sendFile(path.join(__dirname, './public/css/style.css'))
-// })
-// app.get('/assets/js/script.js', (req, res) => {
-//     res.sendFile(path.join(__dirname, './public/js/script.js'))
-// })
 
+// GET requests
 app.get('/employer', (req, res) => {
     res.sendFile(path.join(__dirname, './public/employer.html'))
 })
@@ -39,7 +34,12 @@ app.get('/fellowdev', (req, res) => {
     res.sendFile(path.join(__dirname, './public/fellowdev.html'))
 })
 
+// POST requests
+app.post('/family', (req, res) => {
+    
+})
 
-app.listen(PORT, () => {
-  console.log(`App listening on PORT: ${PORT}`);
+
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
 });
