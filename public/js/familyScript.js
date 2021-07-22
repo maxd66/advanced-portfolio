@@ -1,9 +1,17 @@
-import 'regenerator-runtime/runtime';
-import axios from 'axios';
 
 const getMessages = async () => {
     try {
-        const response = await axios.get('/api/family')
+        const response = await fetch('/api/tables', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        console.log(response);
+        const jsonRes = response => {response.json()};
+        console.log(jsonRes);
+        
+
         
     } catch(err) {console.log(err)}
 }
