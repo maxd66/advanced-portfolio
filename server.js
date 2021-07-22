@@ -3,6 +3,7 @@ const path = require('path');
 const sequelize = require('./config/connection');
 const express = require('express');
 const Visitor = require('./models/Visitor');
+const { RSA_NO_PADDING } = require('constants');
 
 const app = express();
 
@@ -34,9 +35,17 @@ app.get('/family', (req, res) => {
 app.get('/fellowdev', (req, res) => {
     res.sendFile(path.join(__dirname, './public/fellowdev.html'))
 })
+app.get('/api/visitors', async (req, res) => {
+    try {
+        const visData = await Visitor.findAll()
+        res.json(visData);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
 
 // POST requests
-app.post('/family', async (req, res) => {
+app.post('/api/visitors', async (req, res) => {
     try {
         const userData = await Visitor.create(req.body);
         res.status(200).json(userData);

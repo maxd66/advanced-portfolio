@@ -1,4 +1,4 @@
-const GenHtml = require('../lib/GenHtml')
+import GenHtml from '/js/lib/GenHtml.js'
 const genHtml = new GenHtml;
 
 class QandA {
@@ -21,4 +21,4 @@ class QandA {
     }
 }
 
-module.exports= QandA;
+export default QandA;
