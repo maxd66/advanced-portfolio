@@ -12,9 +12,6 @@ Visitor.init({
     first_name: {
         type: DataTypes.STRING,
     },
-    last_name: {
-        type: DataTypes.STRING
-    },
     message: {
         type: DataTypes.STRING,
     },
