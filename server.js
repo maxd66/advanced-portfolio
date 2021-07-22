@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const sequelize = require('./config/connection');
 const express = require('express');
+const Visitor = require('./models/Visitor');
 
 const app = express();
 
@@ -35,8 +36,11 @@ app.get('/fellowdev', (req, res) => {
 })
 
 // POST requests
-app.post('/family', (req, res) => {
-    
+app.post('/family', async (req, res) => {
+    try {
+        const userData = await Visitor.create(req.body);
+        res.status(200).json(userData);
+    } catch(err) {res.status(400).json(err)}
 })
 
 
