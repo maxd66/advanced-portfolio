@@ -28,11 +28,15 @@ class GenHtml {
         return questionHTML
     }
 
-    genMessageList(name, message) {
-        const liHtml = `<li class="custom-line-height-close custom-bg-li mt-1">
-<p class="normal-line-height">${message}</p>
-<p class="text-muted normal-line-height">-${name}</p>
-</li>` 
+    genMessageList(arr) {
+        let liHtml = ``;
+        for(const value of arr) {
+            const templiHtml = `<li class="custom-line-height-close custom-bg-li mt-1">
+    <p class="normal-line-height">${value.message}</p>
+    <p class="text-muted normal-line-height">-${value.first_name}</p>
+    </li>` 
+            liHtml += templiHtml
+        }
         return liHtml
     }
 }

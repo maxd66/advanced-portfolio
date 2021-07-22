@@ -5,7 +5,7 @@ let questionNumber = 0;
 const mainQuestion = `Hello. My name is L.I.L.I and Max designed me to help you find whatever you are looking for! Please select the option that best describes you! P.S. you can always switch to different pages with the buttons in the Nav Bar!`
 const mainButtons = ['I am a possible future employer.', 'I am a curious family member or friend.', 'I am a fellow developer looking for inspiration.', 'Where am I? How did I get here? Is this a game?']
 
-const qAndA = new QandA(mainQuestion, mainButtons);
+const qAndA = new QandA(mainQuestion, mainButtons, []);
 
 document.getElementById('start-button').addEventListener('click', () => {
     qAndA.appendQuestion();

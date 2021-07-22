@@ -9,14 +9,18 @@ const getMessages = async () => {
             },
         })
         const data = await response.json()
-        console.log(data);
-        for(const value of data) {
-            const qAndA = new QandA('', '', value.first_name, value.message);
-            qAndA.appendList();
-        }
-
+        const qAndA = new QandA('', '', data)
+        qAndA.appendList()
     } catch(err) {console.log(err)}
 }
 
+const submitMessage = async () => {
+    try {
+
+    } catch(err) {}
+}
+
 getMessages()
+
+
 

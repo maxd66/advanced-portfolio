@@ -2,10 +2,10 @@ import GenHtml from '/js/lib/GenHtml.js'
 const genHtml = new GenHtml;
 
 class QandA {
-    constructor(question, buttons, name, message) {
+    constructor(question, buttons, arr) {
       this.questionHtml = genHtml.genQuestionHtml(question);
       this.buttonsHtml = genHtml.genButtonsHtml(buttons);
-      this.liHtml = genHtml.genMessageList(name, message);
+      this.liHtml = genHtml.genMessageList(arr);
     }
 
     appendQuestion() {
