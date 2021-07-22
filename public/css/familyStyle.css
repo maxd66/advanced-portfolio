@@ -125,6 +125,10 @@ section {
     position: relative;
 }
 
+form {
+    position: relative
+}
+
 figcaption {
     position: absolute;
     bottom: -16%;
@@ -136,6 +140,29 @@ figcaption {
     padding: 8px;
 }
 
+/* ========================= Form ============================ */
+input {
+    border-radius: 10px;
+    padding: 5px 5px;
+    font-family: var(--regFont);
+}
+
+#submit-button {
+    background-color: #3991b4af;
+    width: 215px;
+    margin-top: 5px;
+    border-radius: 30px;
+    box-shadow: 0px 1.5px 5px black;
+    font-family: var(--specFont);
+}
+
+#submit-button:focus {
+    outline: none;
+}
+
+#submit-button:hover {
+    background-color: #3991b4ce;
+}
 /* ==============Message board adjustements=================== */
 .custom-line-height-close {
     line-height: .25;
@@ -146,7 +173,7 @@ figcaption {
 }
 
 .custom-bg-li {
-    background-color: #87cce7;
+    background-image: linear-gradient(to right, #77B4CC, #c6e8f4);
     border-radius: 30px;
     padding: 0px 15px;
 }
