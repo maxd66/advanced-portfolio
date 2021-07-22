@@ -27,6 +27,14 @@ class GenHtml {
         const questionHTML = `<h2 class="question">${question}</h2>`
         return questionHTML
     }
+
+    genMessageList(name, message) {
+        const liHtml = `<li class="custom-line-height-close custom-bg-li mt-1">
+<p class="normal-line-height">${message}</p>
+<p class="text-muted normal-line-height">${name}</p>
+</li>` 
+        return liHtml
+    }
 }
 
 module.exports = GenHtml;

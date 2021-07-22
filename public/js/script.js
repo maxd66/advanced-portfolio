@@ -28,15 +28,24 @@ class GenHtml {
         const questionHTML = `<h2 class="question">${question}</h2>`
         return questionHTML
     }
+
+    genMessageList(name, message) {
+      const liHtml = `<li class="custom-line-height-close custom-bg-li mt-1">
+<p class="normal-line-height">${message}</p>
+<p class="text-muted normal-line-height">${name}</p>
+</li>` 
+      return liHtml
+  }
 }
 
 const genHtml = new GenHtml;
 
 // =========================== Q and A Class ===================================
 class QandA {
-    constructor(question, buttons) {
+    constructor(question, buttons, name, message) {
       this.questionHtml = genHtml.genQuestionHtml(question);
       this.buttonsHtml = genHtml.genButtonsHtml(buttons);
+      this.liHtml = genHtml.genMessageList(name, message);
     }
 
     appendQuestion() {
@@ -45,6 +54,10 @@ class QandA {
 
     appendButtons() {
       document.getElementById('button-element-container').innerHTML = this.buttonsHtml;
+    }
+
+    appendList() {
+      document.getElementById('message-list').innerHTML = this.liHtml;
     }
 }
 

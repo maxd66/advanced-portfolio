@@ -136,14 +136,29 @@ figcaption {
     padding: 8px;
 }
 
+/* ==============Message board adjustements=================== */
+.custom-line-height-close {
+    line-height: .25;
+}
+
+.normal-line-height {
+    line-height: normal;
+}
+
+.custom-bg-li {
+    background-color: #87cce7;
+    border-radius: 30px;
+    padding: 0px 15px;
+}
+
 @media screen and (min-width: 1200px){
     .img2, .img3, .img4, .img5 {
         flex: 0 0 45%;
         margin: 8px;
     }
 
-    .custom-fixed {
-        position: fixed;
+    .custom-absolute {
+        position: absolute;
         right: -4px;
     }
 }
