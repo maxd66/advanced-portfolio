@@ -29,7 +29,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
       } else if (e.target === document.getElementById('button1')) {
         window.location = '/family'
       } else if (e.target === document.getElementById('button2')) {
-
+        window.location = '/fellowdev'
       } else if (e.target === document.getElementById('button3')) {
 
       }
