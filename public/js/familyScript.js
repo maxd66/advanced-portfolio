@@ -21,6 +21,12 @@ const submitMessage = async () => {
         first_name: name,
         message: message,
     }
+    if(!name) {
+        return
+    }
+    if(!message) {
+        return
+    }
 
     try {
         const response = await fetch('/api/visitors', {
@@ -32,13 +38,16 @@ const submitMessage = async () => {
         })
 
         const data = response.json()
-        alert('added' + data)
+        getMessages()
+        document.getElementById('userName').value = '';
+        document.getElementById('userMessage').value = '';
+        alert('Thank you! Your message has been posted!')
     } catch(err) {console.log('error')}
 }
 
+document.getElementById('submit-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    submitMessage();
+})
+
 getMessages()
-
-
-
-
-
