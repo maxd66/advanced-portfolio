@@ -136,6 +136,11 @@ figcaption {
     padding: 8px;
 }
 
+p {
+    font-weight: 600;
+}
+
+
 @media screen and (min-width: 1200px){
     .img2, .img3, .img4, .img5 {
         flex: 0 0 45%;

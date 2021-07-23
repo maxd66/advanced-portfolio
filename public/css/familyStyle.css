@@ -25,6 +25,11 @@ nav {
 }
 
 /* =============About Me section================== */
+
+p {
+    font-weight: 600;
+}
+
 .outer-about-box {
     background-color: white;
     border-radius: 70px;

@@ -46,6 +46,10 @@ nav {
     font-size: 40px;
 }
 
+p {
+    font-weight: 600;
+}
+
 /* ========Start Button style and animation========= */
 .button-element-container {
     position: relative;
