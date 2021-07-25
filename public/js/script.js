@@ -159,7 +159,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
 
 
         break;
-      case 'fakeOutrps':
+        case 'fakeOutrps':
         questionNumber = 'realrps';
         const question = `Awesome choice...now...I'm sorry is that all we do? I don't really know the rules to this game... Darn, Max is going to be disappointed...Wait. No. Its ok. I can do this, let me look it up...Oh...Oh ok let's try this again.`
         const btnArr = [`Rock`, `Paper`, `Scissors`]
@@ -187,7 +187,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
             gradualAppend(question, btnArr)
           }
           break;
-        case 'prefaceAim':
+          case 'prefaceAim':
           if(e.target === document.getElementById('button0')) {
             // lets play
             questionNumber = 'playAim'
@@ -199,7 +199,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
             //Nah I'm good
           }
           break;
-        case 'playAim':
+          case 'playAim':
           e.preventDefault();
           clearButtons();
           console.log(playingAim);
@@ -230,7 +230,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
               }, 1000);
             }
             break;
-            case 'checkAim':
+          case 'checkAim':
               if(e.target === document.getElementById('button0')) {
                 //Lets do it!
                 questionNumber = 'playAim'
