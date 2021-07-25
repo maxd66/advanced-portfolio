@@ -98,6 +98,20 @@ const launchRPS = (playerChoice) => {
   gradualAppend(question, btnArr);
 }
 
+let aimTrainerScore = -1;
+let timer = 0;
+let playingAim = false
+
+const launchAimTrainer = () => {
+  clearButtons();
+  document.getElementById('inner-question-box').innerHTML = '';
+  document.getElementById('outer-question-box').style.display = 'none';
+  putButtons([`<img style="height:100px;" src="./images/crosshair2.png">`])
+  const leftPos = Math.floor((Math.random() * 89));
+  const bottomPos = Math.floor((Math.random() * 80));
+  document.getElementById('all-buttons-container').setAttribute('style', `position: absolute; left: ${leftPos}%; bottom: ${bottomPos}%;`)
+}
+
 // ======= The event listener and switch case below is going to be running most of the game =========
 document.getElementById('all-buttons-container').addEventListener('click', (e) => {
   switch(questionNumber) {
@@ -118,16 +132,19 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
       break;
     case 2:
       if(e.target === document.getElementById('button0')) {
+        //Yes I do!
         questionNumber = 'fakeOutrps'
         const question = `Great! Ok let me see... we could try...maybe this one?`
         const btnArr = [`Rock`, `Paper`, `Scissors`];
         clearButtons();
         gradualAppend(question, btnArr);
-        //Yes I do!
       } else if (e.target === document.getElementById('button1')) {
-        questionNumber++
-        const question = ``
         //I don't really know
+        questionNumber= 'prefaceAim'
+        const question = `Ok...It's just the sole purpose of my existence is to take you where you want to go on this website. So, it would be very helpful if you knew what you wanted to do. And you clicked the button that asked if this was a game, so I determined that you might want to play a game.`;
+        const btnArr = [`Ok sure, let's play a game.`, `Nah, I'm good.`]
+        clearButtons();
+        gradualAppend(question,btnArr);
       } else if (e.target === document.getElementById('button2')) {
         questionNumber++
         const question = ``
@@ -140,7 +157,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
       break;
       case 3:
 
-      
+
         break;
       case 'fakeOutrps':
         questionNumber = 'realrps';
@@ -169,7 +186,64 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
             const btnArr = ``
             gradualAppend(question, btnArr)
           }
-          
           break;
+        case 'prefaceAim':
+          if(e.target === document.getElementById('button0')) {
+            // lets play
+            questionNumber = 'playAim'
+            clearButtons();
+            const question = `Yes! Ok, Max plays stuff like this sometimes. Hit play to start.`
+            const btnArr = [`Play`];
+            gradualAppend(question, btnArr);
+          }else if (e.target === document.getElementById('button1')) {
+            //Nah I'm good
+          }
+          break;
+        case 'playAim':
+          e.preventDefault();
+          clearButtons();
+          console.log(playingAim);
+            aimTrainerScore++
+            if(playingAim) {
+              launchAimTrainer()
+            } else {
+              const aimTimer = setInterval(() => {
+                timer++
+                if (timer > 21) {
+                  clearInterval(aimTimer)
+                  timer = 0
+                  clearButtons()
+                  playingAim = false;
+                  questionNumber = 'checkAim'
+                  const question = `Wow that was exciting! You hit ${aimTrainerScore} bad guys! Would you like to play again?`
+                  const btnArr = [`Lets do it`, `No, I've had enough`]
+                  document.getElementById('outer-question-box').style.display = 'block';
+                  document.getElementById('all-buttons-container').setAttribute('style', `position: relative;`)
+                  gradualAppend(question, btnArr);
+                } else {
+                  console.log(3);
+                  if(!playingAim) {
+                    launchAimTrainer()
+                    playingAim = true;
+                  }
+                }
+              }, 1000);
+            }
+            break;
+            case 'checkAim':
+              if(e.target === document.getElementById('button0')) {
+                //Lets do it!
+                questionNumber = 'playAim'
+                aimTrainerScore = 0
+                const question = `Yes! Try and beat your last score!`
+                const btnArr = [`Play`];
+                clearButtons();
+                gradualAppend(question, btnArr);
+              } else if (e.target === document.getElementById('button1')) {
+                //No I've had enough
+                questionNumber= ''
+                const question = ``
+              }
+              break;
   }
 })
