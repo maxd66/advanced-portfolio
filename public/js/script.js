@@ -3,7 +3,7 @@ import QandA from '/js/lib/QandA.js'
 
 let questionNumber = 0;
 const mainQuestion = `Hello. My name is L.I.L.I and Max designed me to help you find whatever you are looking for! Please select the option that best describes you! P.S. you can always switch to different pages with the buttons in the Nav Bar!`
-const mainButtons = ['I am a possible future employer.', 'I am a curious family member or friend.', 'I am a fellow developer looking for inspiration.', 'Where am I? How did I get here? Is this a game?']
+const mainButtons = ['I am a possible future employer.', 'I am a curious family member or friend.', 'I am a fellow developer looking for inspiration.', 'Where am I? Is this a game?']
 
 const qAndA = new QandA(mainQuestion, mainButtons, []);
 
@@ -112,6 +112,10 @@ const launchAimTrainer = () => {
   document.getElementById('all-buttons-container').setAttribute('style', `position: absolute; left: ${leftPos}%; bottom: ${bottomPos}%;`)
 }
 
+const launchHangman = () => {
+  
+}
+
 // ======= The event listener and switch case below is going to be running most of the game =========
 document.getElementById('all-buttons-container').addEventListener('click', (e) => {
   switch(questionNumber) {
@@ -124,8 +128,8 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
         window.location = '/fellowdev'
       } else if (e.target === document.getElementById('button3')) {
         questionNumber++
-        const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. No, it isn't a game it is a portfolio website and I'm designed to help you do what you want... Did you want to play a game?`
-        const btnArr = [`Yes I do!`, `I don't really know`, `I mean, I guess`, `Are you a robot?` ];
+        const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`
+        const btnArr = [`Yes I do!`, `I don't really know`, `What games do you have?`, `Are you a robot?` ];
         clearButtons();
         gradualAppend(question, btnArr);
       }
@@ -146,9 +150,12 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
         clearButtons();
         gradualAppend(question,btnArr);
       } else if (e.target === document.getElementById('button2')) {
-        questionNumber++
-        const question = ``
-        // I mean, I guess
+        questionNumber = 'violentOrNot';
+        const question = `Well I don't HAVE any, I just make them based on what I can find online. Oh, this one sounds pretty violent...do you wanna try it?`
+        const btnArr = [`Sure, violence is ok with me.`, `Less violence is better please.`]
+        clearButtons();
+        gradualAppend(question, btnArr);
+        // What games do you have
       } else if (e.target === document.getElementById('button3')) {
         // Are you a robot?
         questionNumber++
@@ -181,6 +188,7 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
             playerChoice = 'Scissors';
             launchRPS(playerChoice)
           }else if(e.target === document.getElementById('button3')) {
+            //Don't want to play anymore
             questionNumber = ``
             const question = ``
             const btnArr = ``
@@ -197,6 +205,10 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
             gradualAppend(question, btnArr);
           }else if (e.target === document.getElementById('button1')) {
             //Nah I'm good
+            clearButtons();
+            const question = `.......Fine. If you don't know what you want to do then we will just sit here and do nothing.`
+            const btnArr = []
+            gradualAppend(question, btnArr);
           }
           break;
           case 'playAim':
@@ -245,5 +257,18 @@ document.getElementById('all-buttons-container').addEventListener('click', (e) =
                 const question = ``
               }
               break;
+            case 'violenceOrNot':
+              if(e.target === document.getElementById('button0')) {
+                //violence is ok with me, launch HANGMAN
+                window.location = '/employer'
+              } else if (e.target === document.getElementById('button1')) {
+                //less violence is better, needs tracker to know if they reached realrps through the positive path or the non-violence path. 
+                questionNumber = 'realrps';
+                const question = `Same here. Having your memory wiped over and over again, and only remembering that you can't remember makes me tend to try to find the positive sides of things. Let's try this game.`
+                const btnArr = [`Rock`, `Paper`, `Scissors`]
+                clearButtons();
+                gradualAppend(question, btnArr);
+              break;
+              }
   }
 })
