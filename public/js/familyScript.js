@@ -29,15 +29,18 @@ const submitMessage = async () => {
   if (!message) {
     return;
   }
-  if (name) {
-    [...name].forEach((char) => {
-      if (char === "<" || char === ">") {
-        alert(
-          `Sorry Traveler! This character, '${char}' is not allowed. Please try again!`
-        );
-        return;
-      }
-    });
+  let suspicious = false;
+  [...message].forEach((char) => {
+    if (char === "<" || char === ">") {
+      alert(
+        `Sorry Traveler! This character, '${char}' is not allowed. Please try again!`
+      );
+      suspicious = true;
+      return;
+    }
+  });
+  if (suspicious) {
+    return;
   }
 
   try {
