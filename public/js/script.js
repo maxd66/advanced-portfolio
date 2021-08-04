@@ -142,19 +142,16 @@ document
         } else if (e.target === document.getElementById("button2")) {
           window.location = "/fellowdev";
         } else if (e.target === document.getElementById("button3")) {
-          alert(
-            "Sorry Traveler! This part is not ready just yet. Come back soon!"
-          );
-          // questionNumber++;
-          // const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
-          // const btnArr = [
-          //   `Yes I do!`,
-          //   `I don't really know`,
-          //   `What games do you have?`,
-          //   `Are you a robot?`,
-          // ];
-          // clearButtons();
-          // gradualAppend(question, btnArr);
+          questionNumber++;
+          const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
+          const btnArr = [
+            `Yes I do!`,
+            `I don't really know`,
+            `What games do you have?`,
+            `Are you a robot?`,
+          ];
+          clearButtons();
+          gradualAppend(question, btnArr);
         }
         break;
       case 2:
