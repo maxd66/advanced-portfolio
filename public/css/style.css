@@ -1,220 +1,253 @@
-body, html {
-    height: 100%;
-  }
+body,
+html {
+  height: 100%;
+}
 
 :root {
-    --regFont: 'Montserrat', monospace;
-    --specFont: 'Source Code Pro', monospace;
+  --regFont: "Montserrat", monospace;
+  --specFont: "Source Code Pro", monospace;
 }
 
 /* ========Background Image =========== */
-.bg { 
-    /* The image used */
-    background-image: url("../images/rain2.jpg");
+.bg {
+  /* The image used */
+  background-image: url("../images/rain2.jpg");
 
-    min-height: 100%; 
+  min-height: 100%;
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* ============Nav============= */
 nav {
-    font-family: var(--regFont);
+  font-family: var(--regFont);
 }
 
 /* =============Question and Button section================== */
 #question-answer-container {
-    justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 
 /* =============Question section================== */
 #outer-question-box {
-    background-color: white;
-    border-radius: 70px;
+  background-color: white;
+  border-radius: 70px;
 }
 
 #inner-question-box {
-    background-color: #3991b4af;
-    border-radius: 85px;
-    box-shadow: 0px 1.5px 10px black;
+  background-color: #3991b4af;
+  border-radius: 85px;
+  box-shadow: 0px 1.5px 10px black;
 }
 
 .question {
-    font-family: var(--regFont);
-    font-size: 40px;
+  font-family: var(--regFont);
+  font-size: 40px;
 }
 
 p {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 /* ========Start Button style and animation========= */
 .button-element-container {
-    position: relative;
+  position: relative;
 }
 
 #button-box1 {
-    background-color: white;
-    border-radius: 45px;
-    position: relative;
-    animation: 4s infinite alternate bounce;
-    animation-timing-function: linear;
+  background-color: white;
+  border-radius: 45px;
+  position: relative;
+  animation: 4s infinite alternate bounce;
+  animation-timing-function: linear;
 }
 
 #button-box2 {
-    background-color: white;
-    border-radius: 45px;
-    position: relative;
-    animation: 4s infinite alternate bounce2;
-    animation-timing-function: linear;
+  background-color: white;
+  border-radius: 45px;
+  position: relative;
+  animation: 4s infinite alternate bounce2;
+  animation-timing-function: linear;
 }
 
 #button-box3 {
-    background-color: white;
-    border-radius: 45px;
-    position: relative;
-    animation: 4s infinite alternate bounce3;
-    animation-timing-function: linear;
+  background-color: white;
+  border-radius: 45px;
+  position: relative;
+  animation: 4s infinite alternate bounce3;
+  animation-timing-function: linear;
 }
 
 #button-box4 {
-    background-color: white;
-    border-radius: 45px;
-    position: relative;
-    animation: 4s infinite alternate bounce4;
-    animation-timing-function: linear;
+  background-color: white;
+  border-radius: 45px;
+  position: relative;
+  animation: 4s infinite alternate bounce4;
+  animation-timing-function: linear;
 }
 
 @keyframes bounce {
-    from {
-        right: 0px;
-        top: 0px;
-    }
-    25% {
-        right: 10px;
-        top: 5px;
-    }
-    50% {
-        right: 0px;
-        top: -5px;
-    }
-    75% {
-        right: -10px;
-        top: 5px;
-    }
-    to {
-        right: 0px;
-        top: 0px;
-    }
+  from {
+    right: 0px;
+    top: 0px;
+  }
+  25% {
+    right: 10px;
+    top: 5px;
+  }
+  50% {
+    right: 0px;
+    top: -5px;
+  }
+  75% {
+    right: -10px;
+    top: 5px;
+  }
+  to {
+    right: 0px;
+    top: 0px;
+  }
 }
 
 @keyframes bounce2 {
-    from {
-        left: 0px;
-        top: 0px;
-    }
-    25% {
-        left: 8px;
-        top: 5px;
-    }
-    50% {
-        left: -2px;
-        top: -5px;
-    }
-    75% {
-        left: 2px;
-        top: 5px;
-    }
-    to {
-        left: 0px;
-        top: 0px;
-    }
+  from {
+    left: 0px;
+    top: 0px;
+  }
+  25% {
+    left: 8px;
+    top: 5px;
+  }
+  50% {
+    left: -2px;
+    top: -5px;
+  }
+  75% {
+    left: 2px;
+    top: 5px;
+  }
+  to {
+    left: 0px;
+    top: 0px;
+  }
 }
 
 @keyframes bounce3 {
-    from {
-        right: 0px;
-        bottom: 0px;
-    }
-    25% {
-        right: 10px;
-        bottom: 5px;
-    }
-    50% {
-        right: 0px;
-        bottom: -5px;
-    }
-    75% {
-        right: -10px;
-        bottom: 5px;
-    }
-    to {
-        right: 0px;
-        bottom: 0px;
-    }
+  from {
+    right: 0px;
+    bottom: 0px;
+  }
+  25% {
+    right: 10px;
+    bottom: 5px;
+  }
+  50% {
+    right: 0px;
+    bottom: -5px;
+  }
+  75% {
+    right: -10px;
+    bottom: 5px;
+  }
+  to {
+    right: 0px;
+    bottom: 0px;
+  }
 }
 
 @keyframes bounce4 {
-    from {
-        left: 0px;
-        bottom: 0px;
-    }
-    25% {
-        left: 10px;
-        bottom: 5px;
-    }
-    50% {
-        left: 0px;
-        bottom: -5px;
-    }
-    75% {
-        left: -10px;
-        bottom: 5px;
-    }
-    to {
-        left: 0px;
-        bottom: 0px;
-    }
+  from {
+    left: 0px;
+    bottom: 0px;
+  }
+  25% {
+    left: 10px;
+    bottom: 5px;
+  }
+  50% {
+    left: 0px;
+    bottom: -5px;
+  }
+  75% {
+    left: -10px;
+    bottom: 5px;
+  }
+  to {
+    left: 0px;
+    bottom: 0px;
+  }
 }
 
-#start-button, #button0, #button1, #button2, #button3 {
-    min-width: 100%;
-    background-color: #3991b4af;
-    border-radius: 30px;
-    box-shadow: 0px 1.5px 10px black;
-    font-size: x-large;
-    font-family: var(--specFont);
+#start-button,
+#button0,
+#button1,
+#button2,
+#button3 {
+  min-width: 100%;
+  background-color: #3991b4af;
+  border-radius: 30px;
+  box-shadow: 0px 1.5px 10px black;
+  font-size: x-large;
+  font-family: var(--specFont);
 }
 
 #start-button:hover {
-    background-color: #3991b4ce;
+  background-color: #3991b4ce;
 }
 
 #start-button:focus {
-    outline: none;
+  outline: none;
 }
 #button0:focus {
-    outline: none;
+  outline: none;
 }
 #button1:focus {
-    outline: none;
+  outline: none;
 }
 #button2:focus {
-    outline: none;
+  outline: none;
 }
 #button3:focus {
-    outline: none;
+  outline: none;
+}
+#hangmanButton:focus {
+  outline: none;
 }
 
 /* Media Queries that bootstrap won't cover */
-@media screen and (min-width: 1200px){
-    #question-answer-container {
-        margin-top: 15%;
-    }
+@media screen and (min-width: 1200px) {
+  #question-answer-container {
+    margin-top: 15%;
+  }
 
-    #outer-question-box {
-        max-width: 75%;
-    }
+  #outer-question-box {
+    max-width: 75%;
+  }
+}
+
+/* Hangman style */
+
+#hangmanImg {
+  min-width: 300px;
+}
+
+#hangmanContainer {
+  background-color: white;
+  border-radius: 70px;
+}
+
+#hangmanForm {
+  background-color: #3991b4af;
+  border-radius: 85px;
+  box-shadow: 0px 1.5px 10px black;
+  font-family: var(--regFont);
+}
+
+#hangmanButton {
+  background-color: #3991b4af;
+  border-radius: 0px 30px 30px 0px;
+  box-shadow: 0px 1.5px 10px black;
+  font-family: var(--specFont);
 }
