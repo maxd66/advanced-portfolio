@@ -82,10 +82,13 @@ const wrongLetter = () => {
     .setAttribute("src", `/images/HM${lives}.png`);
 };
 
-const gameOver = () => {};
+const gameOver = () => {
+  wrongLetter();
+};
 
 const handleSubmit = () => {
   const userInput = document.getElementById("userInput").value.toUpperCase();
+  document.getElementById("userInput").value = "";
   if (!userInput) {
     return;
   } else if (!userInput.match(/[A-Z]/)) {
