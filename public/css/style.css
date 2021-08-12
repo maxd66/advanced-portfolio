@@ -269,9 +269,14 @@ p {
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 1.5px 10px black;
   font-family: var(--specFont);
+  transition: background-color 0.2s ease-in-out;
 }
 
-@media screen and (max-width: 568px) {
+#hangmanButton:hover {
+  background-color: #2c7592af;
+}
+
+@media screen and (max-width: 527px) {
   #hangmanButton {
     background-color: #3991b4af;
     border-radius: 30px;
