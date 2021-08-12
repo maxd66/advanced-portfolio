@@ -3,8 +3,8 @@
 // create funtion to generate word object for selected phrase
 // create function to append words to page, called every time an input is registered
 // create function to check user input and replace letters when necessary
-const wordArr = [];
-let chosenWord = "";
+const wordArr = ["In the direction of Deer"];
+let chosenWord;
 let lettersInChosen;
 let displayLetters = [];
 let guessedLetters = [];
@@ -25,11 +25,16 @@ const setWord = () => {
       displayLetters.push("_");
     }
   }
+  console.log(displayLetters);
+  renderWord(displayLetters);
 };
 
 const renderWord = (letterArr) => {
-  const wordString = letterArr.join(" ").replace(" ", "&nbsp;");
-  document.getElementById("wordBlanks").textContent = wordString;
+  const wordString = letterArr
+    .join(" ")
+    .replace(new RegExp("   ", "g"), "<span id='whiteSpace'>   </span>");
+  console.log(wordString);
+  document.getElementById("wordBlanks").innerHTML = wordString;
 };
 
 const checkLetter = (letter) => {
@@ -75,3 +80,5 @@ document.getElementById("hangmanForm").addEventListener("submit", (event) => {
   event.preventDefault();
   handleSubmit();
 });
+
+setWord();

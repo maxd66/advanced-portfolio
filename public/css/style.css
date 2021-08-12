@@ -229,6 +229,15 @@ p {
 
 /* Hangman style */
 
+#wordBlanks {
+  white-space: nowrap;
+  margin: 15px;
+}
+
+#whiteSpace {
+  white-space: pre-wrap;
+}
+
 #hangmanImg {
   min-width: 300px;
   border-radius: 30px;
