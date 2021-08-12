@@ -229,6 +229,14 @@ p {
 
 /* Hangman style */
 
+#correctGuess {
+  color: green;
+}
+
+#wrongGuess {
+  color: red;
+}
+
 #wordBlanks {
   white-space: nowrap;
   margin: 15px;

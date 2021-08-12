@@ -39,17 +39,22 @@ const renderWord = (letterArr) => {
 
 const checkLetter = (letter) => {
   let needRender = false;
-  guessedLetters.push(letter);
   for (let i = 0; i < lettersInChosen.length; i++) {
-    if (letter.toLowerCase() === lettersInChosen[i]) {
+    if (letter.toUpperCase() === lettersInChosen[i]) {
       displayLetters[i] = letter;
       needRender = true;
     }
   }
   if (needRender) {
     renderWord(displayLetters);
+    guessedLetters.push(`<span id="correctGuess">${letter}</span>`);
+    const guessedString = guessedLetters.join(", ");
+    document.getElementById("guessed").innerHTML = guessedString;
   } else {
     lives--;
+    guessedLetters.push(`<span id="wrongGuess">${letter}</span>`);
+    const guessedString = guessedLetters.join(", ");
+    document.getElementById("guessed").innerHTML = guessedString;
     if (lives === 0) {
       gameOver();
     } else {
