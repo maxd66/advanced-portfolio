@@ -231,6 +231,8 @@ p {
 
 #hangmanImg {
   min-width: 300px;
+  border-radius: 30px;
+  transition: all 0.2s ease-in-out;
 }
 
 #hangmanContainer {
@@ -250,4 +252,13 @@ p {
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 1.5px 10px black;
   font-family: var(--specFont);
+}
+
+@media screen and (max-width: 568px) {
+  #hangmanButton {
+    background-color: #3991b4af;
+    border-radius: 30px;
+    box-shadow: 0px 1.5px 10px black;
+    font-family: var(--specFont);
+  }
 }
