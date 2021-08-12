@@ -25,7 +25,6 @@ const setWord = () => {
       displayLetters.push("_");
     }
   }
-  console.log(displayLetters);
   renderWord(displayLetters);
 };
 
@@ -33,12 +32,26 @@ const renderWord = (letterArr) => {
   const wordString = letterArr
     .join(" ")
     .replace(new RegExp("   ", "g"), "<span id='whiteSpace'>   </span>");
-  console.log(wordString);
   document.getElementById("wordBlanks").innerHTML = wordString;
 };
 
 const checkLetter = (letter) => {
   let needRender = false;
+  if (guessedLetters[0]) {
+    let alreadyGuessed = false;
+    guessedLetters.forEach((val) => {
+      if (
+        val === `<span id="correctGuess">${letter.toUpperCase()}</span>` ||
+        val === `<span id="wrongGuess">${letter.toUpperCase()}</span>`
+      ) {
+        alert("You already guessed that letter traveler!");
+        alreadyGuessed = true;
+      }
+    });
+    if (alreadyGuessed) {
+      return;
+    }
+  }
   for (let i = 0; i < lettersInChosen.length; i++) {
     if (letter.toUpperCase() === lettersInChosen[i]) {
       displayLetters[i] = letter;
@@ -63,7 +76,11 @@ const checkLetter = (letter) => {
   }
 };
 
-const wrongLetter = () => {};
+const wrongLetter = () => {
+  document
+    .getElementById("hangmanImg")
+    .setAttribute("src", `/images/HM${lives}.png`);
+};
 
 const gameOver = () => {};
 
