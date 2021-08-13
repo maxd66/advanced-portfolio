@@ -118,6 +118,14 @@ const checkLetter = (letter) => {
     guessedLetters.push(`<span id="correctGuess">${letter}</span>`);
     const guessedString = guessedLetters.join(", ");
     document.getElementById("guessed").innerHTML = guessedString;
+    console.log(displayLetters);
+    if (
+      displayLetters.every((val) => {
+        return val !== "_";
+      })
+    ) {
+      winCondition();
+    }
   } else {
     lives--;
     guessedLetters.push(`<span id="wrongGuess">${letter}</span>`);
@@ -141,6 +149,31 @@ const gameOver = () => {
   wrongLetter();
   const message = `Oh no! You died...The answer was, ${chosenWord}, but good try. Do you want to play again?`;
   const btnArr = [`Sure`, `No, lets try something else.`];
+  gradualAppend(message, btnArr);
+  document
+    .getElementById("button-element-container")
+    .addEventListener("click", (e) => {
+      if (e.target === document.getElementById("button0")) {
+        alert("this does something");
+      } else if (e.target === document.getElementById("button1")) {
+        alert("this does something else");
+      }
+    });
+};
+
+const winCondition = () => {
+  let message;
+  if (lives === 1) {
+    message =
+      "Oh boy, that was a close one! You were only one wrong answer away from being hanged...Wanna play again?";
+  } else if (lives === 7) {
+    message =
+      "Holy Java! You got the whole thing without even losing a life! Wanna go another round?";
+  } else {
+    message =
+      "Wow good job! Your body is ... incomplete. So ... you win I guess? Do you want to play again?";
+  }
+  const btnArr = ["Let's go again", "I'm ready to move on"];
   gradualAppend(message, btnArr);
   document
     .getElementById("button-element-container")
