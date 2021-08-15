@@ -43,9 +43,9 @@ const determineAdv = (move, p2) => {
   if (type === "neutral") {
     return 0;
   } else if (move.adv.includes(p2.type)) {
-    return 1;
+    return 0.25;
   } else if (move.weak.includes(p2.type)) {
-    return -1;
+    return -0.25;
   } else {
     return 0;
   }
@@ -54,15 +54,16 @@ const determineAdv = (move, p2) => {
 const calculateEffect = (p1, p2, move) => {
   const crit = Math.floor(Math.random() * 100);
   const adv = determineAdv(move, p2);
+  let multiplier = 1 + adv;
+  if (crit < move.critChance) {
+    multiplier += 2;
+  }
   switch (move.ahp) {
     case "attack":
-      if (crit < move.critChance) {
-        p2.hp -= move.damage * 3;
-      } else {
-        p2.hp -= move.damage;
-      }
+      p2.hp -= Math.floor(move.damage * multiplier);
       break;
     case "heal":
+      p1.hp += Math.floor(move.heal * multiplier);
       break;
     case "protect":
       break;
