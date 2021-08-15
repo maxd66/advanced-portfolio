@@ -1,8 +1,4 @@
-// tasks:
-// Create array of tons of phrases, there should be so many that the user shouldn't see the same one after playing dozens of times
-// create funtion to generate word object for selected phrase
-// create function to append words to page, called every time an input is registered
-// create function to check user input and replace letters when necessary
+// These functions are pulled from the original script, would be better suited as a class, but maybe an idea for future refactor
 const gradualAppend = (question, btnArr) => {
   const questionArr = question.split("");
   let input = ``;
@@ -58,6 +54,8 @@ const putButtons = (buttonArr) => {
   document.getElementById("button-element-container").innerHTML = btnHtml;
 };
 
+// beginning of Hangman Logic
+// Uses word array, add to this to add words that could be used for the game
 const wordArr = ["In the direction of Deer"];
 let chosenWord;
 let lettersInChosen;
@@ -65,6 +63,7 @@ let displayLetters = [];
 let guessedLetters = [];
 let lives = 7;
 
+// set word creates the string of underscores, and calls renderword at the end
 const setWord = () => {
   chosenWord =
     wordArr[Math.floor(Math.random() * wordArr.length)].toUpperCase();
@@ -83,6 +82,7 @@ const setWord = () => {
   renderWord(displayLetters);
 };
 
+// render word generates the string so that it will format correctly and actually puts it on the page
 const renderWord = (letterArr) => {
   const wordString = letterArr
     .join(" ")
@@ -90,6 +90,7 @@ const renderWord = (letterArr) => {
   document.getElementById("wordBlanks").innerHTML = wordString;
 };
 
+// called by the submission handler when new letter is input
 const checkLetter = (letter) => {
   let needRender = false;
   if (guessedLetters[0]) {
@@ -139,12 +140,14 @@ const checkLetter = (letter) => {
   }
 };
 
+// wrong letter updates image on page
 const wrongLetter = () => {
   document
     .getElementById("hangmanImg")
     .setAttribute("src", `/images/HM${lives}.png`);
 };
 
+// game over triggers when there are no lives left, prompts for user input
 const gameOver = () => {
   wrongLetter();
   const message = `Oh no! You died...The answer was, ${chosenWord}, but good try. Do you want to play again?`;
@@ -161,6 +164,7 @@ const gameOver = () => {
     });
 };
 
+// activates when the word is completed, prompts for next action
 const winCondition = () => {
   let message;
   if (lives === 1) {

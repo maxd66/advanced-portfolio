@@ -45,6 +45,9 @@ app.get("/api/visitors", async (req, res) => {
 app.get("/hangman", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/hangman.html"));
 });
+app.get("/prodigium", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/prodigium.html"));
+});
 
 // POST requests
 app.post("/api/visitors", async (req, res) => {
