@@ -66,6 +66,10 @@ const wordArr = [
   "Krusty krab pizza",
   "King in the north",
   "max and ruby",
+  "computers are better",
+  "over the moon",
+  "No time for caution",
+  "Strike first, strike hard, no mercy",
 ];
 let chosenWord;
 let lettersInChosen;
@@ -185,7 +189,7 @@ const winCondition = () => {
       "Holy Java! You got the whole thing without even losing a life! Wanna go another round?";
   } else {
     message =
-      "Wow good job! Your body is ... incomplete. So ... you win I guess? Do you want to play again?";
+      "Wow good job! Your body is incomplete. So ... you win I guess? Do you want to play again?";
   }
   const btnArr = ["Let's go again", "I'm ready to move on"];
   gradualAppend(message, btnArr);
