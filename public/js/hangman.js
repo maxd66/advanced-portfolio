@@ -144,7 +144,7 @@ const checkLetter = (letter) => {
 const wrongLetter = () => {
   document
     .getElementById("hangmanImg")
-    .setAttribute("src", `/images/HM${lives}.png`);
+    .setAttribute("src", `/images/hangman/HM${lives}.png`);
 };
 
 // game over triggers when there are no lives left, prompts for user input
