@@ -56,7 +56,17 @@ const putButtons = (buttonArr) => {
 
 // beginning of Hangman Logic
 // Uses word array, add to this to add words that could be used for the game
-const wordArr = ["In the direction of Deer"];
+const wordArr = [
+  "In the direction of Deer",
+  "Not today",
+  "the last of us",
+  "all purpose entertainment",
+  "The Dark Knight",
+  "I need it",
+  "Krusty krab pizza",
+  "King in the north",
+  "max and ruby",
+];
 let chosenWord;
 let lettersInChosen;
 let displayLetters = [];
