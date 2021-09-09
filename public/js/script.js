@@ -28,56 +28,59 @@ document.getElementById("start-button").addEventListener("click", () => {
 
 let playSpeed = 75;
 let playSpeedSlow = 250;
+let skipped = false;
 
 const gradualAppend = (question, btnArr) => {
   document.getElementById("skipButton").classList.remove("hideSkip");
-  document.getElementById("skipButton").addEventListener("click", (e) => {
-    e.preventDefault();
-    playSpeed = 1;
-    playSpeedSlow = 1;
-  });
   const questionArr = question.split("");
   let input = ``;
   let appendIndex = 0;
   let end = questionArr.length;
+  document.getElementById("skipButton").addEventListener("click", (e) => {
+    e.preventDefault();
+    skipped = true;
+  });
   intervalFunc(questionArr, input, appendIndex, end, btnArr);
 };
 
 const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
-  document.getElementById("skipButton").addEventListener("click", (e) => {
-    e.preventDefault();
-  });
   const myInterval = setInterval(() => {
-    input += questionArr[appendIndex];
-    const questionHTML = `<h2 class="question">${input}</h2>`;
-    document.getElementById("inner-question-box").innerHTML = questionHTML;
-    if (
-      questionArr[appendIndex] === "." ||
-      questionArr[appendIndex] === "!" ||
-      questionArr[appendIndex] === "?"
-    ) {
-      clearInterval(myInterval);
-      setTimeout(() => {
-        if (appendIndex >= end) {
-          clearInterval(myInterval);
-          document.getElementById("skipButton").classList.add("hideSkip");
-          playSpeed = 75;
-          playSpeedSlow = 250;
-          putButtons(btnArr);
-          return;
-        } else {
-          intervalFunc(questionArr, input, appendIndex, end, btnArr);
-        }
-      }, playSpeedSlow);
-    }
-    appendIndex++;
-    if (appendIndex >= end) {
+    if (skipped) {
       clearInterval(myInterval);
       document.getElementById("skipButton").classList.add("hideSkip");
-      playSpeed = 75;
-      playSpeedSlow = 250;
+      const questionHTML = `<h2 class="question">${questionArr.join("")}</h2>`;
+      document.getElementById("inner-question-box").innerHTML = questionHTML;
       putButtons(btnArr);
+      skipped = false;
       return;
+    } else {
+      input += questionArr[appendIndex];
+      const questionHTML = `<h2 class="question">${input}</h2>`;
+      document.getElementById("inner-question-box").innerHTML = questionHTML;
+      if (
+        questionArr[appendIndex] === "." ||
+        questionArr[appendIndex] === "!" ||
+        questionArr[appendIndex] === "?"
+      ) {
+        clearInterval(myInterval);
+        setTimeout(() => {
+          if (appendIndex >= end) {
+            clearInterval(myInterval);
+            document.getElementById("skipButton").classList.add("hideSkip");
+            putButtons(btnArr);
+            return;
+          } else {
+            intervalFunc(questionArr, input, appendIndex, end, btnArr);
+          }
+        }, playSpeedSlow);
+      }
+      appendIndex++;
+      if (appendIndex >= end) {
+        clearInterval(myInterval);
+        document.getElementById("skipButton").classList.add("hideSkip");
+        putButtons(btnArr);
+        return;
+      }
     }
   }, playSpeed);
 };
@@ -131,9 +134,19 @@ const launchRPS = (playerChoice) => {
 let aimTrainerScore = -1;
 let timer = 0;
 let playingAim = false;
+let misses = 0;
+let totalClicks = 0;
 
 const launchAimTrainer = () => {
   clearButtons();
+  // document.addEventListener("click", (e) => {
+  //   e.stopPropagation();
+  //   const buttonEl = document.getElementById("button0");
+  //   const imgEl = document.querySelector("img");
+  //   if (e.target !== buttonEl && e.target !== imgEl) {
+  //     misses++;
+  //   }
+  // });
   document.getElementById("inner-question-box").innerHTML = "";
   document.getElementById("outer-question-box").style.display = "none";
   putButtons([`<img style="height:100px;" src="./images/crosshair2.png">`]);
@@ -277,6 +290,7 @@ document
               clearButtons();
               playingAim = false;
               questionNumber = "checkAim";
+              console.log(misses, totalClicks);
               const question = `Wow that was exciting! You hit ${aimTrainerScore} bad guys! Would you like to play again?`;
               const btnArr = [`Lets do it`, `No, I've had enough`];
               document.getElementById("outer-question-box").style.display =
@@ -299,6 +313,8 @@ document
           //Lets do it!
           questionNumber = "playAim";
           aimTrainerScore = 0;
+          misses = 0;
+          totalClicks = 0;
           const question = `Yes! Try and beat your last score!`;
           const btnArr = [`Play`];
           clearButtons();
