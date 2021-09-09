@@ -265,7 +265,6 @@ document
       case "playAim":
         e.preventDefault();
         clearButtons();
-        console.log(playingAim);
         aimTrainerScore++;
         if (playingAim) {
           launchAimTrainer();
@@ -287,7 +286,6 @@ document
                 .setAttribute("style", `position: relative;`);
               gradualAppend(question, btnArr);
             } else {
-              console.log(3);
               if (!playingAim) {
                 launchAimTrainer();
                 playingAim = true;
