@@ -1,53 +1,59 @@
 // These functions are pulled from the original script, would be better suited as a class, but maybe an idea for future refactor
 let playSpeed = 75;
 let playSpeedSlow = 250;
+let skipped = false;
 
 const gradualAppend = (question, btnArr) => {
   document.getElementById("skipButton").classList.remove("hideSkip");
-  document.getElementById("skipButton").addEventListener("click", (e) => {
-    e.preventDefault();
-    playSpeed = 1;
-    playSpeedSlow = 1;
-  });
   const questionArr = question.split("");
   let input = ``;
   let appendIndex = 0;
   let end = questionArr.length;
+  document.getElementById("skipButton").addEventListener("click", (e) => {
+    e.preventDefault();
+    skipped = true;
+  });
   intervalFunc(questionArr, input, appendIndex, end, btnArr);
 };
 
 const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
   const myInterval = setInterval(() => {
-    input += questionArr[appendIndex];
-    const questionHTML = `<h2 class="question">${input}</h2>`;
-    document.getElementById("hangmanForm").innerHTML = questionHTML;
-    if (
-      questionArr[appendIndex] === "." ||
-      questionArr[appendIndex] === "!" ||
-      questionArr[appendIndex] === "?"
-    ) {
-      clearInterval(myInterval);
-      setTimeout(() => {
-        if (appendIndex >= end) {
-          clearInterval(myInterval);
-          document.getElementById("skipButton").classList.add("hideSkip");
-          playSpeed = 75;
-          playSpeedSlow = 250;
-          putButtons(btnArr);
-          return;
-        } else {
-          intervalFunc(questionArr, input, appendIndex, end, btnArr);
-        }
-      }, playSpeedSlow);
-    }
-    appendIndex++;
-    if (appendIndex >= end) {
+    if (skipped) {
       clearInterval(myInterval);
       document.getElementById("skipButton").classList.add("hideSkip");
-      playSpeed = 75;
-      playSpeedSlow = 250;
+      const questionHTML = `<h2 class="question">${questionArr.join("")}</h2>`;
+      document.getElementById("inner-question-box").innerHTML = questionHTML;
       putButtons(btnArr);
+      skipped = false;
       return;
+    } else {
+      input += questionArr[appendIndex];
+      const questionHTML = `<h2 class="question">${input}</h2>`;
+      document.getElementById("hangmanForm").innerHTML = questionHTML;
+      if (
+        questionArr[appendIndex] === "." ||
+        questionArr[appendIndex] === "!" ||
+        questionArr[appendIndex] === "?"
+      ) {
+        clearInterval(myInterval);
+        setTimeout(() => {
+          if (appendIndex >= end) {
+            clearInterval(myInterval);
+            document.getElementById("skipButton").classList.add("hideSkip");
+            putButtons(btnArr);
+            return;
+          } else {
+            intervalFunc(questionArr, input, appendIndex, end, btnArr);
+          }
+        }, playSpeedSlow);
+      }
+      appendIndex++;
+      if (appendIndex >= end) {
+        clearInterval(myInterval);
+        document.getElementById("skipButton").classList.add("hideSkip");
+        putButtons(btnArr);
+        return;
+      }
     }
   }, playSpeed);
 };
