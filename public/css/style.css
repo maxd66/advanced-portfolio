@@ -230,11 +230,24 @@ p {
 /* Skip Button */
 
 #skipButton {
-  /* display: none; */
-  margin-left: 80%;
+  margin-left: 15%;
   font-family: var(--specFont);
   color: rgb(117, 117, 117);
   border: none;
+  border-radius: 10px;
+}
+
+#skipButton:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.hideSkip {
+  display: none;
+}
+
+#skipButton:hover {
+  text-decoration: underline;
 }
 
 /* Hangman style */

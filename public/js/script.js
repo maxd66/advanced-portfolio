@@ -27,6 +27,7 @@ document.getElementById("start-button").addEventListener("click", () => {
 // All of the following functions are purely for game logic, whether that be simply updating the page or tracking the player's progress
 
 const gradualAppend = (question, btnArr) => {
+  document.getElementById("skipButton").classList.remove("hideSkip");
   const questionArr = question.split("");
   let input = ``;
   let appendIndex = 0;
@@ -48,6 +49,7 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
       setTimeout(() => {
         if (appendIndex >= end) {
           clearInterval(myInterval);
+          document.getElementById("skipButton").classList.add("hideSkip");
           putButtons(btnArr);
           return;
         } else {
@@ -58,6 +60,7 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
     appendIndex++;
     if (appendIndex >= end) {
       clearInterval(myInterval);
+      document.getElementById("skipButton").classList.add("hideSkip");
       putButtons(btnArr);
       return;
     }
