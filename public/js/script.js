@@ -53,7 +53,7 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
         } else {
           intervalFunc(questionArr, input, appendIndex, end, btnArr);
         }
-      }, 400);
+      }, 250);
     }
     appendIndex++;
     if (appendIndex >= end) {
@@ -61,7 +61,7 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
       putButtons(btnArr);
       return;
     }
-  }, 100);
+  }, 75);
 };
 
 const clearButtons = () => {

@@ -227,6 +227,16 @@ p {
   }
 }
 
+/* Skip Button */
+
+#skipButton {
+  /* display: none; */
+  margin-left: 80%;
+  font-family: var(--specFont);
+  color: rgb(117, 117, 117);
+  border: none;
+}
+
 /* Hangman style */
 
 #correctGuess {
