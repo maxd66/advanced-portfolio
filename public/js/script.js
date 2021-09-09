@@ -26,8 +26,16 @@ document.getElementById("start-button").addEventListener("click", () => {
 
 // All of the following functions are purely for game logic, whether that be simply updating the page or tracking the player's progress
 
+let playSpeed = 75;
+let playSpeedSlow = 250;
+
 const gradualAppend = (question, btnArr) => {
   document.getElementById("skipButton").classList.remove("hideSkip");
+  document.getElementById("skipButton").addEventListener("click", (e) => {
+    e.preventDefault();
+    playSpeed = 1;
+    playSpeedSlow = 1;
+  });
   const questionArr = question.split("");
   let input = ``;
   let appendIndex = 0;
@@ -36,6 +44,9 @@ const gradualAppend = (question, btnArr) => {
 };
 
 const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
+  document.getElementById("skipButton").addEventListener("click", (e) => {
+    e.preventDefault();
+  });
   const myInterval = setInterval(() => {
     input += questionArr[appendIndex];
     const questionHTML = `<h2 class="question">${input}</h2>`;
@@ -50,21 +61,25 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
         if (appendIndex >= end) {
           clearInterval(myInterval);
           document.getElementById("skipButton").classList.add("hideSkip");
+          playSpeed = 75;
+          playSpeedSlow = 250;
           putButtons(btnArr);
           return;
         } else {
           intervalFunc(questionArr, input, appendIndex, end, btnArr);
         }
-      }, 250);
+      }, playSpeedSlow);
     }
     appendIndex++;
     if (appendIndex >= end) {
       clearInterval(myInterval);
       document.getElementById("skipButton").classList.add("hideSkip");
+      playSpeed = 75;
+      playSpeedSlow = 250;
       putButtons(btnArr);
       return;
     }
-  }, 75);
+  }, playSpeed);
 };
 
 const clearButtons = () => {
