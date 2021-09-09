@@ -143,8 +143,11 @@ const launchAimTrainer = () => {
   //   e.stopPropagation();
   //   const buttonEl = document.getElementById("button0");
   //   const imgEl = document.querySelector("img");
-  //   if (e.target !== buttonEl && e.target !== imgEl) {
+  //   if (e.target !== imgEl) {
+  //     console.log(e.target, "working");
+  //     console.log(imgEl);
   //     misses++;
+  //     console.log("should be a miss");
   //   }
   // });
   document.getElementById("inner-question-box").innerHTML = "";
@@ -290,7 +293,6 @@ document
               clearButtons();
               playingAim = false;
               questionNumber = "checkAim";
-              console.log(misses, totalClicks);
               const question = `Wow that was exciting! You hit ${aimTrainerScore} bad guys! Would you like to play again?`;
               const btnArr = [`Lets do it`, `No, I've had enough`];
               document.getElementById("outer-question-box").style.display =
