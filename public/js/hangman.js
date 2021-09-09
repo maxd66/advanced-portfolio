@@ -1,5 +1,6 @@
 // These functions are pulled from the original script, would be better suited as a class, but maybe an idea for future refactor
 const gradualAppend = (question, btnArr) => {
+  document.getElementById("skipButton").classList.remove("hideSkip");
   const questionArr = question.split("");
   let input = ``;
   let appendIndex = 0;
@@ -21,6 +22,7 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
       setTimeout(() => {
         if (appendIndex >= end) {
           clearInterval(myInterval);
+          document.getElementById("skipButton").classList.add("hideSkip");
           putButtons(btnArr);
           return;
         } else {
@@ -31,6 +33,7 @@ const intervalFunc = (questionArr, input, appendIndex, end, btnArr) => {
     appendIndex++;
     if (appendIndex >= end) {
       clearInterval(myInterval);
+      document.getElementById("skipButton").classList.add("hideSkip");
       putButtons(btnArr);
       return;
     }
