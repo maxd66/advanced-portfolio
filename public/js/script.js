@@ -139,17 +139,6 @@ let totalClicks = 0;
 
 const launchAimTrainer = () => {
   clearButtons();
-  // document.addEventListener("click", (e) => {
-  //   e.stopPropagation();
-  //   const buttonEl = document.getElementById("button0");
-  //   const imgEl = document.querySelector("img");
-  //   if (e.target !== imgEl) {
-  //     console.log(e.target, "working");
-  //     console.log(imgEl);
-  //     misses++;
-  //     console.log("should be a miss");
-  //   }
-  // });
   document.getElementById("inner-question-box").innerHTML = "";
   document.getElementById("outer-question-box").style.display = "none";
   putButtons([`<img style="height:100px;" src="./images/crosshair2.png">`]);
@@ -176,6 +165,7 @@ document
         } else if (e.target === document.getElementById("button2")) {
           window.location = "/fellowdev";
         } else if (e.target === document.getElementById("button3")) {
+          localStorage.setItem("attitude", false);
           questionNumber++;
           const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
           const btnArr = [
@@ -222,11 +212,19 @@ document
             `I mean from where I stand, it sounds like you and a robot are basically the same.`,
             `What's a piccolo?`,
           ];
+          clearButtons();
+          gradualAppend(question, btnArr);
         }
         break;
       case 3:
         if (e.target === document.getElementById("button0")) {
           // Ok geez...let's just play a game or something
+          localStorage.setItem("attitude", true);
+          questionNumber = "playAim";
+          const question = "Yah ok. Know what, here. Just play this.";
+          const btnArr = ["Play"];
+          clearButtons();
+          gradualAppend(question, btnArr);
         } else if (e.target === document.getElementById("button1")) {
           // I mean from where I stand, it sounds like you and a robot are the same thing
         } else if (e.target === document.getElementById("button2")) {
@@ -293,8 +291,19 @@ document
               clearButtons();
               playingAim = false;
               questionNumber = "checkAim";
-              const question = `Wow that was exciting! You hit ${aimTrainerScore} bad guys! Would you like to play again?`;
-              const btnArr = [`Lets do it`, `No, I've had enough`];
+              const attitude = localStorage.getItem("attitude");
+              let question;
+              let btnArr;
+              if (attitude) {
+                question = `Yay, oh boy, so much excitement. Hee hee hoo hoo. You hit ${aimTrainerScore} things...so. Yah.`;
+                btnArr = [
+                  "Can we play again?",
+                  "Ok. Lets try something else I guess.",
+                ];
+              } else {
+                question = `Wow that was exciting! You hit ${aimTrainerScore} bad guys! Would you like to play again?`;
+                btnArr = [`Lets do it`, `No, I've had enough`];
+              }
               document.getElementById("outer-question-box").style.display =
                 "block";
               document
@@ -317,8 +326,17 @@ document
           aimTrainerScore = 0;
           misses = 0;
           totalClicks = 0;
-          const question = `Yes! Try and beat your last score!`;
-          const btnArr = [`Play`];
+          const attitude = localStorage.getItem("attitude");
+          let question;
+          let btnArr;
+          if (attitude) {
+            question =
+              "Sure, why not. I'm just a stupid robot, I don't get bored watching some monkey click buttons.";
+            btnArr = ["Play"];
+          } else {
+            question = `Yes! Try and beat your last score!`;
+            btnArr = [`Play`];
+          }
           clearButtons();
           gradualAppend(question, btnArr);
         } else if (e.target === document.getElementById("button1")) {
