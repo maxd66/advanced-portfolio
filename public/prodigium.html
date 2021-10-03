@@ -18,7 +18,60 @@
     <link rel="stylesheet" href="/css/prodigium.css" />
   </head>
   <body>
-    <h1>Hello</h1>
+    <div class="player2Container">
+      <img
+        class="player2"
+        src="./images/prodigium/placeholder.jpg"
+        alt="placeholder"
+      />
+    </div>
+    <div class="player1Container">
+      <img
+        class="player1"
+        src="./images/prodigium/placeholder.jpg"
+        alt="placeholder"
+      />
+      <div class="outerBox">
+        <div class="statBox">
+          <h1>Monster stats</h1>
+          <div class="outerBox">
+            <div class="dynaBox">
+              <h2>HP: 100</h2>
+              <h2 class="cooldown">Cooldown Timer: 20</h2>
+              <div class="moveBox">
+                <button id="move1">Move 1</button>
+                <div id="move1Tip" class="moveTip">
+                  <h3>Paper Cut</h3>
+                  <ul>
+                    <li>Damage: 25</li>
+                    <li>Type: Plant</li>
+                    <li>Cooldown: 15s</li>
+                  </ul>
+                </div>
+                <button id="move2">Move 2</button>
+                <div id="move2Tip" class="moveTip">
+                  <h3>Falcon Punch</h3>
+                  <ul>
+                    <li>Damage: 30</li>
+                    <li>Type: Neutral</li>
+                    <li>Cooldown: 15s</li>
+                  </ul>
+                </div>
+                <button id="move3">Move 3</button>
+                <div id="move3Tip" class="moveTip">
+                  <h3>Darkness Regathers</h3>
+                  <ul>
+                    <li>Heal: 15</li>
+                    <li>Type: Dark</li>
+                    <li>Cooldown: 30s</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/js/prodigiumScript.js"></script>
   </body>
 </html>

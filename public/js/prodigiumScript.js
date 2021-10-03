@@ -42,6 +42,32 @@
 // maybe a class that extends the player class with different methods
 // Battle class that will manage starting health, round timer, and round ending
 
+class Render {
+  renderHome() {
+    document.querySelector(
+      "body"
+    ).innerHTML = `    <div class="locationContainer">
+    <div class="blocking">
+      <button class="locationButton">Gym</button>
+    </div>
+    <div class="blocking">
+      <button class="locationButton">Arena</button>
+    </div>
+  </div>
+  <div class="monsterContainer">
+    <img
+      class="monster"
+      src="./images/prodigium/placeholder.jpg"
+      alt="placeholder"
+    />
+  </div>`;
+  }
+
+  renderArena() {}
+
+  renderGym() {}
+}
+
 class Player {
   constructor(characterObj) {
     this.character = characterObj;
@@ -110,21 +136,25 @@ const determineAdv = (move, p2) => {
   }
 };
 
-const calculateEffect = (p1, p2, move) => {
-  const crit = Math.floor(Math.random() * 100);
-  const adv = determineAdv(move, p2);
-  let multiplier = 1 + adv;
-  if (crit < move.critChance) {
-    multiplier += 2;
-  }
-  switch (move.ahp) {
-    case "attack":
-      p2.hp -= Math.floor(move.damage * multiplier);
-      break;
-    case "heal":
-      p1.hp += Math.floor(move.heal * multiplier);
-      break;
-    case "protect":
-      break;
-  }
-};
+// const calculateEffect = (p1, p2, move) => {
+//   const crit = Math.floor(Math.random() * 100);
+//   const adv = determineAdv(move, p2);
+//   let multiplier = 1 + adv;
+//   if (crit < move.critChance) {
+//     multiplier += 2;
+//   }
+//   switch (move.ahp) {
+//     case "attack":
+//       p2.hp -= Math.floor(move.damage * multiplier);
+//       break;
+//     case "heal":
+//       p1.hp += Math.floor(move.heal * multiplier);
+//       break;
+//     case "protect":
+//       break;
+//   }
+// };
+
+// const render = new Render();
+
+// render.renderHome();

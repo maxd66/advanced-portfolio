@@ -1,3 +1,116 @@
 body {
   background-color: red;
 }
+
+.blocking {
+  background-color: black;
+}
+
+.locationButton {
+  padding: 100px;
+}
+
+.locationContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15%;
+}
+
+.monsterContainer {
+  text-align: center;
+  margin-top: 200px;
+}
+
+.monster {
+}
+
+.player2Container {
+  margin-top: 200px;
+  margin-left: 60%;
+}
+
+.player2 {
+  width: 200px;
+}
+
+.player1Container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 25%;
+  margin-top: 200px;
+}
+
+@media screen and (max-width: 630px) {
+  .player1Container {
+    margin-left: 0%;
+    justify-content: center;
+  }
+
+  .player2Container {
+    margin-left: 40%;
+  }
+}
+
+.outerBox {
+  border: gray dashed 2px;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.statBox {
+  border: black dashed 2px;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 10px;
+  min-height: 100%;
+}
+
+.statBox h1 {
+  text-align: right;
+}
+
+.dynaBox {
+  position: relative;
+  border-radius: 10px;
+  border: 2px dashed black;
+  padding: 10px;
+  background-color: white;
+}
+
+.cooldown {
+  padding-bottom: 100px;
+}
+
+.moveBox {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.moveTip {
+  position: absolute;
+  top: 50px;
+  left: 7px;
+  background-color: gray;
+  padding: 5px;
+  border: gray solid 2px;
+  min-width: 300px;
+}
+
+#move1Tip,
+#move2Tip,
+#move3Tip {
+  visibility: hidden;
+}
+
+#move1:hover + #move1Tip {
+  visibility: visible;
+}
+
+#move2:hover + #move2Tip {
+  visibility: visible;
+}
+
+#move3:hover + #move3Tip {
+  visibility: visible;
+}
