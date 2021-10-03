@@ -38,7 +38,64 @@
 // function will determine if move is heal, damage, or protect
 // then will calulate changes to players
 // Plan:
-// Classes:
+// Classes: Player class, constuctor holds object of player selected, class holds all functions that can affect player stats.
+// maybe a class that extends the player class with different methods
+// Battle class that will manage starting health, round timer, and round ending
+
+class Player {
+  constructor(characterObj) {
+    this.character = characterObj;
+  }
+
+  determineAdv(move, opponent) {
+    const type = move.type;
+    if (type === "neutral") {
+      return 0;
+    } else if (move.adv.includes(opponent.type)) {
+      return 0.25;
+    } else if (move.weak.includes(opponent.type)) {
+      return -0.25;
+    } else {
+      return 0;
+    }
+  }
+
+  attack(move, opponent) {
+    const crit = Math.floor(Math.random() * 100);
+    const adv = this.determineAdv(move, opponent);
+    let multiplier = 1 + adv;
+    if (crit < move.critChance) {
+      multiplier += 2;
+    }
+    opponent.hp -= move.dmg * multiplier;
+  }
+
+  heal(move) {
+    const crit = Math.floor(Math.random() * 100);
+    let multiplier = 1;
+    if (crit < move.critChance) {
+      multiplier += 2;
+    }
+    this.character.hp += move.heal * multiplier;
+    if (this.character.hp > this.character.startingHp) {
+      this.character.hp = this.character.startingHp;
+    }
+  }
+}
+
+class Battle {
+  constructor(player1, player2) {
+    this.player1 = player1;
+    this.player2 = player2;
+    this.roundTimer = 100;
+  }
+
+  reset() {
+    this.player1.hp = this.player1.startingHp;
+    this.player2.hp = this.player2.startingHp;
+    this.roundTimer = 100;
+  }
+}
 
 const determineAdv = (move, p2) => {
   const type = move.type;
