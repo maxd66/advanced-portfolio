@@ -37,6 +37,8 @@
 // function should take players in question, and move chosen
 // function will determine if move is heal, damage, or protect
 // then will calulate changes to players
+// Plan:
+// Classes:
 
 const determineAdv = (move, p2) => {
   const type = move.type;

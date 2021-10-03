@@ -254,9 +254,9 @@ document
           launchRPS(playerChoice);
         } else if (e.target === document.getElementById("button3")) {
           //Don't want to play anymore
-          questionNumber = ``;
-          const question = ``;
-          const btnArr = ``;
+          questionNumber = `prefaceHangman`;
+          const question = `Oh... Ok... Yah I guess that could get boring. Here, I've got something better.`;
+          const btnArr = [`Something better?`];
           gradualAppend(question, btnArr);
         }
         break;
@@ -358,14 +358,21 @@ document
           //   `<img style="height:200px;" src="./images/HM3.png">`,
           // ];
           // GO TO HANGMAN PAGE
-          gradualAppend(question, btnArr);
+          localStorage.setItem("violent", true);
+          window.location = "/hangman";
         } else if (e.target === document.getElementById("button1")) {
           //less violence is better, needs tracker to know if they reached realrps through the positive path or the non-violence path.
           questionNumber = "realrps";
-          const question = `Same here. Having your memory wiped over and over again, and only remembering that you can't remember makes me tend to try to find the positive sides of things. Let's try this game.`;
+          const question = `Same here. Having your memory wiped over and over again, and only remembering that you can't remember makes me tend to try to find the positives. Let's try this game.`;
           const btnArr = [`Rock`, `Paper`, `Scissors`];
           clearButtons();
           gradualAppend(question, btnArr);
+          break;
+        }
+      case "prefaceHangman":
+        if (e.target === document.getElementById("button0")) {
+          localStorage.setItem("depressed", true);
+          window.location = "/hangman";
           break;
         }
     }
