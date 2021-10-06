@@ -115,6 +115,15 @@ body {
   justify-content: space-evenly;
 }
 
+.moveBox button {
+  padding: 5px;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 0.5s;
+}
+
+.moveBox button:hover {
+  background-color: lightblue;
+}
+
 .moveTip {
   position: absolute;
   top: 50px;

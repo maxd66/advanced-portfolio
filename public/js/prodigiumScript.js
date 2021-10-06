@@ -8,6 +8,153 @@
 //   hp: 150,
 //   moves: [ivySpikes, strangleRoot, regrow],
 // };
+// types: water, fire, wind, earth, plant, electric, physical, dark, spirit,
+// Moves
+
+// Akua Moana
+const finSlap = {
+  name: "Fin Slap",
+  ahp: "attack",
+  damage: 20,
+  critChance: 20,
+  type: "physical",
+  adv: ["plant", "space"],
+  weak: ["dark", "spirit"],
+  cooldown: 15,
+  onCool: false,
+};
+
+const oceansWrath = {
+  name: "Ocean's Wrath",
+  ahp: "attack",
+  damage: 30,
+  critChance: 5,
+  type: "water",
+  adv: ["fire", "earth"],
+  weak: ["electric", "plant"],
+  cooldown: 15,
+  onCool: false,
+};
+
+const goddess = {
+  name: "Goddess",
+  ahp: "special",
+  damage: 10,
+  desription:
+    "Akua Moana calls on her ancestors for assistance. 75% chance your oppenent's move does nothing. If you're opponent does take action, they are punished by the gods and receive 10 damage.",
+  critChance: 75,
+  type: "spirit",
+  adv: ["physical", "dark"],
+  weak: ["wind", "electric"],
+  cooldown: 30,
+  onCool: false,
+};
+
+// Wyld Tiger
+const pounce = {
+  name: "Pounce",
+  ahp: "attack",
+  damage: 30,
+  critChance: 15,
+  type: "dark",
+  adv: ["physical", "electric"],
+  weak: ["plant", "spirit"],
+  cooldown: 10,
+  onCool: false,
+};
+
+const phoenix = {
+  name: "Phoenix",
+  ahp: "heal",
+  heal: 25,
+  critChance: 5,
+  type: "fire",
+  adv: ["wind", "plant"],
+  weak: ["water", "space"],
+  cooldown: 20,
+  onCool: false,
+};
+
+const fireConsumes = {
+  name: "Fire Consumes",
+  ahp: "special",
+  damage: 20,
+  desription:
+    "Wyld Tiger preys on his opponent's weakness. The weaker the opponent, the more the fire burns.",
+  critChance: 10,
+  type: "fire",
+  adv: ["wind", "plant"],
+  weak: ["water", "space"],
+  cooldown: 30,
+  onCool: false,
+};
+
+// The Yeti
+const boulderToss = {
+  name: "Boulder Toss",
+  ahp: "attack",
+  damage: 20,
+  critChance: 10,
+  type: "earth",
+  adv: ["space", "electric"],
+  weak: ["water", "wind"],
+  cooldown: 10,
+  onCool: false,
+};
+
+const iceShield = {
+  name: "Pounce",
+  ahp: "protect",
+  reflectAmt: 30,
+  critChance: 15,
+  type: "physical",
+  adv: ["plant", "space"],
+  weak: ["dark", "spirit"],
+  cooldown: 20,
+  onCool: false,
+};
+
+const blizzardRush = {
+  name: "Blizzard Rush",
+  ahp: "special",
+  lifesteal: 30,
+  desription:
+    "The Yeti rushes at his enemies with a blizzard at his back. He uses dark magic to squeeze the life from his opponent.",
+  critChance: 20,
+  type: "dark",
+  adv: ["physical", "electric"],
+  weak: ["plant", "spirit"],
+  cooldown: 40,
+  onCool: false,
+};
+// Characters
+const akuaMoana = {
+  name: "Akua Moana",
+  description: "Loves puppies. Hates bubbles.",
+  type: "water",
+  startHp: 200,
+  hp: 200,
+  moves: [finSlap, oceansWrath, goddess],
+};
+
+const wyldTiger = {
+  name: "Wyld Tiger",
+  description: "Plays by the rules, but hunts for sport.",
+  type: "fire",
+  startHp: 150,
+  hp: 150,
+  moves: [pounce, phoenix, fireConsumes],
+};
+
+const theYeti = {
+  name: "The Yeti",
+  description: "Smart and big. A scary combination.",
+  type: "wind",
+  startHp: 250,
+  hp: 250,
+  moves: [boulderToss, iceShield, blizzardRush],
+};
+
 // const ivySpikes = {
 //   ahp: "attack",
 //   damage: 20,
@@ -48,10 +195,10 @@ class Render {
       "body"
     ).innerHTML = `    <div class="locationContainer">
     <div class="blocking">
-      <button class="locationButton">Gym</button>
+      <button id="gymBtn" class="locationButton">Gym</button>
     </div>
     <div class="blocking">
-      <button class="locationButton">Arena</button>
+      <button id="arenaBtn" class="locationButton">Arena</button>
     </div>
   </div>
   <div class="monsterContainer">
@@ -61,6 +208,13 @@ class Render {
       alt="placeholder"
     />
   </div>`;
+
+    const arenaButton = document.getElementById("arenaBtn");
+
+    arenaButton.addEventListener("click", () => {
+      alert("this works");
+      this.renderArena();
+    });
   }
 
   renderArena() {}
@@ -123,15 +277,20 @@ class Battle {
   }
 }
 
-const move1 = document.getElementById("move1");
-const move2 = document.getElementById("move2");
+// Home Page Logic
+const render = new Render();
+
+// This is for the Arena Logic
+
+const move1El = document.getElementById("move1");
+const move2El = document.getElementById("move2");
 const healthBar = document.getElementById("hp");
 
-move1.addEventListener("click", () => {
+move1El?.addEventListener("click", () => {
   healthBar.setAttribute("value", "50");
 });
 
-move2.addEventListener("click", () => {
+move2El?.addEventListener("click", () => {
   healthBar.setAttribute("value", "90");
 });
 // const determineAdv = (move, p2) => {
@@ -165,7 +324,5 @@ move2.addEventListener("click", () => {
 //       break;
 //   }
 // };
-
-// const render = new Render();
 
 // render.renderHome();
