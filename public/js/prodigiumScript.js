@@ -123,18 +123,29 @@ class Battle {
   }
 }
 
-const determineAdv = (move, p2) => {
-  const type = move.type;
-  if (type === "neutral") {
-    return 0;
-  } else if (move.adv.includes(p2.type)) {
-    return 0.25;
-  } else if (move.weak.includes(p2.type)) {
-    return -0.25;
-  } else {
-    return 0;
-  }
-};
+const move1 = document.getElementById("move1");
+const move2 = document.getElementById("move2");
+const healthBar = document.getElementById("hp");
+
+move1.addEventListener("click", () => {
+  healthBar.setAttribute("value", "50");
+});
+
+move2.addEventListener("click", () => {
+  healthBar.setAttribute("value", "90");
+});
+// const determineAdv = (move, p2) => {
+//   const type = move.type;
+//   if (type === "neutral") {
+//     return 0;
+//   } else if (move.adv.includes(p2.type)) {
+//     return 0.25;
+//   } else if (move.weak.includes(p2.type)) {
+//     return -0.25;
+//   } else {
+//     return 0;
+//   }
+// };
 
 // const calculateEffect = (p1, p2, move) => {
 //   const crit = Math.floor(Math.random() * 100);

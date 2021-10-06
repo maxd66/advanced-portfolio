@@ -22,14 +22,14 @@ body {
   margin-top: 200px;
 }
 
-.monster {
-}
-
 .player2Container {
   margin-top: 200px;
   margin-left: 60%;
 }
 
+.enemyStats h2 {
+  text-shadow: white 1px 1px;
+}
 .player2 {
   width: 200px;
 }
@@ -76,6 +76,34 @@ body {
   border: 2px dashed black;
   padding: 10px;
   background-color: white;
+}
+
+#hp {
+  -webkit-appearance: none;
+  max-width: 230px;
+}
+
+#hp::-webkit-progress-bar {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
+}
+
+#hp::-webkit-progress-value {
+  transition: all 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#enemyHP {
+  -webkit-appearance: none;
+  max-width: 100px;
+}
+
+#enemyHP::-webkit-progress-bar {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;
+}
+
+#enemyHP::-webkit-progress-value {
+  transition: all 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .cooldown {
