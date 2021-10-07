@@ -110,7 +110,7 @@ const iceKata = {
   type: "water",
   adv: ["fire", "earth"],
   weak: ["fire", "space"],
-  cooldown: 2,
+  cooldown: 1,
   onCool: false,
 };
 
@@ -148,7 +148,7 @@ const riverRush = {
   type: "water",
   adv: ["fire", "earth"],
   weak: ["electric", "plant"],
-  cooldown: 2,
+  cooldown: 1,
   onCool: false,
 };
 
@@ -179,13 +179,13 @@ const shockWave = {
 };
 
 const solarPower = {
-  name: "Shock Wave",
+  name: "Solar Power",
   ahp: "heal",
   heal: 20,
   critChance: 5,
-  type: "electric",
-  adv: ["water", "spirit"],
-  weak: ["dark", "earth"],
+  type: "space",
+  adv: ["wind", "fire"],
+  weak: ["physical", "earth"],
   cooldown: 3,
   onCool: false,
 };
@@ -204,7 +204,81 @@ const shellUp = {
   onCool: false,
 };
 
-const solarBeam = {};
+const organicMatter = {
+  name: "Organic Matter",
+  ahp: "attack",
+  damage: 20,
+  critChance: 10,
+  type: "plant",
+  adv: ["water", "dark"],
+  weak: ["fire", "physical"],
+  cooldown: 1,
+  onCool: false,
+};
+
+const anomaly = {
+  name: "Anomaly",
+  ahp: "attack",
+  damage: 10,
+  critChance: 50,
+  type: "dark",
+  adv: ["physical", "electric"],
+  weak: ["plant", "spirit"],
+  cooldown: 2,
+  onCool: false,
+};
+
+const solarBeam = {
+  name: "Solar Beam",
+  ahp: "special",
+  damage: 20,
+  desription:
+    "Hamstronaut calls down a beam of solar energy on his opponent. The concentrated light deals 20 damage, and has a 50% chance to stun his enemy on their next turn.",
+  critChance: 5,
+  type: "space",
+  adv: ["wind", "fire"],
+  weak: ["earth", "physical"],
+  cooldown: 5,
+  onCool: false,
+};
+
+const charge = {
+  name: "Charge",
+  ahp: "attack",
+  damage: 15,
+  critChance: 20,
+  type: "physical",
+  adv: ["space", "plant"],
+  weak: ["dark", "spirit"],
+  cooldown: 1,
+  onCool: false,
+};
+
+const getTheHorns = {
+  name: "Get the Horns",
+  ahp: "attack",
+  damage: 35,
+  critChance: 1,
+  type: "fire",
+  adv: ["wind", "plant"],
+  weak: ["water", "space"],
+  cooldown: 2,
+  onCool: false,
+};
+
+const stampedeStomp = {
+  name: "Stampede Stomp",
+  ahp: "special",
+  damage: 20,
+  description:
+    "Ay Guey sends a rumble of earth towards his oppenent. It deals 20 damage, and there is a 60% chance that your opponent's next move will be less effective.",
+  critChance: 5,
+  type: "earth",
+  adv: ["space", "electric"],
+  weak: ["water", "wind"],
+  cooldown: 4,
+  onCool: false,
+};
 // Characters
 const akuaMoana = {
   name: "Akua Moana",
@@ -235,11 +309,11 @@ const kenji = {
 
 const sirOso = {
   name: "Sir Oso",
-  description: "Always late, also in love with Wyld Tiger.",
+  description: "Always late, also in love with Igni Kambuku.",
   type: "earth",
   startHp: 200,
   hp: 200,
-  moves: [boulderToss, iceKata, blizzardRush],
+  moves: [bearClaw, riverRush, hibernation],
 };
 
 const hamstronaut = {
@@ -248,16 +322,25 @@ const hamstronaut = {
   type: "space",
   startHp: 200,
   hp: 200,
-  moves: [boulderToss, iceKata, blizzardRush],
+  moves: [organicMatter, anomaly, solarBeam],
 };
 
 const alvatron = {
   name: "Alvatron",
   description: "Surprisingly fast and young at heart.",
   type: "spirit",
-  startHp: 200,
+  startHp: 250,
   hp: 250,
-  moves: [boulderToss, iceKata, blizzardRush],
+  moves: [shockWave, solarPower, shellUp],
+};
+
+const ayGuey = {
+  name: "Ay Guey",
+  description: "Makes logical decisions... except when deciding where to eat.",
+  type: "physical",
+  startHp: 200,
+  hp: 200,
+  moves: [charge, getTheHorns, stampedeStomp],
 };
 
 // const ivySpikes = {
