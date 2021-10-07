@@ -20,7 +20,7 @@ const finSlap = {
   type: "physical",
   adv: ["plant", "space"],
   weak: ["dark", "spirit"],
-  cooldown: 15,
+  cooldown: 1,
   onCool: false,
 };
 
@@ -32,7 +32,7 @@ const oceansWrath = {
   type: "water",
   adv: ["fire", "earth"],
   weak: ["electric", "plant"],
-  cooldown: 15,
+  cooldown: 1,
   onCool: false,
 };
 
@@ -41,12 +41,12 @@ const goddess = {
   ahp: "special",
   damage: 10,
   desription:
-    "Akua Moana calls on her ancestors for assistance. 75% chance your oppenent's move does nothing. If you're opponent does take action, they are punished by the gods and receive 10 damage.",
+    "Akua Moana calls on her ancestors for assistance. 75% chance your oppenent's move misses and they take 10 damage. If you're opponent does land, they are punished by the gods and receive 15 damage.",
   critChance: 75,
   type: "spirit",
   adv: ["physical", "dark"],
   weak: ["wind", "electric"],
-  cooldown: 30,
+  cooldown: 4,
   onCool: false,
 };
 
@@ -59,7 +59,7 @@ const pounce = {
   type: "dark",
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
-  cooldown: 10,
+  cooldown: 1,
   onCool: false,
 };
 
@@ -71,7 +71,7 @@ const phoenix = {
   type: "fire",
   adv: ["wind", "plant"],
   weak: ["water", "space"],
-  cooldown: 20,
+  cooldown: 2,
   onCool: false,
 };
 
@@ -85,7 +85,7 @@ const fireConsumes = {
   type: "fire",
   adv: ["wind", "plant"],
   weak: ["water", "space"],
-  cooldown: 30,
+  cooldown: 3,
   onCool: false,
 };
 
@@ -98,7 +98,7 @@ const boulderToss = {
   type: "earth",
   adv: ["space", "electric"],
   weak: ["water", "wind"],
-  cooldown: 10,
+  cooldown: 1,
   onCool: false,
 };
 // Needs to be changed
@@ -110,7 +110,7 @@ const iceKata = {
   type: "water",
   adv: ["fire", "earth"],
   weak: ["fire", "space"],
-  cooldown: 20,
+  cooldown: 2,
   onCool: false,
 };
 
@@ -124,9 +124,87 @@ const blizzardRush = {
   type: "dark",
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
-  cooldown: 40,
+  cooldown: 4,
   onCool: false,
 };
+
+const bearClaw = {
+  name: "Bear Claw",
+  ahp: "attack",
+  damage: 10,
+  critChance: 50,
+  type: "physical",
+  adv: ["plant", "space"],
+  weak: ["spirit", "dark"],
+  cooldown: 1,
+  onCool: false,
+};
+
+const riverRush = {
+  name: "River Rush",
+  ahp: "attack",
+  damage: 25,
+  critChance: 5,
+  type: "water",
+  adv: ["fire", "earth"],
+  weak: ["electric", "plant"],
+  cooldown: 2,
+  onCool: false,
+};
+
+const hibernation = {
+  name: "Hibernation",
+  ahp: "special",
+  heal: 10,
+  desription:
+    "Sir Oso decides to take a quick rejuvinating slumber. 80% chance his opponent's hit will miss, and he gains ten health.",
+  critChance: 20,
+  type: "earth",
+  adv: ["space", "electric"],
+  weak: ["water", "wind"],
+  cooldown: 4,
+  onCool: false,
+};
+
+const shockWave = {
+  name: "Shock Wave",
+  ahp: "attack",
+  damage: 30,
+  critChance: 10,
+  type: "electric",
+  adv: ["water", "spirit"],
+  weak: ["dark", "earth"],
+  cooldown: 1,
+  onCool: false,
+};
+
+const solarPower = {
+  name: "Shock Wave",
+  ahp: "heal",
+  heal: 20,
+  critChance: 5,
+  type: "electric",
+  adv: ["water", "spirit"],
+  weak: ["dark", "earth"],
+  cooldown: 3,
+  onCool: false,
+};
+
+const shellUp = {
+  name: "Shell Up",
+  ahp: "special",
+  damage: 0,
+  desription:
+    "Alvatron takes cover in his shell. 60% chance he will reflect half of his opponent's attack back, otherwise he only takes half the damage.",
+  critChance: 20,
+  type: "earth",
+  adv: ["space", "electric"],
+  weak: ["water", "wind"],
+  cooldown: 3,
+  onCool: false,
+};
+
+const solarBeam = {};
 // Characters
 const akuaMoana = {
   name: "Akua Moana",
@@ -178,7 +256,7 @@ const alvatron = {
   description: "Surprisingly fast and young at heart.",
   type: "spirit",
   startHp: 200,
-  hp: 200,
+  hp: 250,
   moves: [boulderToss, iceKata, blizzardRush],
 };
 
@@ -255,10 +333,7 @@ class Player {
   }
 
   determineAdv(move, opponent) {
-    const type = move.type;
-    if (type === "neutral") {
-      return 0;
-    } else if (move.adv.includes(opponent.type)) {
+    if (move.adv.includes(opponent.type)) {
       return 0.25;
     } else if (move.weak.includes(opponent.type)) {
       return -0.25;
