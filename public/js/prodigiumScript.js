@@ -101,15 +101,15 @@ const boulderToss = {
   cooldown: 10,
   onCool: false,
 };
-
-const iceShield = {
-  name: "Pounce",
-  ahp: "protect",
-  reflectAmt: 30,
+// Needs to be changed
+const iceKata = {
+  name: "Ice Kata",
+  ahp: "attack",
+  damage: 30,
   critChance: 15,
-  type: "physical",
-  adv: ["plant", "space"],
-  weak: ["dark", "spirit"],
+  type: "water",
+  adv: ["fire", "earth"],
+  weak: ["fire", "space"],
   cooldown: 20,
   onCool: false,
 };
@@ -117,7 +117,7 @@ const iceShield = {
 const blizzardRush = {
   name: "Blizzard Rush",
   ahp: "special",
-  lifesteal: 30,
+  lifesteal: 20,
   desription:
     "The Yeti rushes at his enemies with a blizzard at his back. He uses dark magic to squeeze the life from his opponent.",
   critChance: 20,
@@ -137,8 +137,8 @@ const akuaMoana = {
   moves: [finSlap, oceansWrath, goddess],
 };
 
-const wyldTiger = {
-  name: "Wyld Tiger",
+const igniKambuku = {
+  name: "Igni Kambuku",
   description: "Plays by the rules, but hunts for sport.",
   type: "fire",
   startHp: 150,
@@ -146,13 +146,40 @@ const wyldTiger = {
   moves: [pounce, phoenix, fireConsumes],
 };
 
-const theYeti = {
-  name: "The Yeti",
+const kenji = {
+  name: "Kenji",
   description: "Smart and big. A scary combination.",
   type: "wind",
   startHp: 250,
   hp: 250,
-  moves: [boulderToss, iceShield, blizzardRush],
+  moves: [boulderToss, iceKata, blizzardRush],
+};
+
+const sirOso = {
+  name: "Sir Oso",
+  description: "Always late, also in love with Wyld Tiger.",
+  type: "earth",
+  startHp: 200,
+  hp: 200,
+  moves: [boulderToss, iceKata, blizzardRush],
+};
+
+const hamstronaut = {
+  name: "Hamstronaut",
+  description: "Very loud. It's good sound doesn't carry in space.",
+  type: "space",
+  startHp: 200,
+  hp: 200,
+  moves: [boulderToss, iceKata, blizzardRush],
+};
+
+const alvatron = {
+  name: "Alvatron",
+  description: "Surprisingly fast and young at heart.",
+  type: "spirit",
+  startHp: 200,
+  hp: 200,
+  moves: [boulderToss, iceKata, blizzardRush],
 };
 
 // const ivySpikes = {
