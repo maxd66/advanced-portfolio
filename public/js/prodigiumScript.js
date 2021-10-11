@@ -80,7 +80,7 @@ const fireConsumes = {
   ahp: "special",
   damage: 20,
   description:
-    "Wyld Tiger preys on his opponent's weakness. The weaker the opponent, the more the fire burns.",
+    "Igni Kambuku preys on his opponent's weakness. The weaker the opponent, the more the fire burns.",
   critChance: 10,
   type: "fire",
   adv: ["wind", "plant"],
@@ -530,16 +530,31 @@ class Render {
   </div>`;
     const move1El = document.getElementById("move1");
     const move2El = document.getElementById("move2");
+    const move3El = document.getElementById("move3");
     const healthBar = document.getElementById("hp");
     const battle = new Battle(selectedCharacter, selectedEnemy);
 
     move1El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
+      const adv = battle.determineAdv(selectedCharacter.moves[0], battle.enemy);
       alert(enemyMove.name);
+      // display proper image above proper player
+      // logic affects player
+      // buttons is placed on cooldown, unless it is player has no moves left.
     });
 
     move2El?.addEventListener("click", () => {
-      healthBar.setAttribute("value", "200");
+      healthBar.setAttribute("value", "150");
+      const adv = battle.determineAdv(selectedCharacter.moves[1], battle.enemy);
+      const enemyMove = battle.determineEnemyMove();
+      alert(enemyMove.name);
+    });
+
+    move3El?.addEventListener("click", () => {
+      healthBar.setAttribute("value", "50");
+      const enemyMove = battle.determineEnemyMove();
+      const adv = battle.determineAdv(selectedCharacter.moves[2], battle.enemy);
+      alert(enemyMove.name);
     });
   }
 
@@ -549,16 +564,6 @@ class Render {
 class Player {
   constructor(characterObj) {
     this.character = characterObj;
-  }
-
-  determineAdv(move, opponent) {
-    if (move.adv.includes(opponent.type)) {
-      return 0.25;
-    } else if (move.weak.includes(opponent.type)) {
-      return -0.25;
-    } else {
-      return 0;
-    }
   }
 
   attack(move, opponent) {
@@ -603,11 +608,18 @@ class Battle {
       return this.enemy.moves[0];
     }
     const availableMoves = moves.filter((move) => !move.onCooldown);
-    console.log({ availableMoves });
     const rand = Math.floor(Math.random() * availableMoves.length);
-    console.log(rand);
-    console.log(availableMoves[rand]);
     return availableMoves[rand];
+  }
+
+  determineAdv(move, opponent) {
+    if (move.adv.includes(opponent.type)) {
+      return 0.25;
+    } else if (move.weak.includes(opponent.type)) {
+      return -0.25;
+    } else {
+      return 0;
+    }
   }
 }
 
@@ -645,6 +657,6 @@ const render = new Render();
 //       break;
 //   }
 // };
-const selectedEnemy = ayGuey;
-const selectedCharacter = tt;
+const selectedEnemy = alvatron;
+const selectedCharacter = igniKambuku;
 render.renderHome();
