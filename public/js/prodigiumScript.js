@@ -40,7 +40,7 @@ const goddess = {
   name: "Goddess",
   ahp: "special",
   damage: 10,
-  desription:
+  description:
     "Akua Moana calls on her ancestors for assistance. 75% chance your oppenent's move misses and they take 10 damage. If you're opponent does land, they are punished by the gods and receive 15 damage.",
   critChance: 75,
   type: "spirit",
@@ -50,7 +50,7 @@ const goddess = {
   onCool: false,
 };
 
-// Wyld Tiger
+//Igni Kambuku
 const pounce = {
   name: "Pounce",
   ahp: "attack",
@@ -66,7 +66,7 @@ const pounce = {
 const phoenix = {
   name: "Phoenix",
   ahp: "heal",
-  heal: 25,
+  damage: 25,
   critChance: 5,
   type: "fire",
   adv: ["wind", "plant"],
@@ -79,7 +79,7 @@ const fireConsumes = {
   name: "Fire Consumes",
   ahp: "special",
   damage: 20,
-  desription:
+  description:
     "Wyld Tiger preys on his opponent's weakness. The weaker the opponent, the more the fire burns.",
   critChance: 10,
   type: "fire",
@@ -89,7 +89,7 @@ const fireConsumes = {
   onCool: false,
 };
 
-// The Yeti
+// Kenji
 const boulderToss = {
   name: "Boulder Toss",
   ahp: "attack",
@@ -101,7 +101,7 @@ const boulderToss = {
   cooldown: 1,
   onCool: false,
 };
-// Needs to be changed
+
 const iceKata = {
   name: "Ice Kata",
   ahp: "attack",
@@ -110,7 +110,7 @@ const iceKata = {
   type: "water",
   adv: ["fire", "earth"],
   weak: ["fire", "space"],
-  cooldown: 1,
+  cooldown: 2,
   onCool: false,
 };
 
@@ -118,8 +118,8 @@ const blizzardRush = {
   name: "Blizzard Rush",
   ahp: "special",
   lifesteal: 20,
-  desription:
-    "The Yeti rushes at his enemies with a blizzard at his back. He uses dark magic to squeeze the life from his opponent.",
+  description:
+    "The Yeti rushes at his enemies with a blizzard at his back. He uses dark magic to squeeze 20 hp from his opponent and claim it for himself.",
   critChance: 20,
   type: "dark",
   adv: ["physical", "electric"],
@@ -155,8 +155,8 @@ const riverRush = {
 const hibernation = {
   name: "Hibernation",
   ahp: "special",
-  heal: 10,
-  desription:
+  damage: 10,
+  description:
     "Sir Oso decides to take a quick rejuvinating slumber. 80% chance his opponent's hit will miss, and he gains ten health.",
   critChance: 20,
   type: "earth",
@@ -181,7 +181,7 @@ const shockWave = {
 const solarPower = {
   name: "Solar Power",
   ahp: "heal",
-  heal: 20,
+  damage: 20,
   critChance: 5,
   type: "space",
   adv: ["wind", "fire"],
@@ -194,7 +194,7 @@ const shellUp = {
   name: "Shell Up",
   ahp: "special",
   damage: 0,
-  desription:
+  description:
     "Alvatron takes cover in his shell. 60% chance he will reflect half of his opponent's attack back, otherwise he only takes half the damage.",
   critChance: 20,
   type: "earth",
@@ -232,7 +232,7 @@ const solarBeam = {
   name: "Solar Beam",
   ahp: "special",
   damage: 20,
-  desription:
+  description:
     "Hamstronaut calls down a beam of solar energy on his opponent. The concentrated light deals 20 damage, and has a 50% chance to stun his enemy on their next turn.",
   critChance: 5,
   type: "space",
@@ -279,6 +279,45 @@ const stampedeStomp = {
   cooldown: 4,
   onCool: false,
 };
+
+const stareDown = {
+  name: "Stare Down",
+  ahp: "attack",
+  damage: 10,
+  critChance: 50,
+  type: "dark",
+  adv: ["physical", "electric"],
+  weak: ["plant", "spirit"],
+  cooldown: 1,
+  onCool: false,
+};
+
+const wildSurvival = {
+  name: "Wild Survival",
+  ahp: "heal",
+  damage: 20,
+  critChance: 20,
+  type: "plant",
+  adv: ["water", "dark"],
+  weak: ["physical", "fire"],
+  cooldown: 2,
+  onCool: false,
+};
+
+const bloodThirsty = {
+  name: "Blood Thirsty",
+  ahp: "special",
+  damage: 20,
+  description:
+    "T.T increases in mass each time she feasts on her opponent's blood. Each time she attacks, her crit chance increases by 10%",
+  critChance: 5,
+  type: "space",
+  adv: ["wind", "fire"],
+  weak: ["physical", "earth"],
+  cooldown: 3,
+  onCool: false,
+};
+
 // Characters
 const akuaMoana = {
   name: "Akua Moana",
@@ -343,31 +382,14 @@ const ayGuey = {
   moves: [charge, getTheHorns, stampedeStomp],
 };
 
-// const ivySpikes = {
-//   ahp: "attack",
-//   damage: 20,
-//   critChance: 5,
-//   type: "plant",
-//   adv: ["water", "mythical"],
-//   weak: ["fire", "ice"],
-//   onCool: false,
-// };
-// const regrow = {
-//   ahp: "heal",
-//   heal: 10,
-//   critChance: 10,
-//   type: "neutral",
-//   onCool: false,
-// };
-
-// enemy player object
-// const p2 = {
-//   name: "Koogle",
-//   type: "mythical",
-//   startHp: 220,
-//   hp: 200,
-//   moves: [shadowSlice, minorIllusion, poisonMist],
-// };
+const tt = {
+  name: "T.T",
+  description: "The fastest tongue in the West.",
+  type: "dark",
+  startHp: 200,
+  hp: 200,
+  moves: [stareDown, wildSurvival, bloodThirsty],
+};
 
 // function should take players in question, and move chosen
 // function will determine if move is heal, damage, or protect
@@ -400,12 +422,124 @@ class Render {
     const arenaButton = document.getElementById("arenaBtn");
 
     arenaButton.addEventListener("click", () => {
-      alert("this works");
       this.renderArena();
     });
   }
 
-  renderArena() {}
+  renderMoves() {
+    const move1 = selectedCharacter.moves[0];
+    const move2 = selectedCharacter.moves[1];
+    const move3 = selectedCharacter.moves[2];
+    document.querySelector(
+      "#moveBox"
+    ).innerHTML = `              <button id="move1">${move1.name}</button>
+      <div id="move1Tip" class="moveTip">
+        <h3>${move1.name}</h3>
+        <ul>
+          <li>${move1.ahp}: ${move1.damage}</li>
+          <li>Type: ${move1.type}</li>
+          <li>Cooldown: ${move1.cooldown}</li>
+        </ul>
+      </div>
+      <button id="move2">${move2.name}</button>
+      <div id="move2Tip" class="moveTip">
+        <h3>${move2.name}</h3>
+        <ul>
+          <li>${move2.ahp}: ${move2.damage}</li>
+          <li>Type: ${move2.type}</li>
+          <li>Cooldown: ${move2.cooldown}</li>
+        </ul>
+      </div>
+      <button id="move3">${move3.name}</button>
+      <div id="move3Tip" class="moveTip">
+        <h3>${move3.name}, <em>special</em></h3>
+        <ul>
+          <li>${move2.description}</li>
+        </ul>
+      </div>`;
+  }
+
+  renderArena() {
+    const move1 = selectedCharacter.moves[0];
+    const move2 = selectedCharacter.moves[1];
+    const move3 = selectedCharacter.moves[2];
+    document.querySelector(
+      "body"
+    ).innerHTML = `    <div class="player2Container">
+    <div class="enemyStats">
+      <h2>HP: <progress id="enemyHP" max=${selectedEnemy.startHp} value=${
+      selectedEnemy.hp
+    }></progress></h2>
+      <h2 id="enemyStats">${
+        selectedEnemy.name
+      }, <em>${selectedEnemy.type.toUpperCase()}</em></h2>
+    </div>
+    <img
+      class="player2"
+      src="./images/prodigium/placeholder.jpg"
+      alt="placeholder"
+    />
+  </div>
+  <div class="player1Container">
+    <img
+      class="player1"
+      src="./images/prodigium/placeholder.jpg"
+      alt="placeholder"
+    />
+    <div class="outerBox">
+      <div class="statBox">
+        <h1 id="playerStats">${
+          selectedCharacter.name
+        }, <em class="smallText">${selectedCharacter.type.toUpperCase()}</em></h1>
+        <div class="outerBox">
+          <div class="dynaBox">
+            <h2>HP: <progress id="hp" max=${selectedCharacter.startHp} value=${
+      selectedCharacter.hp
+    }></progress></h2>
+            <div class="moveBox">
+            <button id="move1">${move1.name}</button>
+      <div id="move1Tip" class="moveTip">
+        <h3>${move1.name}</h3>
+        <ul>
+          <li>${move1.ahp}: ${move1.damage}</li>
+          <li>Type: ${move1.type}</li>
+          <li>Cooldown: ${move1.cooldown}</li>
+        </ul>
+      </div>
+      <button id="move2">${move2.name}</button>
+      <div id="move2Tip" class="moveTip">
+        <h3>${move2.name}</h3>
+        <ul>
+          <li>${move2.ahp}: ${move2.damage}</li>
+          <li>Type: ${move2.type}</li>
+          <li>Cooldown: ${move2.cooldown}</li>
+        </ul>
+      </div>
+      <button id="move3">${move3.name}</button>
+      <div id="move3Tip" class="moveTip">
+        <h3>${move3.name}, <em>special</em></h3>
+        <ul>
+          <li>${move3.description}</li>
+        </ul>
+      </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    const move1El = document.getElementById("move1");
+    const move2El = document.getElementById("move2");
+    const healthBar = document.getElementById("hp");
+
+    move1El?.addEventListener("click", () => {
+      healthBar.setAttribute("value", "50");
+    });
+
+    move2El?.addEventListener("click", () => {
+      healthBar.setAttribute("value", "200");
+    });
+  }
 
   renderGym() {}
 }
@@ -465,19 +599,6 @@ class Battle {
 // Home Page Logic
 const render = new Render();
 
-// This is for the Arena Logic
-
-const move1El = document.getElementById("move1");
-const move2El = document.getElementById("move2");
-const healthBar = document.getElementById("hp");
-
-move1El?.addEventListener("click", () => {
-  healthBar.setAttribute("value", "50");
-});
-
-move2El?.addEventListener("click", () => {
-  healthBar.setAttribute("value", "90");
-});
 // const determineAdv = (move, p2) => {
 //   const type = move.type;
 //   if (type === "neutral") {
@@ -509,5 +630,6 @@ move2El?.addEventListener("click", () => {
 //       break;
 //   }
 // };
-
-// render.renderHome();
+const selectedEnemy = igniKambuku;
+const selectedCharacter = kenji;
+render.renderHome();

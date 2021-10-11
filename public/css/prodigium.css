@@ -6,6 +6,10 @@ body {
   background-color: black;
 }
 
+.smallText {
+  font-size: 1.5rem;
+}
+
 .locationButton {
   padding: 100px;
 }
@@ -80,7 +84,7 @@ body {
 
 #hp {
   -webkit-appearance: none;
-  max-width: 230px;
+  max-width: 250px;
 }
 
 #hp::-webkit-progress-bar {
@@ -113,25 +117,33 @@ body {
 .moveBox {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 150px;
 }
 
 .moveBox button {
-  padding: 5px;
+  padding: 10px 20px;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 0.5s;
+  border: none;
+  border-right: white 2px solid;
+  background-color: lightblue;
 }
 
 .moveBox button:hover {
-  background-color: lightblue;
+  background-color: lightgreen;
 }
 
 .moveTip {
   position: absolute;
   top: 50px;
   left: 7px;
-  background-color: gray;
+  background-color: lightgray;
   padding: 5px;
-  border: gray solid 2px;
+  border: none;
   min-width: 300px;
+}
+
+#move3Tip {
+  font-size: 0.85rem;
 }
 
 #move1Tip,

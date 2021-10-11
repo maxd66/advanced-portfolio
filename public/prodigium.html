@@ -21,7 +21,7 @@
     <div class="player2Container">
       <div class="enemyStats">
         <h2>HP: <progress id="enemyHP" max="100" value="70"></progress></h2>
-        <h2>Cooldown: 15</h2>
+        <h2 id="enemyStats">Monster Stats</h2>
       </div>
       <img
         class="player2"
@@ -37,11 +37,10 @@
       />
       <div class="outerBox">
         <div class="statBox">
-          <h1>Monster stats</h1>
+          <h1 id="playerStats">Monster stats</h1>
           <div class="outerBox">
             <div class="dynaBox">
               <h2>HP: <progress id="hp" max="100" value="80"></progress></h2>
-              <h2 class="cooldown">Cooldown: 20</h2>
               <div class="moveBox">
                 <button id="move1">Move 1</button>
                 <div id="move1Tip" class="moveTip">
@@ -49,7 +48,7 @@
                   <ul>
                     <li>Damage: 25</li>
                     <li>Type: Plant</li>
-                    <li>Cooldown: 15s</li>
+                    <li>Cooldown: 1</li>
                   </ul>
                 </div>
                 <button id="move2">Move 2</button>
@@ -58,7 +57,7 @@
                   <ul>
                     <li>Damage: 30</li>
                     <li>Type: Neutral</li>
-                    <li>Cooldown: 15s</li>
+                    <li>Cooldown: 2</li>
                   </ul>
                 </div>
                 <button id="move3">Move 3</button>
@@ -67,7 +66,7 @@
                   <ul>
                     <li>Heal: 15</li>
                     <li>Type: Dark</li>
-                    <li>Cooldown: 30s</li>
+                    <li>Cooldown: 3</li>
                   </ul>
                 </div>
               </div>
