@@ -157,7 +157,7 @@ const hibernation = {
   ahp: "special",
   damage: 10,
   description:
-    "Sir Oso decides to take a quick rejuvinating slumber. 80% chance his opponent's hit will miss, and he gains ten health.",
+    "Sir Oso decides to take a quick rejuvinating slumber. 80% chance his opponent's hit will miss. He also gains ten health.",
   critChance: 20,
   type: "earth",
   adv: ["space", "electric"],
@@ -309,7 +309,7 @@ const bloodThirsty = {
   ahp: "special",
   damage: 20,
   description:
-    "T.T increases in mass each time she feasts on her opponent's blood. Each time she attacks, her crit chance increases by 10%",
+    "T.T increases in mass each time she feasts on her opponent's blood. This attack does 20 damage, but it's crit chance increases by 10% each time she uses it.",
   critChance: 5,
   type: "space",
   adv: ["wind", "fire"],
@@ -341,8 +341,8 @@ const kenji = {
   name: "Kenji",
   description: "Smart and big. A scary combination.",
   type: "wind",
-  startHp: 250,
-  hp: 250,
+  startHp: 200,
+  hp: 200,
   moves: [boulderToss, iceKata, blizzardRush],
 };
 
@@ -531,9 +531,11 @@ class Render {
     const move1El = document.getElementById("move1");
     const move2El = document.getElementById("move2");
     const healthBar = document.getElementById("hp");
+    const battle = new Battle(selectedCharacter, selectedEnemy);
 
     move1El?.addEventListener("click", () => {
-      healthBar.setAttribute("value", "50");
+      const enemyMove = battle.determineEnemyMove();
+      alert(enemyMove.name);
     });
 
     move2El?.addEventListener("click", () => {
@@ -583,9 +585,9 @@ class Player {
 }
 
 class Battle {
-  constructor(player1, player2) {
+  constructor(player1, enemy) {
     this.player1 = player1;
-    this.player2 = player2;
+    this.enemy = enemy;
     this.roundTimer = 100;
   }
 
@@ -593,6 +595,19 @@ class Battle {
     this.player1.hp = this.player1.startingHp;
     this.player2.hp = this.player2.startingHp;
     this.roundTimer = 100;
+  }
+
+  determineEnemyMove() {
+    const moves = this.enemy.moves;
+    if (moves.every((move) => move.onCooldown)) {
+      return this.enemy.moves[0];
+    }
+    const availableMoves = moves.filter((move) => !move.onCooldown);
+    console.log({ availableMoves });
+    const rand = Math.floor(Math.random() * availableMoves.length);
+    console.log(rand);
+    console.log(availableMoves[rand]);
+    return availableMoves[rand];
   }
 }
 
@@ -630,6 +645,6 @@ const render = new Render();
 //       break;
 //   }
 // };
-const selectedEnemy = igniKambuku;
-const selectedCharacter = kenji;
+const selectedEnemy = ayGuey;
+const selectedCharacter = tt;
 render.renderHome();
