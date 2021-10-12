@@ -1,201 +1,223 @@
-body, html {
-    height: 100%;
-  }
+body,
+html {
+  height: 100%;
+}
 
 :root {
-    --regFont: 'Montserrat', monospace;
-    --specFont: 'Source Code Pro', monospace;
+  --regFont: "Montserrat", monospace;
+  --specFont: "Source Code Pro", monospace;
 }
 
 /* ========Background Image =========== */
-.bg { 
-    /* The image used */
-    background-image: url("../images/rain2.jpg");
+.bg {
+  /* The image used */
+  background-image: url("../images/rain2.jpg");
 
-    min-height: 100%; 
+  min-height: 100%;
 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* ============Nav============= */
 nav {
-    font-family: 'Montserrat', monospace;
+  font-family: "Montserrat", monospace;
 }
 
 /* =============About Me section================== */
 
 p {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .outer-about-box {
-    background-color: white;
-    border-radius: 70px;
-    font-family: var(--regFont);
+  background-color: white;
+  border-radius: 70px;
+  font-family: var(--regFont);
 }
 
 .inner-about-box {
-    background-color: #3991b4af;
-    border-radius: 85px;
-    box-shadow: 0px 1.5px 10px black;
+  background-color: #3991b4af;
+  border-radius: 85px;
+  box-shadow: 0px 1.5px 10px black;
 }
 
 .about-me-head {
-    font-family: var(--specFont);
-    font-weight: 550;
+  font-family: var(--specFont);
+  font-weight: 550;
 }
 
 .about-me-underline {
-    height: 10px;
-    background-color: white;
-    box-shadow: inset 0px 0px 5px black;
-    border-radius: 3px;
-    margin-bottom: 5px;
+  height: 10px;
+  background-color: white;
+  box-shadow: inset 0px 0px 5px black;
+  border-radius: 3px;
+  margin-bottom: 5px;
 }
 
 #myPicture {
-    height: 200px;
-    width: auto;
-    float: left;
-    margin: 5px;
+  height: 200px;
+  width: auto;
+  float: left;
+  margin: 5px;
 }
 
-@media screen and (min-width: 700px) and (max-width: 1200px){
-    #myPicture {
-        position: relative;
-        bottom: 20px;
-    }
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+  #myPicture {
+    position: relative;
+    bottom: 20px;
+  }
 }
 
 /* ============Work Section============ */
 
 #flex-work-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #flex-work-container a {
-    height: 100%;
+  height: 100%;
 }
 
 #flex-work-container section img {
-    width: 100%;
-    position: inherit;
-    height: 300px;
-    object-position: center;
-    object-fit: cover;
-    opacity: .5;
-    transition: all .5s ease-in-out;
+  width: 100%;
+  position: inherit;
+  height: 300px;
+  object-position: center;
+  object-fit: cover;
+  opacity: 0.5;
+  transition: all 0.5s ease-in-out;
 }
 
-.img1, .img2, .img3, .img4, .img5 {
-    flex: 0 0 90%;
-    margin: 8px;
+.img1,
+.img2,
+.img3,
+.img4,
+.img5 {
+  flex: 0 0 90%;
+  margin: 8px;
 }
 
-#main-img, #question, #cat, #weather, #calendar {
-    border-radius: 50px;
+.img5 {
+  background-color: white;
+  border-radius: 50px;
+  transition: all 0.5s ease-in-out;
+}
+
+.img5:hover {
+  border-radius: 85px;
+}
+
+#main-img,
+#question,
+#cat,
+#weather,
+#calendar {
+  border-radius: 50px;
 }
 
 /* ==========image hover reactions=============== */
 .img1:hover #main-img {
-    opacity: 1;
-    border-radius: 85px;
+  opacity: 1;
+  border-radius: 85px;
 }
 
 .img2:hover #weather {
-    opacity: 1;
-    border-radius: 85px;
+  opacity: 1;
+  border-radius: 85px;
 }
 
 .img3:hover #question {
-    opacity: 1;
-    border-radius: 85px;
+  opacity: 1;
+  border-radius: 85px;
 }
 
 .img4:hover #cat {
-    opacity: 1;
-    border-radius: 85px;
+  opacity: 1;
+  border-radius: 85px;
 }
 
 .img5:hover #calendar {
-    opacity: 1;
-    border-radius: 85px;
+  opacity: 1;
+  border-radius: 85px;
 }
 
 section {
-    position: relative;
+  position: relative;
 }
 
 form {
-    position: relative
+  position: relative;
 }
 
 figcaption {
-    position: absolute;
-    bottom: -16%;
-    left: 2%;
-    margin-bottom: 10%;
-    font-size: 150%;
-    color: white;
-    text-shadow: 1px 1px 2px black;
-    padding: 8px;
+  position: absolute;
+  bottom: -16%;
+  left: 2%;
+  margin-bottom: 10%;
+  font-size: 150%;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  padding: 8px;
 }
 
 /* ========================= Form ============================ */
 input {
-    border-radius: 10px;
-    padding: 5px 5px;
-    font-family: var(--regFont);
+  border-radius: 10px;
+  padding: 5px 5px;
+  font-family: var(--regFont);
 }
 
 #submit-button {
-    background-color: #3991b4af;
-    width: 215px;
-    margin-top: 5px;
-    border-radius: 30px;
-    box-shadow: 0px 1.5px 5px black;
-    font-family: var(--specFont);
+  background-color: #3991b4af;
+  width: 215px;
+  margin-top: 5px;
+  border-radius: 30px;
+  box-shadow: 0px 1.5px 5px black;
+  font-family: var(--specFont);
 }
 
 #submit-button:focus {
-    outline: none;
+  outline: none;
 }
 
 #submit-button:hover {
-    background-color: #3991b4ce;
+  background-color: #3991b4ce;
 }
 /* ==============Message board adjustements=================== */
 .custom-line-height-close {
-    line-height: .25;
+  line-height: 0.25;
 }
 
 .normal-line-height {
-    line-height: normal;
+  line-height: normal;
 }
 
 .custom-bg-li {
-    background-image: linear-gradient(to right, #77B4CC, #c6e8f4);
-    border-radius: 30px;
-    padding: 0px 15px;
+  background-image: linear-gradient(to right, #77b4cc, #c6e8f4);
+  border-radius: 30px;
+  padding: 0px 15px;
 }
 
-@media screen and (min-width: 1200px){
-    .img2, .img3, .img4, .img5 {
-        flex: 0 0 45%;
-        margin: 8px;
-    }
+@media screen and (min-width: 1200px) {
+  .img2,
+  .img3,
+  .img4,
+  .img5 {
+    flex: 0 0 45%;
+    margin: 8px;
+  }
 
-    .custom-absolute {
-        position: absolute;
-        right: -4px;
-    }
+  .custom-absolute {
+    position: absolute;
+    right: -4px;
+  }
 }
 
 ul {
-    list-style-type: none;
-    padding-left: 0px;
+  list-style-type: none;
+  padding-left: 0px;
 }

@@ -166,16 +166,19 @@ document
           window.location = "/fellowdev";
         } else if (e.target === document.getElementById("button3")) {
           localStorage.setItem("attitude", false);
-          questionNumber++;
-          const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
-          const btnArr = [
-            `Yes I do!`,
-            `I don't really know`,
-            `What games do you have?`,
-            `Are you a robot?`,
-          ];
-          clearButtons();
-          gradualAppend(question, btnArr);
+          alert(
+            "Hi traveler! I'm really excited you clicked that button, but unfortunately it is still in production. I am working on it everyday, and it is almost done! Check back soon and I promise you will enjoy it!"
+          );
+          // questionNumber++;
+          // const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
+          // const btnArr = [
+          //   `Yes I do!`,
+          //   `I don't really know`,
+          //   `What games do you have?`,
+          //   `Are you a robot?`,
+          // ];
+          // clearButtons();
+          // gradualAppend(question, btnArr);
         }
         break;
       case 2:
