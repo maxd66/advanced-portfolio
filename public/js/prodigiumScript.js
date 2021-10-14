@@ -21,7 +21,7 @@ const finSlap = {
   adv: ["plant", "space"],
   weak: ["dark", "spirit"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const oceansWrath = {
@@ -33,7 +33,7 @@ const oceansWrath = {
   adv: ["fire", "earth"],
   weak: ["electric", "plant"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const goddess = {
@@ -47,7 +47,7 @@ const goddess = {
   adv: ["physical", "dark"],
   weak: ["wind", "electric"],
   cooldown: 4,
-  onCool: false,
+  onCool: 0,
 };
 
 //Igni Kambuku
@@ -60,7 +60,7 @@ const pounce = {
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const phoenix = {
@@ -72,7 +72,7 @@ const phoenix = {
   adv: ["wind", "plant"],
   weak: ["water", "space"],
   cooldown: 2,
-  onCool: false,
+  onCool: 0,
 };
 
 const fireConsumes = {
@@ -86,7 +86,7 @@ const fireConsumes = {
   adv: ["wind", "plant"],
   weak: ["water", "space"],
   cooldown: 3,
-  onCool: false,
+  onCool: 0,
 };
 
 // Kenji
@@ -99,7 +99,7 @@ const boulderToss = {
   adv: ["space", "electric"],
   weak: ["water", "wind"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const iceKata = {
@@ -111,7 +111,7 @@ const iceKata = {
   adv: ["fire", "earth"],
   weak: ["fire", "space"],
   cooldown: 2,
-  onCool: false,
+  onCool: 0,
 };
 
 const blizzardRush = {
@@ -125,7 +125,7 @@ const blizzardRush = {
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
   cooldown: 4,
-  onCool: false,
+  onCool: 0,
 };
 
 const bearClaw = {
@@ -137,7 +137,7 @@ const bearClaw = {
   adv: ["plant", "space"],
   weak: ["spirit", "dark"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const riverRush = {
@@ -149,7 +149,7 @@ const riverRush = {
   adv: ["fire", "earth"],
   weak: ["electric", "plant"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const hibernation = {
@@ -163,7 +163,7 @@ const hibernation = {
   adv: ["space", "electric"],
   weak: ["water", "wind"],
   cooldown: 4,
-  onCool: false,
+  onCool: 0,
 };
 
 const shockWave = {
@@ -175,7 +175,7 @@ const shockWave = {
   adv: ["water", "spirit"],
   weak: ["dark", "earth"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const solarPower = {
@@ -187,7 +187,7 @@ const solarPower = {
   adv: ["wind", "fire"],
   weak: ["physical", "earth"],
   cooldown: 3,
-  onCool: false,
+  onCool: 0,
 };
 
 const shellUp = {
@@ -201,7 +201,7 @@ const shellUp = {
   adv: ["space", "electric"],
   weak: ["water", "wind"],
   cooldown: 3,
-  onCool: false,
+  onCool: 0,
 };
 
 const organicMatter = {
@@ -213,7 +213,7 @@ const organicMatter = {
   adv: ["water", "dark"],
   weak: ["fire", "physical"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const anomaly = {
@@ -225,7 +225,7 @@ const anomaly = {
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
   cooldown: 2,
-  onCool: false,
+  onCool: 0,
 };
 
 const solarBeam = {
@@ -239,7 +239,7 @@ const solarBeam = {
   adv: ["wind", "fire"],
   weak: ["earth", "physical"],
   cooldown: 5,
-  onCool: false,
+  onCool: 0,
 };
 
 const charge = {
@@ -251,7 +251,7 @@ const charge = {
   adv: ["space", "plant"],
   weak: ["dark", "spirit"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const getTheHorns = {
@@ -263,7 +263,7 @@ const getTheHorns = {
   adv: ["wind", "plant"],
   weak: ["water", "space"],
   cooldown: 2,
-  onCool: false,
+  onCool: 0,
 };
 
 const stampedeStomp = {
@@ -277,7 +277,7 @@ const stampedeStomp = {
   adv: ["space", "electric"],
   weak: ["water", "wind"],
   cooldown: 4,
-  onCool: false,
+  onCool: 0,
 };
 
 const stareDown = {
@@ -289,7 +289,7 @@ const stareDown = {
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
   cooldown: 1,
-  onCool: false,
+  onCool: 0,
 };
 
 const wildSurvival = {
@@ -301,7 +301,7 @@ const wildSurvival = {
   adv: ["water", "dark"],
   weak: ["physical", "fire"],
   cooldown: 2,
-  onCool: false,
+  onCool: 0,
 };
 
 const bloodThirsty = {
@@ -315,7 +315,7 @@ const bloodThirsty = {
   adv: ["wind", "fire"],
   weak: ["physical", "earth"],
   cooldown: 3,
-  onCool: false,
+  onCool: 0,
 };
 
 // Characters
@@ -431,7 +431,7 @@ class Render {
     const move2 = selectedCharacter.moves[1];
     const move3 = selectedCharacter.moves[2];
     document.querySelector(
-      "#moveBox"
+      ".moveBox"
     ).innerHTML = `              <button id="move1">${move1.name}</button>
       <div id="move1Tip" class="moveTip">
         <h3>${move1.name}</h3>
@@ -454,9 +454,79 @@ class Render {
       <div id="move3Tip" class="moveTip">
         <h3>${move3.name}, <em>special</em></h3>
         <ul>
-          <li>${move2.description}</li>
+          <li>${move3.description}</li>
         </ul>
       </div>`;
+
+    const move1El = document.getElementById("move1");
+    const move2El = document.getElementById("move2");
+    const move3El = document.getElementById("move3");
+    const healthBar = document.getElementById("hp");
+    const battle = new Battle(selectedCharacter, selectedEnemy);
+
+    move1.onCool
+      ? (document.getElementById("move1").disabled = true)
+      : (document.getElementById("move1").disabled = false);
+
+    move2.onCool
+      ? (document.getElementById("move2").disabled = true)
+      : (document.getElementById("move2").disabled = false);
+
+    move3.onCool
+      ? (document.getElementById("move3").disabled = true)
+      : (document.getElementById("move3").disabled = false);
+
+    move1El?.addEventListener("click", () => {
+      const enemyMove = battle.determineEnemyMove();
+      const adv = battle.determineAdv(move1, battle.enemy);
+      alert(enemyMove.name);
+      // display proper image above proper player
+      // logic affects player
+      // buttons is placed on cooldown, unless it is player has no moves left.
+      // check to see if all other moves will be on cooldown, on the next move
+      if (move2.onCool > 1 && move3.onCool > 1) {
+        move1.onCool = 0;
+      } else {
+        move1.onCool = move1.cooldown;
+      }
+      if (move2.onCool) {
+        move2.onCool--;
+      }
+      if (move3.onCool) {
+        move3.onCool--;
+      }
+      this.renderMoves();
+    });
+
+    move2El?.addEventListener("click", () => {
+      healthBar.setAttribute("value", "150");
+      const adv = battle.determineAdv(move2, battle.enemy);
+      const enemyMove = battle.determineEnemyMove();
+      alert(enemyMove.name);
+      move2.onCool = move2.cooldown;
+      if (move1.onCool) {
+        move1.onCool--;
+      }
+      if (move3.onCool) {
+        move3.onCool--;
+      }
+      this.renderMoves();
+    });
+
+    move3El?.addEventListener("click", () => {
+      healthBar.setAttribute("value", "50");
+      const enemyMove = battle.determineEnemyMove();
+      const adv = battle.determineAdv(move3, battle.enemy);
+      alert(enemyMove.name);
+      move3.onCool = move3.cooldown;
+      if (move1.onCool) {
+        move1.onCool--;
+      }
+      if (move2.onCool) {
+        move2.onCool--;
+      }
+      this.renderMoves();
+    });
   }
 
   renderArena() {
@@ -528,34 +598,8 @@ class Render {
       </div>
     </div>
   </div>`;
-    const move1El = document.getElementById("move1");
-    const move2El = document.getElementById("move2");
-    const move3El = document.getElementById("move3");
-    const healthBar = document.getElementById("hp");
-    const battle = new Battle(selectedCharacter, selectedEnemy);
 
-    move1El?.addEventListener("click", () => {
-      const enemyMove = battle.determineEnemyMove();
-      const adv = battle.determineAdv(selectedCharacter.moves[0], battle.enemy);
-      alert(enemyMove.name);
-      // display proper image above proper player
-      // logic affects player
-      // buttons is placed on cooldown, unless it is player has no moves left.
-    });
-
-    move2El?.addEventListener("click", () => {
-      healthBar.setAttribute("value", "150");
-      const adv = battle.determineAdv(selectedCharacter.moves[1], battle.enemy);
-      const enemyMove = battle.determineEnemyMove();
-      alert(enemyMove.name);
-    });
-
-    move3El?.addEventListener("click", () => {
-      healthBar.setAttribute("value", "50");
-      const enemyMove = battle.determineEnemyMove();
-      const adv = battle.determineAdv(selectedCharacter.moves[2], battle.enemy);
-      alert(enemyMove.name);
-    });
+    this.renderMoves();
   }
 
   renderGym() {}
@@ -604,11 +648,20 @@ class Battle {
 
   determineEnemyMove() {
     const moves = this.enemy.moves;
-    if (moves.every((move) => move.onCooldown)) {
+    if (moves.every((move) => move.onCool)) {
       return this.enemy.moves[0];
     }
-    const availableMoves = moves.filter((move) => !move.onCooldown);
+    const availableMoves = moves.filter((move) => !move.onCool);
     const rand = Math.floor(Math.random() * availableMoves.length);
+    moves.forEach((move) => {
+      if (move.name === availableMoves[rand].name) {
+        move.onCool = move.cooldown;
+      } else {
+        if (move.onCool) {
+          move.onCool--;
+        }
+      }
+    });
     return availableMoves[rand];
   }
 
@@ -626,37 +679,6 @@ class Battle {
 // Home Page Logic
 const render = new Render();
 
-// const determineAdv = (move, p2) => {
-//   const type = move.type;
-//   if (type === "neutral") {
-//     return 0;
-//   } else if (move.adv.includes(p2.type)) {
-//     return 0.25;
-//   } else if (move.weak.includes(p2.type)) {
-//     return -0.25;
-//   } else {
-//     return 0;
-//   }
-// };
-
-// const calculateEffect = (p1, p2, move) => {
-//   const crit = Math.floor(Math.random() * 100);
-//   const adv = determineAdv(move, p2);
-//   let multiplier = 1 + adv;
-//   if (crit < move.critChance) {
-//     multiplier += 2;
-//   }
-//   switch (move.ahp) {
-//     case "attack":
-//       p2.hp -= Math.floor(move.damage * multiplier);
-//       break;
-//     case "heal":
-//       p1.hp += Math.floor(move.heal * multiplier);
-//       break;
-//     case "protect":
-//       break;
-//   }
-// };
 const selectedEnemy = alvatron;
 const selectedCharacter = igniKambuku;
 render.renderHome();
