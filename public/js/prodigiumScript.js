@@ -495,6 +495,11 @@ class Render {
       if (move3.onCool) {
         move3.onCool--;
       }
+      // create object with key values of special move name, and specific logic for that move
+      // for each enemy move, run switch case to find type, and run logic accordingly
+      // for player move 1 and 2 run switch for attack vs. heal and run logic accordingly
+      // for player move 3, call object with move name as key i.e. specialMoves[goddess],
+      // value of key will be function specifically for that move. Faster than running a switch every time.
       this.renderMoves();
     });
 
