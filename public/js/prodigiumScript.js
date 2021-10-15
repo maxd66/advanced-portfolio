@@ -169,7 +169,7 @@ const hibernation = {
 const shockWave = {
   name: "Shock Wave",
   ahp: "attack",
-  damage: 30,
+  damage: 25,
   critChance: 10,
   type: "electric",
   adv: ["water", "spirit"],
@@ -332,8 +332,8 @@ const igniKambuku = {
   name: "Igni Kambuku",
   description: "Plays by the rules, but hunts for sport.",
   type: "fire",
-  startHp: 150,
-  hp: 150,
+  startHp: 175,
+  hp: 175,
   moves: [pounce, phoenix, fireConsumes],
 };
 
@@ -368,8 +368,8 @@ const alvatron = {
   name: "Alvatron",
   description: "Surprisingly fast and young at heart.",
   type: "spirit",
-  startHp: 250,
-  hp: 250,
+  startHp: 200,
+  hp: 200,
   moves: [shockWave, solarPower, shellUp],
 };
 
@@ -462,6 +462,7 @@ class Render {
     const move2El = document.getElementById("move2");
     const move3El = document.getElementById("move3");
     const healthBar = document.getElementById("hp");
+    const enemyHealthBar = document.getElementById("enemyHP");
     const battle = new Battle(selectedCharacter, selectedEnemy);
 
     move1.onCool
@@ -477,13 +478,11 @@ class Render {
       : (document.getElementById("move3").disabled = false);
 
     move1El?.addEventListener("click", () => {
-      const enemyMove = battle.determineEnemyMove();
-      const adv = battle.determineAdv(move1, battle.enemy);
-      alert(enemyMove.name);
-      // display proper image above proper player
-      // logic affects player
-      // buttons is placed on cooldown, unless it is player has no moves left.
-      // check to see if all other moves will be on cooldown, on the next move
+      battle.handleMove(move1);
+      battle.handleEnemyMove();
+      enemyHealthBar.setAttribute("value", battle.enemy.hp);
+      healthBar.setAttribute("value", battle.player1.hp);
+
       if (move2.onCool > 1 && move3.onCool > 1) {
         move1.onCool = 0;
       } else {
@@ -499,15 +498,16 @@ class Render {
       // for each enemy move, run switch case to find type, and run logic accordingly
       // for player move 1 and 2 run switch for attack vs. heal and run logic accordingly
       // for player move 3, call object with move name as key i.e. specialMoves[goddess],
-      // value of key will be function specifically for that move. Faster than running a switch every time.
+      // value of key will be function specifically for that move. F aster than running a switch every time.
       this.renderMoves();
     });
 
     move2El?.addEventListener("click", () => {
-      healthBar.setAttribute("value", "150");
-      const adv = battle.determineAdv(move2, battle.enemy);
-      const enemyMove = battle.determineEnemyMove();
-      alert(enemyMove.name);
+      battle.handleMove(move2);
+      battle.handleEnemyMove();
+      enemyHealthBar.setAttribute("value", battle.enemy.hp);
+      healthBar.setAttribute("value", battle.player1.hp);
+
       move2.onCool = move2.cooldown;
       if (move1.onCool) {
         move1.onCool--;
@@ -521,7 +521,7 @@ class Render {
     move3El?.addEventListener("click", () => {
       healthBar.setAttribute("value", "50");
       const enemyMove = battle.determineEnemyMove();
-      const adv = battle.determineAdv(move3, battle.enemy);
+      const adv = battle.determineAdv(move3);
       alert(enemyMove.name);
       move3.onCool = move3.cooldown;
       if (move1.onCool) {
@@ -670,13 +670,71 @@ class Battle {
     return availableMoves[rand];
   }
 
-  determineAdv(move, opponent) {
-    if (move.adv.includes(opponent.type)) {
+  determineAdv(move) {
+    if (move.adv.includes(this.enemy.type)) {
       return 0.25;
-    } else if (move.weak.includes(opponent.type)) {
+    } else if (move.weak.includes(this.enemy.type)) {
       return -0.25;
     } else {
       return 0;
+    }
+  }
+
+  determineEnemyAdv(move) {
+    if (move.adv.includes(this.player1.type)) {
+      return 0.25;
+    } else if (move.weak.includes(this.player1.type)) {
+      return -0.25;
+    } else {
+      return 0;
+    }
+  }
+
+  handleMove(move) {
+    // Player move handler
+    const adv = this.determineAdv(move);
+    const crit = Math.floor(Math.random() * 100);
+    if (move.ahp === "attack") {
+      let multiplier = 1 + adv;
+      if (crit < move.critChance) {
+        multiplier += 2;
+      }
+      const damage = move.damage * multiplier;
+      this.enemy.hp -= damage;
+    } else if (move.ahp === "heal") {
+      let multiplier = 1 + adv;
+      if (crit < move.critChance) {
+        multiplier += 2;
+      }
+      const heal = move.damage * multiplier;
+      this.player1.hp += heal;
+      if (this.player1.hp > this.player1.startHp) {
+        this.player1.hp = this.player1.startHp;
+      }
+    }
+  }
+
+  handleEnemyMove() {
+    const enemyMove = this.determineEnemyMove();
+    const enemyAdv = this.determineEnemyAdv(enemyMove);
+    const enemyCrit = Math.floor(Math.random() * 100);
+    if (enemyMove.ahp === "attack") {
+      let multiplier = 1 + enemyAdv;
+      if (enemyCrit < enemyMove.critChance) {
+        multiplier += 2;
+      }
+      const damage = enemyMove.damage * multiplier;
+      this.player1.hp -= damage;
+    } else if (enemyMove.ahp === "heal") {
+      let multiplier = 1 + enemyAdv;
+      if (enemyCrit < enemyMove.critChance) {
+        multiplier += 2;
+      }
+      const heal = enemyMove.damage * multiplier;
+      this.enemy.hp += heal;
+      if (this.enemy.hp > this.enemy.startHp) {
+        this.enemy.hp = this.enemy.startHp;
+      }
     }
   }
 }
