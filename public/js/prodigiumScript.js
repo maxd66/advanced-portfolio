@@ -37,11 +37,12 @@ const oceansWrath = {
 };
 
 const goddess = {
+  id: 1,
   name: "Goddess",
   ahp: "special",
   damage: 10,
   description:
-    "Akua Moana calls on her ancestors for assistance. 75% chance your oppenent's move misses and they take 10 damage. If you're opponent does land, they are punished by the gods and receive 15 damage.",
+    "Akua Moana calls on her ancestors for assistance. 75% oppenent's move misses and they take 10 damage. If not ignored, they are punished by the gods and receive 15 damage.",
   critChance: 75,
   type: "spirit",
   adv: ["physical", "dark"],
@@ -67,7 +68,7 @@ const phoenix = {
   name: "Phoenix",
   ahp: "heal",
   damage: 25,
-  critChance: 5,
+  critChance: 10,
   type: "fire",
   adv: ["wind", "plant"],
   weak: ["water", "space"],
@@ -76,12 +77,13 @@ const phoenix = {
 };
 
 const fireConsumes = {
+  id: 2,
   name: "Fire Consumes",
   ahp: "special",
   damage: 20,
   description:
     "Igni Kambuku preys on his opponent's weakness. The weaker the opponent, the more the fire burns.",
-  critChance: 10,
+  critChance: 5,
   type: "fire",
   adv: ["wind", "plant"],
   weak: ["water", "space"],
@@ -115,6 +117,7 @@ const iceKata = {
 };
 
 const blizzardRush = {
+  id: 3,
   name: "Blizzard Rush",
   ahp: "special",
   lifesteal: 20,
@@ -153,6 +156,7 @@ const riverRush = {
 };
 
 const hibernation = {
+  id: 4,
   name: "Hibernation",
   ahp: "special",
   damage: 10,
@@ -191,12 +195,13 @@ const solarPower = {
 };
 
 const shellUp = {
+  id: 5,
   name: "Shell Up",
   ahp: "special",
   damage: 0,
   description:
     "Alvatron takes cover in his shell. 60% chance he will reflect half of his opponent's attack back, otherwise he only takes half the damage.",
-  critChance: 20,
+  critChance: 5,
   type: "earth",
   adv: ["space", "electric"],
   weak: ["water", "wind"],
@@ -229,6 +234,7 @@ const anomaly = {
 };
 
 const solarBeam = {
+  id: 6,
   name: "Solar Beam",
   ahp: "special",
   damage: 20,
@@ -267,6 +273,7 @@ const getTheHorns = {
 };
 
 const stampedeStomp = {
+  id: 7,
   name: "Stampede Stomp",
   ahp: "special",
   damage: 20,
@@ -305,6 +312,7 @@ const wildSurvival = {
 };
 
 const bloodThirsty = {
+  id: 8,
   name: "Blood Thirsty",
   ahp: "special",
   damage: 20,
@@ -389,6 +397,35 @@ const tt = {
   startHp: 200,
   hp: 200,
   moves: [stareDown, wildSurvival, bloodThirsty],
+};
+
+const specialLogic = {
+  Goddess: function (move, adv, enemy) {
+    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+    const ignoreChance = Math.floor(Math.random() * 100);
+    if (ignoreChance <= 80) {
+      const damage = (1 + adv + crit) * 10;
+      enemy.hp -= damage;
+      return true;
+    } else {
+      const damage = (1 + adv + crit) * 15;
+      enemy.hp -= math.floor(damage);
+      return false;
+    }
+  },
+  "Fire Consumes": function (move, adv, enemy) {
+    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+    const enemyHealthMultiplier = 0.01 * (enemy.startHp - enemy.hp);
+    const damage = move.damage(1 + crit + adv + enemyHealthMultiplier);
+    enemy.hp -= Math.floor(damage);
+    return false;
+  },
+  "Blizzard Rush": function (move, adv, enemy) {},
+  Hibernation: function (move, adv, enemy) {},
+  "Solar Beam": function (move, adv, enemy) {},
+  "Shell Up": function (move, adv, enemy) {},
+  "Stampede Stomp": function (move, adv, enemy) {},
+  "Blood Thirsty": function (move, adv, enemy) {},
 };
 
 // function should take players in question, and move chosen
@@ -478,8 +515,9 @@ class Render {
       : (document.getElementById("move3").disabled = false);
 
     move1El?.addEventListener("click", () => {
+      const enemyMove = battle.determineEnemyMove();
       battle.handleMove(move1);
-      battle.handleEnemyMove();
+      battle.handleEnemyMove(enemyMove);
       enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
@@ -503,8 +541,9 @@ class Render {
     });
 
     move2El?.addEventListener("click", () => {
+      const enemyMove = battle.determineEnemyMove();
       battle.handleMove(move2);
-      battle.handleEnemyMove();
+      battle.handleEnemyMove(enemyMove);
       enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
@@ -519,10 +558,12 @@ class Render {
     });
 
     move3El?.addEventListener("click", () => {
-      healthBar.setAttribute("value", "50");
       const enemyMove = battle.determineEnemyMove();
       const adv = battle.determineAdv(move3);
-      alert(enemyMove.name);
+      const ignore = specialLogic[move3.name](move3, adv, battle.enemy);
+      if (!ignore) {
+        battle.handleEnemyMove(enemyMove);
+      }
       move3.onCool = move3.cooldown;
       if (move1.onCool) {
         move1.onCool--;
@@ -700,38 +741,37 @@ class Battle {
         multiplier += 2;
       }
       const damage = move.damage * multiplier;
-      this.enemy.hp -= damage;
+      this.enemy.hp -= Math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + adv;
       if (crit < move.critChance) {
         multiplier += 2;
       }
       const heal = move.damage * multiplier;
-      this.player1.hp += heal;
+      this.player1.hp += math.floor(heal);
       if (this.player1.hp > this.player1.startHp) {
         this.player1.hp = this.player1.startHp;
       }
     }
   }
 
-  handleEnemyMove() {
-    const enemyMove = this.determineEnemyMove();
-    const enemyAdv = this.determineEnemyAdv(enemyMove);
+  handleEnemyMove(move) {
+    const enemyAdv = this.determineEnemyAdv(move);
     const enemyCrit = Math.floor(Math.random() * 100);
-    if (enemyMove.ahp === "attack") {
+    if (move.ahp === "attack") {
       let multiplier = 1 + enemyAdv;
-      if (enemyCrit < enemyMove.critChance) {
+      if (enemyCrit < move.critChance) {
         multiplier += 2;
       }
-      const damage = enemyMove.damage * multiplier;
-      this.player1.hp -= damage;
-    } else if (enemyMove.ahp === "heal") {
+      const damage = move.damage * multiplier;
+      this.player1.hp -= math.floor(damage);
+    } else if (move.ahp === "heal") {
       let multiplier = 1 + enemyAdv;
-      if (enemyCrit < enemyMove.critChance) {
+      if (enemyCrit < move.critChance) {
         multiplier += 2;
       }
-      const heal = enemyMove.damage * multiplier;
-      this.enemy.hp += heal;
+      const heal = move.damage * multiplier;
+      this.enemy.hp += math.floor(heal);
       if (this.enemy.hp > this.enemy.startHp) {
         this.enemy.hp = this.enemy.startHp;
       }
@@ -743,5 +783,5 @@ class Battle {
 const render = new Render();
 
 const selectedEnemy = alvatron;
-const selectedCharacter = igniKambuku;
+const selectedCharacter = akuaMoana;
 render.renderHome();
