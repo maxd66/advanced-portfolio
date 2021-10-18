@@ -37,7 +37,6 @@ const oceansWrath = {
 };
 
 const goddess = {
-  id: 1,
   name: "Goddess",
   ahp: "special",
   damage: 10,
@@ -77,7 +76,6 @@ const phoenix = {
 };
 
 const fireConsumes = {
-  id: 2,
   name: "Fire Consumes",
   ahp: "special",
   damage: 20,
@@ -117,7 +115,6 @@ const iceKata = {
 };
 
 const blizzardRush = {
-  id: 3,
   name: "Blizzard Rush",
   ahp: "special",
   lifesteal: 20,
@@ -156,7 +153,6 @@ const riverRush = {
 };
 
 const hibernation = {
-  id: 4,
   name: "Hibernation",
   ahp: "special",
   damage: 10,
@@ -195,7 +191,6 @@ const solarPower = {
 };
 
 const shellUp = {
-  id: 5,
   name: "Shell Up",
   ahp: "special",
   damage: 0,
@@ -234,7 +229,6 @@ const anomaly = {
 };
 
 const solarBeam = {
-  id: 6,
   name: "Solar Beam",
   ahp: "special",
   damage: 20,
@@ -273,7 +267,6 @@ const getTheHorns = {
 };
 
 const stampedeStomp = {
-  id: 7,
   name: "Stampede Stomp",
   ahp: "special",
   damage: 20,
@@ -312,7 +305,6 @@ const wildSurvival = {
 };
 
 const bloodThirsty = {
-  id: 8,
   name: "Blood Thirsty",
   ahp: "special",
   damage: 20,
@@ -323,6 +315,44 @@ const bloodThirsty = {
   adv: ["wind", "fire"],
   weak: ["physical", "earth"],
   cooldown: 3,
+  onCool: 0,
+};
+
+const downUpUpXOO = {
+  name: "Down Up Up X O O",
+  ahp: "attack",
+  damage: 15,
+  critChance: 25,
+  type: "dark",
+  adv: ["physical", "electric"],
+  weak: ["plant", "spirit"],
+  cooldown: 1,
+  onCool: 0,
+};
+
+const subEmotes = {
+  name: "Sub Emotes",
+  ahp: "attack",
+  damage: 20,
+  critChance: 5,
+  type: "fire",
+  adv: ["plant", "wind"],
+  weak: ["water", "space"],
+  cooldown: 2,
+  onCool: 0,
+};
+
+const toggle = {
+  name: "Toggle",
+  ahp: "special",
+  damage: 20,
+  description:
+    "Streamer toggles on his hacks, he automatically loses 10 respect (hp), but deals a critical of one of his attacks.",
+  critChance: 100,
+  type: "electric",
+  adv: ["water", "spirit"],
+  weak: ["dark", "earth"],
+  cooldown: 4,
   onCool: 0,
 };
 
@@ -397,6 +427,15 @@ const tt = {
   startHp: 200,
   hp: 200,
   moves: [stareDown, wildSurvival, bloodThirsty],
+};
+
+const streamer = {
+  name: "Streamer",
+  description: "Pretty good at throwing hatchets...virtual hatchets.",
+  type: "electric",
+  startHp: 200,
+  hp: 200,
+  moves: [downUpUpXOO, subEmotes, toggle],
 };
 
 const specialLogic = {
