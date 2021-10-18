@@ -319,7 +319,7 @@ const bloodThirsty = {
 };
 
 const downUpUpXOO = {
-  name: "Down Up Up X O O",
+  name: "Down-Up-Up-X-O-O",
   ahp: "attack",
   damage: 15,
   critChance: 25,
