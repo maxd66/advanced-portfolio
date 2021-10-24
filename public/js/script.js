@@ -257,6 +257,7 @@ document
           questionNumber = `prefaceHangman`;
           const question = `Oh... Ok... Yah I guess that could get boring. Here, I've got something better.`;
           const btnArr = [`Something better?`];
+          clearButtons();
           gradualAppend(question, btnArr);
         }
         break;

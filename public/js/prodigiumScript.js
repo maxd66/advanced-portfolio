@@ -120,7 +120,7 @@ const blizzardRush = {
   lifesteal: 20,
   description:
     "The Yeti rushes at his enemies with a blizzard at his back. He uses dark magic to squeeze 20 hp from his opponent and claim it for himself.",
-  critChance: 20,
+  critChance: 1,
   type: "dark",
   adv: ["physical", "electric"],
   weak: ["plant", "spirit"],
@@ -439,7 +439,7 @@ const streamer = {
 };
 
 const specialLogic = {
-  Goddess: function (move, adv, enemy) {
+  Goddess: function (move, adv, enemy, player) {
     const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
     const ignoreChance = Math.floor(Math.random() * 100);
     if (ignoreChance <= 80) {
@@ -452,19 +452,24 @@ const specialLogic = {
       return false;
     }
   },
-  "Fire Consumes": function (move, adv, enemy) {
+  "Fire Consumes": function (move, adv, enemy, player) {
     const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
     const enemyHealthMultiplier = 0.01 * (enemy.startHp - enemy.hp);
     const damage = move.damage(1 + crit + adv + enemyHealthMultiplier);
     enemy.hp -= Math.floor(damage);
     return false;
   },
-  "Blizzard Rush": function (move, adv, enemy) {},
-  Hibernation: function (move, adv, enemy) {},
-  "Solar Beam": function (move, adv, enemy) {},
-  "Shell Up": function (move, adv, enemy) {},
-  "Stampede Stomp": function (move, adv, enemy) {},
-  "Blood Thirsty": function (move, adv, enemy) {},
+  "Blizzard Rush": function (move, adv, enemy, player) {
+    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+    let multiplier = 1 + adv;
+    return false;
+  },
+  Hibernation: function (move, adv, enemy, player) {},
+  "Solar Beam": function (move, adv, enemy, player) {},
+  "Shell Up": function (move, adv, enemy, player) {},
+  "Stampede Stomp": function (move, adv, enemy, player) {},
+  "Blood Thirsty": function (move, adv, enemy, player) {},
+  Toggle: function (move, adv, enemy, player) {},
 };
 
 // function should take players in question, and move chosen
@@ -599,7 +604,12 @@ class Render {
     move3El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const adv = battle.determineAdv(move3);
-      const ignore = specialLogic[move3.name](move3, adv, battle.enemy);
+      const ignore = specialLogic[move3.name](
+        move3,
+        adv,
+        battle.enemy,
+        battle.player1
+      );
       if (!ignore) {
         battle.handleEnemyMove(enemyMove);
       }
@@ -814,6 +824,13 @@ class Battle {
       if (this.enemy.hp > this.enemy.startHp) {
         this.enemy.hp = this.enemy.startHp;
       }
+    } else if (move.ahp === "special") {
+      const ignore = specialLogic[move.name](
+        move3,
+        adv,
+        this.player1,
+        this.enemy
+      );
     }
   }
 }
