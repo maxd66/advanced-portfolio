@@ -233,7 +233,7 @@ const solarBeam = {
   ahp: "special",
   damage: 20,
   description:
-    "Hamstronaut calls down a beam of solar energy on his opponent. The concentrated light deals 20 damage, and has a 50% chance to stun his enemy on their next turn.",
+    "Hamstronaut calls down a beam of solar energy on his opponent. The concentrated light deals 20 damage, and has a 50% chance to stun his enemy on for their turn.",
   critChance: 5,
   type: "space",
   adv: ["wind", "fire"],
@@ -461,11 +461,24 @@ const specialLogic = {
   },
   "Blizzard Rush": function (move, adv, enemy, player) {
     const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
-    let multiplier = 1 + adv;
+    let multiplier = 1 + adv + crit;
+    enemy.hp -= 20 * multiplier;
+    player.hp += 20 * multiplier;
     return false;
   },
-  Hibernation: function (move, adv, enemy, player) {},
-  "Solar Beam": function (move, adv, enemy, player) {},
+  Hibernation: function (move, adv, enemy, player) {
+    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+    let multiplier = 1 + adv + crit;
+    player.hp += 10 * multiplier;
+    const ignoreChance = Math.floor(Math.random() * 100);
+    if (ignoreChance < 80) {
+      return true;
+    }
+    return false;
+  },
+  "Solar Beam": function (move, adv, enemy, player) {
+    // if ignore and move name is solar beam, other player's efficiency is halved
+  },
   "Shell Up": function (move, adv, enemy, player) {},
   "Stampede Stomp": function (move, adv, enemy, player) {},
   "Blood Thirsty": function (move, adv, enemy, player) {},
@@ -832,6 +845,39 @@ class Battle {
         this.enemy
       );
     }
+  }
+
+  checkSpecialEffect(move) {
+    if (move.ahp === "special") {
+      switch (move.name) {
+        case "Goddess":
+          if (Math.floor(Math.random() * 100) < 75) {
+            return true;
+          }
+          return false;
+        case "Hibernation":
+          if (Math.floor(Math.random() * 100) < 80) {
+            return true;
+          }
+          return false;
+        case "Solar Beam":
+          if (Math.floor(Math.random() * 100) < 50) {
+            return true;
+          }
+          return false;
+        case "Shell Up":
+          if (Math.floor(Math.random() * 100) < 60) {
+            return true;
+          }
+          return false;
+        case "Stampede Stomp":
+          if (Math.floor(Math.random() * 100) < 60) {
+            return true;
+          }
+          return false;
+      }
+    }
+    return false;
   }
 }
 
