@@ -233,7 +233,7 @@ const solarBeam = {
   ahp: "special",
   damage: 20,
   description:
-    "Hamstronaut calls down a beam of solar energy on his opponent. The concentrated light deals 20 damage, and has a 50% chance to stun his enemy on for their turn.",
+    "Hamstronaut calls down a beam of solar energy on his opponent. The concentrated light deals 15 damage, and has a 50% chance to stun his enemy on their next turn.",
   critChance: 5,
   type: "space",
   adv: ["wind", "fire"],
@@ -271,7 +271,7 @@ const stampedeStomp = {
   ahp: "special",
   damage: 20,
   description:
-    "Ay Guey sends a rumble of earth towards his oppenent. It deals 20 damage, and there is a 60% chance that your opponent's next move will be less effective.",
+    "Ay Guey sends a rumble of earth towards his oppenent. It deals 20 damage, and there is a 40% chance that your opponent's next move will be less effective.",
   critChance: 5,
   type: "earth",
   adv: ["space", "electric"],
@@ -439,11 +439,10 @@ const streamer = {
 };
 
 const specialLogic = {
-  Goddess: function (move, adv, enemy, player) {
-    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
-    const ignoreChance = Math.floor(Math.random() * 100);
-    if (ignoreChance <= 80) {
-      const damage = (1 + adv + crit) * 10;
+  Goddess: function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    if (effect) {
+      const damage = (1 + adv + crit) * move.damage;
       enemy.hp -= damage;
       return true;
     } else {
@@ -452,37 +451,73 @@ const specialLogic = {
       return false;
     }
   },
-  "Fire Consumes": function (move, adv, enemy, player) {
-    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+  "Fire Consumes": function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
     const enemyHealthMultiplier = 0.01 * (enemy.startHp - enemy.hp);
-    const damage = move.damage(1 + crit + adv + enemyHealthMultiplier);
+    const damage = move.damage * (1 + crit + adv + enemyHealthMultiplier);
     enemy.hp -= Math.floor(damage);
     return false;
   },
-  "Blizzard Rush": function (move, adv, enemy, player) {
-    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+  "Blizzard Rush": function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
     let multiplier = 1 + adv + crit;
-    enemy.hp -= 20 * multiplier;
-    player.hp += 20 * multiplier;
+    enemy.hp -= move.damage * multiplier;
+    player.hp += move.damage * multiplier;
     return false;
   },
-  Hibernation: function (move, adv, enemy, player) {
-    const crit = Math.floor(Math.random() * 100) < move.critChance ? 2 : 0;
+  Hibernation: function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
     let multiplier = 1 + adv + crit;
-    player.hp += 10 * multiplier;
-    const ignoreChance = Math.floor(Math.random() * 100);
-    if (ignoreChance < 80) {
+    player.hp += move.damage * multiplier;
+    if (effect) {
       return true;
     }
     return false;
   },
-  "Solar Beam": function (move, adv, enemy, player) {
+  "Solar Beam": function (move, adv, enemy, player, effect, enemyMove) {
     // if ignore and move name is solar beam, other player's efficiency is halved
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    let multiplier = 1 + adv + crit;
+    if (effect) {
+      enemy.hp -= move.damage * multiplier;
+      enemy.stunned = true;
+    } else {
+      enemy.hp -= move.damage * multiplier;
+    }
   },
-  "Shell Up": function (move, adv, enemy, player) {},
-  "Stampede Stomp": function (move, adv, enemy, player) {},
-  "Blood Thirsty": function (move, adv, enemy, player) {},
-  Toggle: function (move, adv, enemy, player) {},
+  "Shell Up": function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    let multiplier = 1 - adv + crit;
+    if (effect && enemyMove.ahp !== "heal") {
+      const damageReflected = (enemyMove.damage * multiplier) / 2;
+      enemy.hp -= damageReflected;
+    } else if (enemyMove.ahp !== "heal") {
+      const damageInflicted = (enemyMove.damage * multipler) / 2;
+      player.hp -= damageInflicted;
+    }
+  },
+  "Stampede Stomp": function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    let multiplier = 1 + adv + crit;
+    if (effect) {
+      enemy.hp -= move.damage * multiplier;
+      enemy.stunned = true;
+    } else {
+      enemy.hp -= move.damage * multiplier;
+    }
+  },
+  "Blood Thirsty": function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    let multiplier = 1 + adv + crit;
+    enemy.hp -= move.damage * multiplier;
+    move.critChance += 10;
+  },
+  Toggle: function (move, adv, enemy, player, effect, enemyMove) {
+    const randomMove = player.moves[Math.round(Math.random())];
+    let multiplier = 3 + adv;
+    const damage = randomMove.damage * multiplier;
+    enemy.hp -= damage;
+  },
 };
 
 // function should take players in question, and move chosen
@@ -573,9 +608,12 @@ class Render {
 
     move1El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
-      battle.handleMove(move1);
+      const enemyEffect = battle.checkSpecialEffect(enemyMove);
+      if (!enemyEffect) {
+        battle.handleMove(move1);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+      }
       battle.handleEnemyMove(enemyMove);
-      enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
       if (move2.onCool > 1 && move3.onCool > 1) {
@@ -599,9 +637,12 @@ class Render {
 
     move2El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
-      battle.handleMove(move2);
+      const enemyEffect = battle.checkSpecialEffect(enemyMove);
+      if (!enemyEffect) {
+        battle.handleMove(move2);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+      }
       battle.handleEnemyMove(enemyMove);
-      enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
       move2.onCool = move2.cooldown;
@@ -617,15 +658,9 @@ class Render {
     move3El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const adv = battle.determineAdv(move3);
-      const ignore = specialLogic[move3.name](
-        move3,
-        adv,
-        battle.enemy,
-        battle.player1
-      );
-      if (!ignore) {
-        battle.handleEnemyMove(enemyMove);
-      }
+      const playerEffect = checkSpecialEffect(move3);
+      const enemyEffect = checkSpecialEffect(enemyMove);
+
       move3.onCool = move3.cooldown;
       if (move1.onCool) {
         move1.onCool--;
@@ -871,7 +906,7 @@ class Battle {
           }
           return false;
         case "Stampede Stomp":
-          if (Math.floor(Math.random() * 100) < 60) {
+          if (Math.floor(Math.random() * 100) < 40) {
             return true;
           }
           return false;
