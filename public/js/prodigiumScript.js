@@ -441,55 +441,73 @@ const streamer = {
 const specialLogic = {
   Goddess: function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     if (effect) {
-      const damage = (1 + adv + crit) * move.damage;
+      const damage = ((1 + adv + crit) * move.damage) / stunMod;
       enemy.hp -= damage;
       return true;
     } else {
-      const damage = (1 + adv + crit) * 15;
+      const damage = ((1 + adv + crit) * 15) / stunMod;
       enemy.hp -= math.floor(damage);
-      return false;
     }
   },
   "Fire Consumes": function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     const enemyHealthMultiplier = 0.01 * (enemy.startHp - enemy.hp);
-    const damage = move.damage * (1 + crit + adv + enemyHealthMultiplier);
+    const damage =
+      (move.damage * (1 + crit + adv + enemyHealthMultiplier)) / stunMod;
     enemy.hp -= Math.floor(damage);
-    return false;
   },
   "Blizzard Rush": function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     let multiplier = 1 + adv + crit;
-    enemy.hp -= move.damage * multiplier;
-    player.hp += move.damage * multiplier;
-    return false;
+    enemy.hp -= (move.damage * multiplier) / stunMod;
+    player.hp += (move.damage * multiplier) / stunMod;
   },
   Hibernation: function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
-    let multiplier = 1 + adv + crit;
-    player.hp += move.damage * multiplier;
-    if (effect) {
-      return true;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
     }
-    return false;
+    let multiplier = 1 + adv + crit;
+    player.hp += (move.damage * multiplier) / stunMod;
   },
   "Solar Beam": function (move, adv, enemy, player, effect, enemyMove) {
     // if ignore and move name is solar beam, other player's efficiency is halved
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     let multiplier = 1 + adv + crit;
     if (effect) {
-      enemy.hp -= move.damage * multiplier;
+      enemy.hp -= (move.damage * multiplier) / stunMod;
       enemy.stunned = true;
     } else {
-      enemy.hp -= move.damage * multiplier;
+      enemy.hp -= (move.damage * multiplier) / stunMod;
     }
   },
   "Shell Up": function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     let multiplier = 1 - adv + crit;
     if (effect && enemyMove.ahp !== "heal") {
-      const damageReflected = (enemyMove.damage * multiplier) / 2;
+      const damageReflected = (enemyMove.damage * multiplier) / (2 * stunMod);
       enemy.hp -= damageReflected;
     } else if (enemyMove.ahp !== "heal") {
       const damageInflicted = (enemyMove.damage * multipler) / 2;
@@ -498,24 +516,36 @@ const specialLogic = {
   },
   "Stampede Stomp": function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     let multiplier = 1 + adv + crit;
     if (effect) {
-      enemy.hp -= move.damage * multiplier;
+      enemy.hp -= (move.damage * multiplier) / stunMod;
       enemy.stunned = true;
     } else {
-      enemy.hp -= move.damage * multiplier;
+      enemy.hp -= (move.damage * multiplier) / stunMod;
     }
   },
   "Blood Thirsty": function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     let multiplier = 1 + adv + crit;
-    enemy.hp -= move.damage * multiplier;
+    enemy.hp -= (move.damage * multiplier) / stunMod;
     move.critChance += 10;
   },
   Toggle: function (move, adv, enemy, player, effect, enemyMove) {
     const randomMove = player.moves[Math.round(Math.random())];
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
     let multiplier = 3 + adv;
-    const damage = randomMove.damage * multiplier;
+    const damage = (randomMove.damage * multiplier) / stunMod;
     enemy.hp -= damage;
   },
 };
@@ -613,7 +643,7 @@ class Render {
         battle.handleMove(move1);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
       }
-      battle.handleEnemyMove(enemyMove);
+      battle.handleEnemyMove(enemyMove, move1);
       healthBar.setAttribute("value", battle.player1.hp);
 
       if (move2.onCool > 1 && move3.onCool > 1) {
@@ -631,7 +661,7 @@ class Render {
       // for each enemy move, run switch case to find type, and run logic accordingly
       // for player move 1 and 2 run switch for attack vs. heal and run logic accordingly
       // for player move 3, call object with move name as key i.e. specialMoves[goddess],
-      // value of key will be function specifically for that move. F aster than running a switch every time.
+      // value of key will be function specifically for that move. Faster than running a switch every time.
       this.renderMoves();
     });
 
@@ -642,7 +672,7 @@ class Render {
         battle.handleMove(move2);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
       }
-      battle.handleEnemyMove(enemyMove);
+      battle.handleEnemyMove(enemyMove, move2);
       healthBar.setAttribute("value", battle.player1.hp);
 
       move2.onCool = move2.cooldown;
@@ -828,23 +858,25 @@ class Battle {
     }
   }
 
-  handleMove(move) {
+  handleMove(move, player) {
     // Player move handler
     const adv = this.determineAdv(move);
     const crit = Math.floor(Math.random() * 100);
+    let stunMod = player.stunned ? 2 : 1;
+    this.fixStun(enemy);
     if (move.ahp === "attack") {
       let multiplier = 1 + adv;
       if (crit < move.critChance) {
         multiplier += 2;
       }
-      const damage = move.damage * multiplier;
+      const damage = (move.damage * multiplier) / stunMod;
       this.enemy.hp -= Math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + adv;
       if (crit < move.critChance) {
         multiplier += 2;
       }
-      const heal = move.damage * multiplier;
+      const heal = (move.damage * multiplier) / stunMod;
       this.player1.hp += math.floor(heal);
       if (this.player1.hp > this.player1.startHp) {
         this.player1.hp = this.player1.startHp;
@@ -852,22 +884,24 @@ class Battle {
     }
   }
 
-  handleEnemyMove(move) {
+  handleEnemyMove(move, playerMove, enemy) {
     const enemyAdv = this.determineEnemyAdv(move);
     const enemyCrit = Math.floor(Math.random() * 100);
+    let stunMod = enemy.stunned ? 2 : 1;
+    this.fixStun(enemy);
     if (move.ahp === "attack") {
       let multiplier = 1 + enemyAdv;
       if (enemyCrit < move.critChance) {
         multiplier += 2;
       }
-      const damage = move.damage * multiplier;
+      const damage = (move.damage * multiplier) / stunMod;
       this.player1.hp -= math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + enemyAdv;
       if (enemyCrit < move.critChance) {
         multiplier += 2;
       }
-      const heal = move.damage * multiplier;
+      const heal = (move.damage * multiplier) / stunMod;
       this.enemy.hp += math.floor(heal);
       if (this.enemy.hp > this.enemy.startHp) {
         this.enemy.hp = this.enemy.startHp;
@@ -877,7 +911,8 @@ class Battle {
         move3,
         adv,
         this.player1,
-        this.enemy
+        this.enemy,
+        playerMove
       );
     }
   }
@@ -913,6 +948,12 @@ class Battle {
       }
     }
     return false;
+  }
+
+  fixStun(player) {
+    if (player.stunned) {
+      player.stunned = false;
+    }
   }
 }
 
