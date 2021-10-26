@@ -639,11 +639,21 @@ class Render {
     move1El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
+      // if we ignore this if block, that means the enemy move has stopped the players move with special
       if (!enemyEffect) {
-        battle.handleMove(move1);
+        battle.handleMove(move1, battle.player1);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
+      } else if (
+        enemyMove.name === "Stampede Stomp" ||
+        enemyMove.name === "Solar Beam"
+      ) {
+        battle.handleMove(move1, battle.player1);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
       }
-      battle.handleEnemyMove(enemyMove, move1);
+      battle.handleEnemyMove(enemyMove, move1, battle.enemy);
+      enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
       if (move2.onCool > 1 && move3.onCool > 1) {
@@ -669,10 +679,19 @@ class Render {
       const enemyMove = battle.determineEnemyMove();
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
       if (!enemyEffect) {
-        battle.handleMove(move2);
+        battle.handleMove(move2, battle.player1);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
+      } else if (
+        enemyMove.name === "Stampede Stomp" ||
+        enemyMove.name === "Solar Beam"
+      ) {
+        battle.handleMove(move2, battle.player1);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
       }
-      battle.handleEnemyMove(enemyMove, move2);
+      battle.handleEnemyMove(enemyMove, move2, battle.enemy);
+      enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
       move2.onCool = move2.cooldown;
@@ -690,6 +709,32 @@ class Render {
       const adv = battle.determineAdv(move3);
       const playerEffect = checkSpecialEffect(move3);
       const enemyEffect = checkSpecialEffect(enemyMove);
+      if (playerEffect) {
+        specialLogic[move3.name](
+          move3,
+          adv,
+          battle.enemy,
+          battle.player1,
+          playerEffect,
+          enemyMove
+        );
+      } else if (enemyEffect) {
+        handleEnemyMove(enemyMove, move3, battle.enemy);
+      } else {
+        specialLogic[move3.name](
+          move3,
+          adv,
+          battle.enemy,
+          battle.player1,
+          playerEffect,
+          enemyMove
+        );
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
+        handleEnemyMove(enemyMove, move3, battle.enemy);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
+      }
 
       move3.onCool = move3.cooldown;
       if (move1.onCool) {
