@@ -106,7 +106,7 @@ const iceKata = {
   name: "Ice Kata",
   ahp: "attack",
   damage: 30,
-  critChance: 15,
+  critChance: 10,
   type: "water",
   adv: ["fire", "earth"],
   weak: ["fire", "space"],
@@ -245,7 +245,7 @@ const solarBeam = {
 const charge = {
   name: "Charge",
   ahp: "attack",
-  damage: 15,
+  damage: 20,
   critChance: 20,
   type: "physical",
   adv: ["space", "plant"],
@@ -257,8 +257,8 @@ const charge = {
 const getTheHorns = {
   name: "Get the Horns",
   ahp: "attack",
-  damage: 35,
-  critChance: 1,
+  damage: 30,
+  critChance: 5,
   type: "fire",
   adv: ["wind", "plant"],
   weak: ["water", "space"],
@@ -451,7 +451,7 @@ const specialLogic = {
       return true;
     } else {
       const damage = ((1 + adv + crit) * 15) / stunMod;
-      enemy.hp -= math.floor(damage);
+      enemy.hp -= Math.floor(damage);
     }
   },
   "Fire Consumes": function (move, adv, enemy, player, effect, enemyMove) {
@@ -510,7 +510,7 @@ const specialLogic = {
       const damageReflected = (enemyMove.damage * multiplier) / (2 * stunMod);
       enemy.hp -= damageReflected;
     } else if (enemyMove.ahp !== "heal") {
-      const damageInflicted = (enemyMove.damage * multipler) / 2;
+      const damageInflicted = (enemyMove.damage * multiplier) / 2;
       player.hp -= damageInflicted;
     }
   },
@@ -639,6 +639,7 @@ class Render {
     move1El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
+      console.log({ enemyMove, enemyEffect });
       // if we ignore this if block, that means the enemy move has stopped the players move with special
       if (!enemyEffect) {
         battle.handleMove(move1, battle.player1);
@@ -652,7 +653,7 @@ class Render {
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
         healthBar.setAttribute("value", battle.player1.hp);
       }
-      battle.handleEnemyMove(enemyMove, move1, battle.enemy);
+      battle.handleEnemyMove(enemyMove, move1, battle.enemy, enemyEffect);
       enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
@@ -678,6 +679,7 @@ class Render {
     move2El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
+      console.log({ enemyMove, enemyEffect });
       if (!enemyEffect) {
         battle.handleMove(move2, battle.player1);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
@@ -690,7 +692,7 @@ class Render {
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
         healthBar.setAttribute("value", battle.player1.hp);
       }
-      battle.handleEnemyMove(enemyMove, move2, battle.enemy);
+      battle.handleEnemyMove(enemyMove, move2, battle.enemy, enemyEffect);
       enemyHealthBar.setAttribute("value", battle.enemy.hp);
       healthBar.setAttribute("value", battle.player1.hp);
 
@@ -707,8 +709,9 @@ class Render {
     move3El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const adv = battle.determineAdv(move3);
-      const playerEffect = checkSpecialEffect(move3);
-      const enemyEffect = checkSpecialEffect(enemyMove);
+      const playerEffect = battle.checkSpecialEffect(move3);
+      const enemyEffect = battle.checkSpecialEffect(enemyMove);
+      console.log({ enemyMove, enemyEffect });
       if (playerEffect) {
         specialLogic[move3.name](
           move3,
@@ -718,8 +721,15 @@ class Render {
           playerEffect,
           enemyMove
         );
-      } else if (enemyEffect) {
-        handleEnemyMove(enemyMove, move3, battle.enemy);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
+      } else if (
+        enemyEffect &&
+        (enemyMove.name !== "Stampede Stomp" || enemyMove.name !== "Solar Beam")
+      ) {
+        battle.handleEnemyMove(enemyMove, move3, battle.enemy, enemyEffect);
+        enemyHealthBar.setAttribute("value", battle.enemy.hp);
+        healthBar.setAttribute("value", battle.player1.hp);
       } else {
         specialLogic[move3.name](
           move3,
@@ -731,7 +741,7 @@ class Render {
         );
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
         healthBar.setAttribute("value", battle.player1.hp);
-        handleEnemyMove(enemyMove, move3, battle.enemy);
+        battle.handleEnemyMove(enemyMove, move3, battle.enemy, enemyEffect);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
         healthBar.setAttribute("value", battle.player1.hp);
       }
@@ -908,13 +918,14 @@ class Battle {
     const adv = this.determineAdv(move);
     const crit = Math.floor(Math.random() * 100);
     let stunMod = player.stunned ? 2 : 1;
-    this.fixStun(enemy);
+    this.fixStun(player);
     if (move.ahp === "attack") {
       let multiplier = 1 + adv;
       if (crit < move.critChance) {
         multiplier += 2;
       }
       const damage = (move.damage * multiplier) / stunMod;
+      console.log("player damage: " + damage);
       this.enemy.hp -= Math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + adv;
@@ -922,14 +933,14 @@ class Battle {
         multiplier += 2;
       }
       const heal = (move.damage * multiplier) / stunMod;
-      this.player1.hp += math.floor(heal);
+      this.player1.hp += Math.floor(heal);
       if (this.player1.hp > this.player1.startHp) {
         this.player1.hp = this.player1.startHp;
       }
     }
   }
 
-  handleEnemyMove(move, playerMove, enemy) {
+  handleEnemyMove(move, playerMove, enemy, effect) {
     const enemyAdv = this.determineEnemyAdv(move);
     const enemyCrit = Math.floor(Math.random() * 100);
     let stunMod = enemy.stunned ? 2 : 1;
@@ -940,23 +951,25 @@ class Battle {
         multiplier += 2;
       }
       const damage = (move.damage * multiplier) / stunMod;
-      this.player1.hp -= math.floor(damage);
+      console.log("enemy damage: " + damage);
+      this.player1.hp -= Math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + enemyAdv;
       if (enemyCrit < move.critChance) {
         multiplier += 2;
       }
       const heal = (move.damage * multiplier) / stunMod;
-      this.enemy.hp += math.floor(heal);
+      this.enemy.hp += Math.floor(heal);
       if (this.enemy.hp > this.enemy.startHp) {
         this.enemy.hp = this.enemy.startHp;
       }
     } else if (move.ahp === "special") {
-      const ignore = specialLogic[move.name](
-        move3,
-        adv,
+      specialLogic[move.name](
+        move,
+        enemyAdv,
         this.player1,
         this.enemy,
+        effect,
         playerMove
       );
     }
@@ -966,7 +979,7 @@ class Battle {
     if (move.ahp === "special") {
       switch (move.name) {
         case "Goddess":
-          if (Math.floor(Math.random() * 100) < 75) {
+          if (Math.floor(Math.random() * 100) < 1) {
             return true;
           }
           return false;
@@ -1005,6 +1018,6 @@ class Battle {
 // Home Page Logic
 const render = new Render();
 
-const selectedEnemy = alvatron;
+const selectedEnemy = ayGuey;
 const selectedCharacter = akuaMoana;
 render.renderHome();
