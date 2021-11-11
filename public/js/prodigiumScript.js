@@ -1,16 +1,3 @@
-// need to have functions that will subtract hitpoints from players life based on attack type, crit chance and enemy type and defense
-// player attack objects could look like
-// player object could look like
-// const p1 = {
-//   name: "Gristle",
-//   type: "plant",
-//   startHp: 200,
-//   hp: 150,
-//   moves: [ivySpikes, strangleRoot, regrow],
-// };
-// types: water, fire, wind, earth, plant, electric, physical, dark, spirit,
-// Moves
-
 // Akua Moana
 const finSlap = {
   name: "Fin Slap",
@@ -68,9 +55,9 @@ const phoenix = {
   ahp: "heal",
   damage: 25,
   critChance: 10,
-  type: "fire",
-  adv: ["wind", "plant"],
-  weak: ["water", "space"],
+  type: "spirit",
+  adv: ["physical", "dark"],
+  weak: ["wind", "electric"],
   cooldown: 2,
   onCool: 0,
 };
@@ -121,13 +108,14 @@ const blizzardRush = {
   description:
     "The Yeti rushes at his enemies with a blizzard at his back. He uses dark magic to squeeze 20 hp from his opponent and claim it for himself.",
   critChance: 1,
-  type: "dark",
-  adv: ["physical", "electric"],
-  weak: ["plant", "spirit"],
+  type: "wind",
+  adv: ["earth", "spirit"],
+  weak: ["fire", "space"],
   cooldown: 4,
   onCool: 0,
 };
 
+// Sir Oso
 const bearClaw = {
   name: "Bear Claw",
   ahp: "attack",
@@ -166,6 +154,7 @@ const hibernation = {
   onCool: 0,
 };
 
+// Alvatron
 const shockWave = {
   name: "Shock Wave",
   ahp: "attack",
@@ -197,13 +186,14 @@ const shellUp = {
   description:
     "Alvatron takes cover in his shell. 60% chance he will reflect half of his opponent's attack back, otherwise he only takes half the damage.",
   critChance: 5,
-  type: "earth",
-  adv: ["space", "electric"],
-  weak: ["water", "wind"],
+  type: "spirit",
+  adv: ["physical", "dark"],
+  weak: ["electric", "wind"],
   cooldown: 3,
   onCool: 0,
 };
 
+// Hamstronaut
 const organicMatter = {
   name: "Organic Matter",
   ahp: "attack",
@@ -242,6 +232,7 @@ const solarBeam = {
   onCool: 0,
 };
 
+// Ay Guey
 const charge = {
   name: "Charge",
   ahp: "attack",
@@ -280,6 +271,7 @@ const stampedeStomp = {
   onCool: 0,
 };
 
+// T.T
 const stareDown = {
   name: "Stare Down",
   ahp: "attack",
@@ -318,6 +310,7 @@ const bloodThirsty = {
   onCool: 0,
 };
 
+// The Streamer
 const downUpUpXOO = {
   name: "Down-Up-Up-X-O-O",
   ahp: "attack",
@@ -349,6 +342,45 @@ const toggle = {
   description:
     "Streamer toggles on his hacks, he automatically loses 10 respect (hp), but deals a critical of one of his attacks.",
   critChance: 100,
+  type: "electric",
+  adv: ["water", "spirit"],
+  weak: ["dark", "earth"],
+  cooldown: 4,
+  onCool: 0,
+};
+
+// Lys Du Paradis
+const petalPropeller = {
+  name: "Petal Propeller",
+  ahp: "attack",
+  damage: 20,
+  critChance: 20,
+  type: "wind",
+  adv: ["earth", "spirit"],
+  weak: ["fire", "space"],
+  cooldown: 1,
+  onCool: 0,
+};
+
+const photosynthesis = {
+  name: "Photosynthesis",
+  ahp: "heal",
+  damage: 25,
+  critChance: 10,
+  type: "electric",
+  adv: ["water", "spirit"],
+  weak: ["earth", "dark"],
+  cooldown: 3,
+  onCool: 0,
+};
+
+const strangleRoot = {
+  name: "Strangle Root",
+  ahp: "special",
+  damage: 30,
+  description:
+    "Lys Du Paradis grows beneath her opponent, bursts from the ground, and strangles the life from them. She deals 30 damage and heals 10.",
+  critChance: 5,
   type: "electric",
   adv: ["water", "spirit"],
   weak: ["dark", "earth"],
@@ -438,6 +470,15 @@ const streamer = {
   moves: [downUpUpXOO, subEmotes, toggle],
 };
 
+const lysDuParadis = {
+  name: "Lys Du Paradis",
+  description: "Thrives in sunlight, as long as they had their coffee.",
+  type: "plant",
+  startHp: 200,
+  hp: 200,
+  moves: [petalPropeller, photosynthesis, strangleRoot],
+};
+
 const specialLogic = {
   Goddess: function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
@@ -447,7 +488,7 @@ const specialLogic = {
     }
     if (effect) {
       const damage = ((1 + adv + crit) * move.damage) / stunMod;
-      enemy.hp -= damage;
+      enemy.hp -= Math.floor(damage);
       return true;
     } else {
       const damage = ((1 + adv + crit) * 15) / stunMod;
@@ -472,8 +513,11 @@ const specialLogic = {
       player.stunned = false;
     }
     let multiplier = 1 + adv + crit;
-    enemy.hp -= (move.damage * multiplier) / stunMod;
-    player.hp += (move.damage * multiplier) / stunMod;
+    enemy.hp -= Math.floor((move.damage * multiplier) / stunMod);
+    player.hp += Math.floor((move.damage * multiplier) / stunMod);
+    if (player.hp > player.startHp) {
+      player.hp = player.startHp;
+    }
   },
   Hibernation: function (move, adv, enemy, player, effect, enemyMove) {
     const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
@@ -482,7 +526,10 @@ const specialLogic = {
       player.stunned = false;
     }
     let multiplier = 1 + adv + crit;
-    player.hp += (move.damage * multiplier) / stunMod;
+    player.hp += Math.floor((move.damage * multiplier) / stunMod);
+    if (player.hp > player.startHp) {
+      player.hp = player.startHp;
+    }
   },
   "Solar Beam": function (move, adv, enemy, player, effect, enemyMove) {
     // if ignore and move name is solar beam, other player's efficiency is halved
@@ -493,10 +540,10 @@ const specialLogic = {
     }
     let multiplier = 1 + adv + crit;
     if (effect) {
-      enemy.hp -= (move.damage * multiplier) / stunMod;
+      enemy.hp -= Math.floor((move.damage * multiplier) / stunMod);
       enemy.stunned = true;
     } else {
-      enemy.hp -= (move.damage * multiplier) / stunMod;
+      enemy.hp -= Math.floor((move.damage * multiplier) / stunMod);
     }
   },
   "Shell Up": function (move, adv, enemy, player, effect, enemyMove) {
@@ -508,10 +555,10 @@ const specialLogic = {
     let multiplier = 1 - adv + crit;
     if (effect && enemyMove.ahp !== "heal") {
       const damageReflected = (enemyMove.damage * multiplier) / (2 * stunMod);
-      enemy.hp -= damageReflected;
+      enemy.hp -= Math.floor(damageReflected);
     } else if (enemyMove.ahp !== "heal") {
       const damageInflicted = (enemyMove.damage * multiplier) / 2;
-      player.hp -= damageInflicted;
+      player.hp -= Math.floor(damageInflicted);
     }
   },
   "Stampede Stomp": function (move, adv, enemy, player, effect, enemyMove) {
@@ -522,10 +569,10 @@ const specialLogic = {
     }
     let multiplier = 1 + adv + crit;
     if (effect) {
-      enemy.hp -= (move.damage * multiplier) / stunMod;
+      enemy.hp -= Math.floor((move.damage * multiplier) / stunMod);
       enemy.stunned = true;
     } else {
-      enemy.hp -= (move.damage * multiplier) / stunMod;
+      enemy.hp -= Math.floor((move.damage * multiplier) / stunMod);
     }
   },
   "Blood Thirsty": function (move, adv, enemy, player, effect, enemyMove) {
@@ -535,7 +582,7 @@ const specialLogic = {
       player.stunned = false;
     }
     let multiplier = 1 + adv + crit;
-    enemy.hp -= (move.damage * multiplier) / stunMod;
+    enemy.hp -= Math.floor((move.damage * multiplier) / stunMod);
     move.critChance += 10;
   },
   Toggle: function (move, adv, enemy, player, effect, enemyMove) {
@@ -546,7 +593,17 @@ const specialLogic = {
     }
     let multiplier = 3 + adv;
     const damage = (randomMove.damage * multiplier) / stunMod;
-    enemy.hp -= damage;
+    enemy.hp -= Math.floor(damage);
+  },
+  "Strangle Root": function (move, adv, enemy, player, effect, enemyMove) {
+    const crit = Math.floor(Math.random() * 100) <= move.critChance ? 2 : 0;
+    const stunMod = player.stunned ? 2 : 1;
+    if (player.stunned) {
+      player.stunned = false;
+    }
+    let multiplier = 1 + adv + crit;
+    const damage = Math.floor((move.damage * multiplier) / stunMod);
+    const heal = Math.floor(((move.damage / 3) * multiplier) / stunMod);
   },
 };
 
@@ -639,7 +696,6 @@ class Render {
     move1El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
-      console.log({ enemyMove, enemyEffect });
       // if we ignore this if block, that means the enemy move has stopped the players move with special
       if (!enemyEffect) {
         battle.handleMove(move1, battle.player1);
@@ -679,7 +735,6 @@ class Render {
     move2El?.addEventListener("click", () => {
       const enemyMove = battle.determineEnemyMove();
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
-      console.log({ enemyMove, enemyEffect });
       if (!enemyEffect) {
         battle.handleMove(move2, battle.player1);
         enemyHealthBar.setAttribute("value", battle.enemy.hp);
@@ -711,7 +766,6 @@ class Render {
       const adv = battle.determineAdv(move3);
       const playerEffect = battle.checkSpecialEffect(move3);
       const enemyEffect = battle.checkSpecialEffect(enemyMove);
-      console.log({ enemyMove, enemyEffect });
       if (playerEffect) {
         specialLogic[move3.name](
           move3,
@@ -830,7 +884,9 @@ class Render {
     this.renderMoves();
   }
 
-  renderGym() {}
+  renderGym() {
+    document.querySelector("body").innerHTML = ``;
+  }
 }
 
 class Player {
@@ -925,7 +981,6 @@ class Battle {
         multiplier += 2;
       }
       const damage = (move.damage * multiplier) / stunMod;
-      console.log("player damage: " + damage);
       this.enemy.hp -= Math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + adv;
@@ -951,7 +1006,6 @@ class Battle {
         multiplier += 2;
       }
       const damage = (move.damage * multiplier) / stunMod;
-      console.log("enemy damage: " + damage);
       this.player1.hp -= Math.floor(damage);
     } else if (move.ahp === "heal") {
       let multiplier = 1 + enemyAdv;
