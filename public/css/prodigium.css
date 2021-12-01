@@ -163,3 +163,31 @@ body {
 #move3:hover + #move3Tip {
   visibility: visible;
 }
+
+/* Gym Styling ----------------------------------------------------- */
+#workouts .gymMoves {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+#workouts #move1Stats,
+#move2Stats,
+#move3Stats {
+  background-color: white;
+  padding: 5px 5%;
+}
+
+#workouts .playerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 300px;
+}
+
+#workouts #playerStats {
+  background-color: white;
+  margin: 5px;
+  padding: 5px;
+}

@@ -636,9 +636,14 @@ class Render {
   </div>`;
 
     const arenaButton = document.getElementById("arenaBtn");
+    const gymButton = document.getElementById("gymBtn");
 
     arenaButton.addEventListener("click", () => {
       this.renderArena();
+    });
+
+    gymButton.addEventListener("click", () => {
+      this.renderGym();
     });
   }
 
@@ -885,7 +890,55 @@ class Render {
   }
 
   renderGym() {
-    document.querySelector("body").innerHTML = ``;
+    const player1 = selectedCharacter;
+    const move1 = selectedCharacter.moves[0];
+    const move2 = selectedCharacter.moves[1];
+    const move3 = selectedCharacter.moves[2];
+    document.querySelector("body").innerHTML = ` <div id="workouts">
+    <div class="gymMoves">
+      <div id="move1Stats">
+        <h1>${move1.name}</h1>
+        <p>
+          <span class="statTitle">Type/Amount: </span
+          >${move1.ahp.toUpperCase()}/${move1.damage}
+        </p>
+      </div>
+      <div id="move2Stats">
+        <h1>${move2.name}</h1>
+        <p>
+          <span class="statTitle">Type/Amount: </span
+          >${move2.ahp.toUpperCase()}/${move2.damage}
+        </p>
+      </div>
+      <div id="move3Stats">
+        <h1>${move3.name}</h1>
+        <p>
+          <span class="statTitle">Type/Amount: </span
+          >${move3.ahp.toUpperCase()}/${move3.damage}
+        </p>
+      </div>
+    </div>
+    <div class="playerContainer">
+      <img
+        src="./images/prodigium/placeholder.jpg"
+        alt="placeholder for character"
+      />
+      <div id="playerStats">
+        <h1>${player1.name}</h1>
+        <p>
+          <span class="statTitle">Description: </span>${player1.description}
+        </p>
+        <p><span class="statTitle">Type: </span>${player1.type.toUpperCase()}</p>
+        <p><span class="statTitle">Health: </span>${player1.startHp}</p>
+        <button class="workoutButton">Train Health</button>
+      </div>
+    </div>
+  </div>
+  <button id="backBtn">&lt; Back</button>`;
+    const backBtn = document.getElementById("backBtn");
+    backBtn.addEventListener("click", () => {
+      this.renderHome();
+    });
   }
 }
 
@@ -1074,4 +1127,4 @@ const render = new Render();
 
 const selectedEnemy = ayGuey;
 const selectedCharacter = akuaMoana;
-render.renderHome();
+render.renderGym();
