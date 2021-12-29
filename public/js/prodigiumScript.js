@@ -894,26 +894,43 @@ class Render {
     const move1 = selectedCharacter.moves[0];
     const move2 = selectedCharacter.moves[1];
     const move3 = selectedCharacter.moves[2];
-    document.querySelector("body").innerHTML = ` <div id="workouts">
+    document.querySelector("body").innerHTML = `    <div id="workouts">
     <div class="gymMoves">
       <div id="move1Stats">
         <h1>${move1.name}</h1>
-        <p>
-          <span class="statTitle">Type/Amount: </span
-          >${move1.ahp.toUpperCase()}/${move1.damage}
-        </p>
+        <p>${move1.ahp.toUpperCase()}</p>
+        <ul class="dropdown_menu dropdown_menu--animated dropdown_menu-6">
+          <li class="dropdown_item-1">
+            <span class="stat-title">Move Type: </span
+            >${move1.type.toUpperCase()}
+          </li>
+          <li class="dropdown_item-2">
+            <span class="stat-title">Power: </span>${move1.damage}
+          </li>
+          <li class="dropdown_item-3">
+            <span class="stat-title">Crit Chance: </span>${move1.critChance}%
+          </li>
+          <li class="dropdown_item-4">
+            <span class="stat-title">Advantages: </span
+            >${move1.adv[0].toUpperCase()}, ${move1.adv[1].toUpperCase()}
+          </li>
+          <li class="dropdown_item-5">
+            <span class="stat-title">Disadvantages: </span
+            >${move1.weak[0].toUpperCase()}, ${move1.weak[1].toUpperCase()}
+          </li>
+        </ul>
       </div>
       <div id="move2Stats">
         <h1>${move2.name}</h1>
         <p>
-          <span class="statTitle">Type/Amount: </span
+          <span class="statTitle">Move/Power: </span
           >${move2.ahp.toUpperCase()}/${move2.damage}
         </p>
       </div>
       <div id="move3Stats">
         <h1>${move3.name}</h1>
         <p>
-          <span class="statTitle">Type/Amount: </span
+          <span class="statTitle">Move/Power: </span
           >${move3.ahp.toUpperCase()}/${move3.damage}
         </p>
       </div>
@@ -928,9 +945,11 @@ class Render {
         <p>
           <span class="statTitle">Description: </span>${player1.description}
         </p>
-        <p><span class="statTitle">Type: </span>${player1.type.toUpperCase()}</p>
+        <p>
+          <span class="statTitle">Type: </span>${player1.type.toUpperCase()}
+        </p>
         <p><span class="statTitle">Health: </span>${player1.startHp}</p>
-        <button class="workoutButton">Train Health</button>
+        <button class="workoutButton">Upgrade Health</button>
       </div>
     </div>
   </div>

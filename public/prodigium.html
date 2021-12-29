@@ -22,24 +22,72 @@
       <div class="gymMoves">
         <div id="move1Stats">
           <h1>${move1.name}</h1>
-          <p>
-            <span class="statTitle">Type/Amount: </span
-            >${move1.ahp.toUpperCase()}/${move1.damage}
-          </p>
+          <p>${move1.ahp.toUpperCase()}</p>
+          <ul class="dropdown_menu dropdown_menu--animated dropdown_menu-6">
+            <li class="dropdown_item-1">
+              <span class="stat-title">Move Type: </span
+              >${move1.type.toUpperCase()}
+            </li>
+            <li class="dropdown_item-2">
+              <span class="stat-title">Power: </span>${move1.damage}
+            </li>
+            <li class="dropdown_item-3">
+              <span class="stat-title">Crit Chance: </span>${move1.critChance}%
+            </li>
+            <li class="dropdown_item-4">
+              <span class="stat-title">Advantages: </span
+              >${move1.adv[0].toUpperCase()}, ${move1.adv[1].toUpperCase()}
+            </li>
+            <li class="dropdown_item-5">
+              <span class="stat-title">Disadvantages: </span
+              >${move1.weak[0].toUpperCase()}, ${move1.weak[1].toUpperCase()}
+            </li>
+          </ul>
         </div>
         <div id="move2Stats">
           <h1>${move2.name}</h1>
-          <p>
-            <span class="statTitle">Type/Amount: </span
-            >${move2.ahp.toUpperCase()}/${move2.damage}
-          </p>
+          <p>${move2.ahp.toUpperCase()}</p>
+          <ul class="dropdown_menu dropdown_menu--animated dropdown_menu-6">
+            <li class="dropdown_item-1">
+              <span class="stat-title">Move Type: </span
+              >${move2.type.toUpperCase()}
+            </li>
+            <li class="dropdown_item-2">
+              <span class="stat-title">Power: </span>${move2.damage}
+            </li>
+            <li class="dropdown_item-3">
+              <span class="stat-title">Crit Chance: </span>${move2.critChance}%
+            </li>
+            <li class="dropdown_item-4">
+              <span class="stat-title">Advantages: </span
+              >${move2.adv[0].toUpperCase()}, ${move2.adv[1].toUpperCase()}
+            </li>
+            <li class="dropdown_item-5">
+              <span class="stat-title">Disadvantages: </span
+              >${move2.weak[0].toUpperCase()}, ${move2.weak[1].toUpperCase()}
+            </li>
+          </ul>
         </div>
         <div id="move3Stats">
           <h1>${move3.name}</h1>
-          <p>
-            <span class="statTitle">Type/Amount: </span
-            >${move3.ahp.toUpperCase()}/${move3.damage}
-          </p>
+          <p>${move3.ahp.toUpperCase()}</p>
+          <ul class="dropdown_menu dropdown_menu--animated dropdown_menu-6">
+            <li class="dropdown_item-1">
+              <span class="stat-title">Move Type: </span
+              >${move3.type.toUpperCase()}, ${move3.description}
+            </li>
+            <li class="dropdown_item-2">
+              <span class="stat-title">Crit Chance: </span>${move3.critChance}%
+            </li>
+            <li class="dropdown_item-3">
+              <span class="stat-title">Advantages: </span
+              >${move3.adv[0].toUpperCase()}, ${move3.adv[1].toUpperCase()}
+            </li>
+            <li class="dropdown_item-4">
+              <span class="stat-title">Disadvantages: </span
+              >${move3.weak[0].toUpperCase()}, ${move3.weak[1].toUpperCase()}
+            </li>
+          </ul>
         </div>
       </div>
       <div class="playerContainer">
@@ -56,7 +104,7 @@
             <span class="statTitle">Type: </span>${player1.type.toUpperCase()}
           </p>
           <p><span class="statTitle">Health: </span>${player1.startHp}</p>
-          <button class="workoutButton">Train Health</button>
+          <button class="workoutButton">Upgrade Health</button>
         </div>
       </div>
     </div>

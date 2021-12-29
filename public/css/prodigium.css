@@ -167,8 +167,9 @@ body {
 /* Gym Styling ----------------------------------------------------- */
 #workouts .gymMoves {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 #workouts #move1Stats,
@@ -176,11 +177,13 @@ body {
 #move3Stats {
   background-color: white;
   padding: 5px 5%;
+  min-width: 100px;
 }
 
 #workouts .playerContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
   margin-top: 300px;
