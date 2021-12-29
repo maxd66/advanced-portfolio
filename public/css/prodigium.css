@@ -169,15 +169,17 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 #workouts #move1Stats,
 #move2Stats,
 #move3Stats {
+  position: relative;
   background-color: white;
   padding: 5px 5%;
-  min-width: 100px;
+  margin: 10px 3%;
+  flex: 1 0 175px;
 }
 
 #workouts .playerContainer {
@@ -190,7 +192,60 @@ body {
 }
 
 #workouts #playerStats {
-  background-color: white;
   margin: 5px;
   padding: 5px;
+}
+
+.dropdown_menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  perspective: 1000px;
+  display: none;
+  list-style-type: none;
+}
+
+.dropdown_menu li {
+  border-bottom: solid black 1px;
+  background-color: lightgray;
+}
+
+#move1Stats:hover .dropdown_menu--animated {
+  display: block;
+}
+#move2Stats:hover .dropdown_menu--animated {
+  display: block;
+}
+#move3Stats:hover .dropdown_menu--animated {
+  display: block;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.dropdown_menu-6 {
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: top center;
+}
+
+.attack {
+  background-color: orange;
+}
+
+.heal {
+  background-color: lightgreen;
+}
+
+.special {
+  background-color: purple;
 }

@@ -899,7 +899,10 @@ class Render {
       <div id="move1Stats">
         <h1>${move1.name}</h1>
         <p>${move1.ahp.toUpperCase()}</p>
-        <ul class="dropdown_menu dropdown_menu--animated dropdown_menu-6">
+        <ul
+          class="dropdown_menu dropdown_menu--animated dropdown_menu-6"
+          id="move1Ul"
+        >
           <li class="dropdown_item-1">
             <span class="stat-title">Move Type: </span
             >${move1.type.toUpperCase()}
@@ -922,17 +925,54 @@ class Render {
       </div>
       <div id="move2Stats">
         <h1>${move2.name}</h1>
-        <p>
-          <span class="statTitle">Move/Power: </span
-          >${move2.ahp.toUpperCase()}/${move2.damage}
-        </p>
+        <p>${move2.ahp.toUpperCase()}</p>
+        <ul
+          class="dropdown_menu dropdown_menu--animated dropdown_menu-6"
+          id="move2Ul"
+        >
+          <li class="dropdown_item-1">
+            <span class="stat-title">Move Type: </span
+            >${move2.type.toUpperCase()}
+          </li>
+          <li class="dropdown_item-2">
+            <span class="stat-title">Power: </span>${move2.damage}
+          </li>
+          <li class="dropdown_item-3">
+            <span class="stat-title">Crit Chance: </span>${move2.critChance}%
+          </li>
+          <li class="dropdown_item-4">
+            <span class="stat-title">Advantages: </span
+            >${move2.adv[0].toUpperCase()}, ${move2.adv[1].toUpperCase()}
+          </li>
+          <li class="dropdown_item-5">
+            <span class="stat-title">Disadvantages: </span
+            >${move2.weak[0].toUpperCase()}, ${move2.weak[1].toUpperCase()}
+          </li>
+        </ul>
       </div>
       <div id="move3Stats">
         <h1>${move3.name}</h1>
-        <p>
-          <span class="statTitle">Move/Power: </span
-          >${move3.ahp.toUpperCase()}/${move3.damage}
-        </p>
+        <p>${move3.ahp.toUpperCase()}</p>
+        <ul
+          class="dropdown_menu dropdown_menu--animated dropdown_menu-6"
+          id="move3Ul"
+        >
+          <li class="dropdown_item-1">
+            <span class="stat-title">Move Type: </span
+            >${move3.type.toUpperCase()}, ${move3.description}
+          </li>
+          <li class="dropdown_item-2">
+            <span class="stat-title">Crit Chance: </span>${move3.critChance}%
+          </li>
+          <li class="dropdown_item-3">
+            <span class="stat-title">Advantages: </span
+            >${move3.adv[0].toUpperCase()}, ${move3.adv[1].toUpperCase()}
+          </li>
+          <li class="dropdown_item-4">
+            <span class="stat-title">Disadvantages: </span
+            >${move3.weak[0].toUpperCase()}, ${move3.weak[1].toUpperCase()}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="playerContainer">
@@ -958,6 +998,73 @@ class Render {
     backBtn.addEventListener("click", () => {
       this.renderHome();
     });
+
+    const move1El = document.getElementById("move1Ul");
+    const move2El = document.getElementById("move2Ul");
+    const move3El = document.getElementById("move3Ul");
+
+    if (move1.ahp === "attack") {
+      move1El.classList.add("attack");
+    } else if (move1.ahp === "heal") {
+      move1El.classList.add("heal");
+    } else {
+      move1El.classList.add("special");
+    }
+    if (move2.ahp === "attack") {
+      move2El.classList.add("attack");
+    } else if (move2.ahp === "heal") {
+      move2El.classList.add("heal");
+    } else {
+      move2El.classList.add("special");
+    }
+    if (move3.ahp === "attack") {
+      move3El.classList.add("attack");
+    } else if (move3.ahp === "heal") {
+      move3El.classList.add("heal");
+    } else {
+      move3El.classList.add("special");
+    }
+
+    const playerStatsEl = document.getElementById("playerStats");
+
+    switch (player1.type) {
+      case "water":
+        playerStatsEl.style.backgroundColor = "lightblue";
+        break;
+      case "fire":
+        playerStatsEl.style.backgroundColor = "#FF7F7F";
+        //light red
+        break;
+      case "plant":
+        playerStatsEl.style.backgroundColor = "lightgreen";
+        break;
+      case "electric":
+        playerStatsEl.style.backgroundColor = "lightyellow";
+        break;
+      case "earth":
+        playerStatsEl.style.backgroundColor = "tan";
+        break;
+      case "space":
+        playerStatsEl.style.backgroundColor = "#CBC3E3";
+        //light purple
+        break;
+      case "wind":
+        playerStatsEl.style.backgroundColor = "whitesmoke";
+        break;
+      case "physical":
+        playerStatsEl.style.backgroundColor = "#fed4a7";
+        //light orange
+        break;
+      case "dark":
+        playerStatsEl.style.backgroundColor = "lightgray";
+        break;
+      case "spirit":
+        playerStatsEl.style.backgroundColor = "powderblue";
+        break;
+      default:
+        playerStatsEl.style.backgroundColor = "white";
+        break;
+    }
   }
 }
 
@@ -1144,6 +1251,6 @@ class Battle {
 // Home Page Logic
 const render = new Render();
 
-const selectedEnemy = ayGuey;
-const selectedCharacter = akuaMoana;
+const selectedEnemy = alvatron;
+const selectedCharacter = igniKambuku;
 render.renderGym();
