@@ -1252,5 +1252,5 @@ class Battle {
 const render = new Render();
 
 const selectedEnemy = alvatron;
-const selectedCharacter = igniKambuku;
+const selectedCharacter = akuaMoana;
 render.renderGym();
