@@ -921,6 +921,7 @@ class Render {
             <span class="stat-title">Disadvantages: </span
             >${move1.weak[0].toUpperCase()}, ${move1.weak[1].toUpperCase()}
           </li>
+          <li><button id="move1Button">Train</button></li>
         </ul>
       </div>
       <div id="move2Stats">
@@ -948,6 +949,7 @@ class Render {
             <span class="stat-title">Disadvantages: </span
             >${move2.weak[0].toUpperCase()}, ${move2.weak[1].toUpperCase()}
           </li>
+          <li><button id="move2Button">Train</button></li>
         </ul>
       </div>
       <div id="move3Stats">
@@ -972,6 +974,7 @@ class Render {
             <span class="stat-title">Disadvantages: </span
             >${move3.weak[0].toUpperCase()}, ${move3.weak[1].toUpperCase()}
           </li>
+          <li><button id="move3Button">Train</button></li>
         </ul>
       </div>
     </div>
@@ -1065,6 +1068,24 @@ class Render {
         playerStatsEl.style.backgroundColor = "white";
         break;
     }
+
+    document.getElementById("move1Button").addEventListener("click", (e) => {
+      renderSlider();
+    });
+
+    const renderSlider = () => {
+      document.querySelector("body").innerHTML = `
+      <h1 style="text-align: center; margin-top:100px;">Click and hold, then release when ready...</h1>
+      <div id="training_bar">
+      <div id="training_slider" class="backForth"></div>
+      </div>`;
+      setTimeout(() => {
+        document.addEventListener("click", (e) => {
+          document.getElementById("training_slider").style.animationPlayState =
+            "paused";
+        });
+      }, 500);
+    };
   }
 }
 

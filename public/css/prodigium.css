@@ -238,6 +238,12 @@ body {
   transform-origin: top center;
 }
 
+li button {
+  min-width: 95%;
+  margin-left: 2%;
+  padding: 10px;
+}
+
 .attack {
   background-color: orange;
 }
@@ -248,4 +254,36 @@ body {
 
 .special {
   background-color: purple;
+}
+
+#training_bar {
+  position: relative;
+  width: 80%;
+  height: 50px;
+  margin-top: 100px;
+  margin-left: 10%;
+  border: solid black 3px;
+}
+
+#training_slider {
+  position: absolute;
+  top: -120%;
+  height: 70px;
+  text-align: center;
+  width: 20px;
+  margin: 40px;
+  background-color: black;
+}
+
+@keyframes backAndForth {
+  from {
+    left: -5%;
+  }
+  to {
+    left: 96%;
+  }
+}
+
+.backForth {
+  animation: 0.75s backAndForth linear alternate infinite;
 }
