@@ -191,6 +191,11 @@ body {
   margin-top: 300px;
 }
 
+#workouts .playerContainer img {
+  width: 360px;
+  height: 360px;
+}
+
 #workouts #playerStats {
   margin: 5px;
   padding: 5px;
@@ -219,6 +224,17 @@ body {
 }
 #move3Stats:hover .dropdown_menu--animated {
   display: block;
+}
+
+@media screen and (max-width: 754px) {
+  #workouts #move1Stats:hover {
+    display: block;
+    margin-bottom: 220px;
+  }
+  #move2Stats:hover {
+    display: block;
+    margin-bottom: 220px;
+  }
 }
 
 @keyframes growDown {
@@ -256,13 +272,19 @@ li button {
   background-color: purple;
 }
 
+/* Training game 1, slider. */
+#training_container {
+  display: flex;
+  justify-content: center;
+}
+
 #training_bar {
   position: relative;
   width: 80%;
   height: 50px;
   margin-top: 100px;
-  margin-left: 10%;
   border: solid black 3px;
+  background-color: white;
 }
 
 #training_slider {
@@ -270,20 +292,46 @@ li button {
   top: -120%;
   height: 70px;
   text-align: center;
+  margin-top: 40px;
   width: 20px;
-  margin: 40px;
   background-color: black;
+}
+
+#success_zone {
+  background-color: green;
+  position: absolute;
+  height: 44px;
 }
 
 @keyframes backAndForth {
   from {
-    left: -5%;
+    left: -1%;
   }
   to {
-    left: 96%;
+    left: 100%;
   }
 }
 
 .backForth {
   animation: 0.75s backAndForth linear alternate infinite;
+}
+
+/* Simon says mini game style */
+
+.simonButton {
+  height: 250px;
+  width: 250px;
+}
+
+#simonFlex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#red {
+  text-align: center;
+}
+
+#yellow {
+  text-align: center;
 }

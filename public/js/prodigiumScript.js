@@ -980,7 +980,7 @@ class Render {
     </div>
     <div class="playerContainer">
       <img
-        src="./images/prodigium/placeholder.jpg"
+        src="./images/prodigium/akuaMoanaFront.png"
         alt="placeholder for character"
       />
       <div id="playerStats">
@@ -1069,22 +1069,107 @@ class Render {
         break;
     }
 
+    const renderSlider = (level) => {
+      if (level > 3) {
+        //display success and move growth somehow.
+        this.renderGym();
+      } else {
+        let greenZoneWidth;
+        if (level === 1) {
+          greenZoneWidth = "200";
+        } else if (level === 2) {
+          greenZoneWidth = "100";
+        } else {
+          greenZoneWidth = "50";
+        }
+        level++;
+        const greenZonePosition = 10 + Math.floor(Math.random() * 70);
+        document.querySelector("body").innerHTML = `
+        <h1 style="text-align: center; margin-top:100px;">Click when ready...</h1>
+        <div id="training_container">
+        <div id="training_bar">
+        <div id="success_zone" style="width: ${greenZoneWidth}px; left:${greenZonePosition}%;"></div>
+        <div id="training_slider" class="backForth"></div>
+        </div>
+        </div>`;
+        const mouseDownListener = (e) => {
+          e.preventDefault();
+          e.stopPropagation(); b
+          const sliderEl = document.getElementById("training_slider");
+          sliderEl.style.animationPlayState = "paused";
+          const successZoneEl = document.getElementById("success_zone");
+          const leftSlider = sliderEl.getBoundingClientRect().left;
+          const rightSlider = sliderEl.getBoundingClientRect().right;
+          const leftSuccessZone = successZoneEl.getBoundingClientRect().left;
+          const rightSuccessZone = successZoneEl.getBoundingClientRect().right;
+          if (leftSlider > leftSuccessZone && leftSlider < rightSuccessZone) {
+            setTimeout(() => {
+              document.querySelector("body").innerHTML = "";
+              renderSlider(level);
+            }, 1000);
+          } else if (
+            rightSlider > leftSuccessZone &&
+            rightSlider < rightSuccessZone
+          ) {
+            setTimeout(() => {
+              document.querySelector("body").innerHTML = "";
+              renderSlider(level);
+            }, 1000);
+          } else {
+            console.log("failure");
+            document.removeEventListener("mousedown", mouseDownListener);
+            this.renderGym();
+          }
+        };
+        document.addEventListener("mousedown", mouseDownListener);
+      }
+    };
+
     document.getElementById("move1Button").addEventListener("click", (e) => {
-      renderSlider();
+      renderSlider(1, 400);
     });
 
-    const renderSlider = () => {
+    const renderSimonSays = () => {
+      //render 4 html buttons with black backgrounds, and ids according to the color they will be
+      //couple seconds timeout
+      //generate array, length 10, with random strings red, blue, yellow, green
+      //function that lights up buttons according to array and listens for clicks, if clicks match
+      //then it continues, if not then it stops. Getting the timing on this is going to be difficult
+      //I think it will be easier to have functions that will run for each step and listen for clicks
+      //outside of that
       document.querySelector("body").innerHTML = `
-      <h1 style="text-align: center; margin-top:100px;">Click and hold, then release when ready...</h1>
-      <div id="training_bar">
-      <div id="training_slider" class="backForth"></div>
-      </div>`;
-      setTimeout(() => {
-        document.addEventListener("click", (e) => {
-          document.getElementById("training_slider").style.animationPlayState =
-            "paused";
-        });
-      }, 500);
+      <button id="red" class="simonButton"></button>
+      <div id="simonFlex">
+      <button id="blue" class="simonButton"></button>
+      <button id="green" class="simonButton"></button>
+      </div>
+      <button id="yellow" class="simonButton"></button>
+      `;
+
+      const counter = 0;
+
+      document.getElementById("#red").addEventListener("click", () => {
+        console.log("hello");
+      });
+      document.getElementById("#blue").addEventListener("click", () => {
+        console.log("hello");
+      });
+      document.getElementById("#green").addEventListener("click", () => {
+        console.log("hello");
+      });
+      document.getElementById("#yellow").addEventListener("click", () => {
+        console.log("hello");
+      });
+    };
+
+    const generateRandomColors = () => {
+      const colors = ["red", "blue", "yellow", "green"];
+      const randomColors = [];
+      for (let i = 0; i < 10; i++) {
+        const pickedColor = colors[Math.floor(Math.random() * colors.length)];
+        randomColors.push(pickedColor);
+      }
+      return randomColors;
     };
   }
 }
