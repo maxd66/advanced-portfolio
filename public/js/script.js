@@ -165,20 +165,17 @@ document
         } else if (e.target === document.getElementById("button2")) {
           window.location = "/fellowdev";
         } else if (e.target === document.getElementById("button3")) {
-          alert(
-            "Pardon my dust! This project has become a massive endeavor, I work on it daily and am planning on updating this option in the next few months! Come back soon for an update, thanks for checking out my portfolio!"
-          );
-          // localStorage.setItem("attitude", false);
-          // questionNumber++;
-          // const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
-          // const btnArr = [
-          //   `Yes I do!`,
-          //   `I don't really know`,
-          //   `What games do you have?`,
-          //   `Are you a robot?`,
-          // ];
-          // clearButtons();
-          // gradualAppend(question, btnArr);
+          localStorage.setItem("attitude", false);
+          questionNumber++;
+          const question = `Oh...Ok...Well um. Sorry its just very rare for someone to pick that option. Don't worry I can figure this out, just whatever happens don't press the home button, or refresh the page. It wipes my memory, and ... it kinda hurts... Did you want to play a game?`;
+          const btnArr = [
+            `Yes I do!`,
+            `I don't really know`,
+            `What games do you have?`,
+            `Are you a robot?`,
+          ];
+          clearButtons();
+          gradualAppend(question, btnArr);
         }
         break;
       case 2:
